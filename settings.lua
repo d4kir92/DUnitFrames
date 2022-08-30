@@ -166,12 +166,9 @@ function DUFInitSettings()
 
 		local DUFSettings = {}
 
-		local DUFname = "DUnitFrames"
-		local DUFcolorname = "|c008888ff"
-		local DUFauthor = "D4KiR"
-		local DUFcolorauthor = "|c0000ffff"
+		local DUFname = "DUnitFrames |T134167/:16:16:0:0|t by |cFFAAAAFFD4KiR |T132115/:16:16:0:0|t"
 
-		local settingname = DUFcolorauthor .. DUFauthor .. " " .. DUFcolorname .. DUFname
+		local settingname = DUFname
 		DUFSettings.panel = CreateFrame("FRAME")
 		DUFSettings.panel.name = settingname
 

@@ -7,7 +7,7 @@ function DUFTargetFrameSetup()
 		self.settexture = true
 
 		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 		else
 			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 		end
@@ -21,7 +21,7 @@ function DUFTargetFrameSetup()
 		self.settexture = true
 		
 		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 		else
 			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 		end
@@ -297,14 +297,14 @@ function DUFTargetFrameSetup()
 	TargetFrameNameBackground:Hide()
 
 	function DUFUpdateTargetTexture()
-		local texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame"
+		local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 		local class = UnitClassification("TARGET")
 		if class == "worldboss" or class == "elite" then
-			texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame-Elite"
+			texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Elite"
 		elseif class == "rareelite" then
-			texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame-Rare-Elite"
+			texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Rare-Elite"
 		elseif class == "rare" then
-			texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame-Rare"
+			texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Rare"
 		end
 		TargetFrameTextureFrameTexture:SetTexture(texture);
 
@@ -325,7 +325,7 @@ function DUFTargetFrameSetup()
 		end
 		TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
 		TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUFHPHeight())
-		TargetFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
+		TargetFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
 
 		if DUFHPHeight() >= 32 then
 			TargetFrameTextureFrameTexture.spacer:Hide()

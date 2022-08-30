@@ -8,7 +8,7 @@ function DUFPartyMemberFramesSetup()
 		if PartyMemberFrame then
 			local func = _G["DUFUpdateParty" .. id .. "Texture"]
 			func = function()
-				local texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-PartyFrame"
+				local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-PartyFrame"
 				local PartyMemberTexture = _G["PartyMemberFrame" .. id .. "Texture"]
 				PartyMemberTexture:SetTexture(texture);
 				PartyMemberTexture:SetVertexColor(0, 0, 0)
@@ -20,7 +20,7 @@ function DUFPartyMemberFramesSetup()
 				self.settexture = true
 		
 				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-					self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+					self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 				else
 					self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 				end
@@ -34,7 +34,7 @@ function DUFPartyMemberFramesSetup()
 				self.settexture = true
 				
 				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-					self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+					self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 				else
 					self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 				end

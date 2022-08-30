@@ -40,10 +40,10 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 		if t then
 			if DUFGetConfig("portraitmode") ~= "Default" then
 				if DUFGetConfig("portraitmode") ~= "Old" then
-					self.portrait:SetTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-CLASSES-CIRCLES-"  .. DUFGetConfig("portraitmode", "New"))
+					self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-"  .. DUFGetConfig("portraitmode", "New"))
 					self.portrait:SetTexCoord(unpack(t))
 				elseif DUFGetConfig("portraitmode") == "Old" then
-					self.portrait:SetTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
+					self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
 					self.portrait:SetTexCoord(unpack(t))
 				else
 					self.portrait:SetTexCoord(0, 1, 0, 1)

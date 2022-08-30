@@ -116,9 +116,9 @@ pff:SetScript( "OnEvent", function( event )
 end )
 
 function DUFUpdatePlayerFrame()
-	local texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame"
+	local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 	PlayerFrameTexture:SetTexture(texture)
-	PlayerStatusTexture:SetTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-Player-Status")
+	PlayerStatusTexture:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-Player-Status")
 	
 	hooksecurefunc( PlayerFrameHealthBar, "SetHeight", function( self, height )
 		if self.dufsetheight then return end
@@ -193,7 +193,7 @@ function DUFPlayerFrameSetup()
 		self.settexture = true
 
 		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 		else
 			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 		end
@@ -207,7 +207,7 @@ function DUFPlayerFrameSetup()
 		self.settexture = true
 		
 		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 		else
 			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 		end

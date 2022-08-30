@@ -9,7 +9,7 @@ if FocusFrame then
 			self.settexture = true
 	
 			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-				self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 			else
 				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 			end
@@ -23,7 +23,7 @@ if FocusFrame then
 			self.settexture = true
 			
 			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-				self:SetStatusBarTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 			else
 				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 			end
@@ -295,14 +295,14 @@ if FocusFrame then
 		FocusFrameNameBackground:Hide()
 
 		function DUFUpdateFocusTexture()
-			local texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame"
+			local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 			local class = UnitClassification("FOCUS")
 			if class == "worldboss" or class == "elite" then
-				texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame-Elite"
+				texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Elite"
 			elseif class == "rareelite" then
-				texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame-Rare-Elite"
+				texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Rare-Elite"
 			elseif class == "rare" then
-				texture = "Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame-Rare"
+				texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Rare"
 			end
 			FocusFrameTextureFrameTexture:SetTexture(texture);
 
@@ -323,7 +323,7 @@ if FocusFrame then
 			end
 			FocusFrameTextureFrameTexture.spacer:SetSize(128, 16)
 			FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 5, 21 - DUFHPHeight())
-			FocusFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\D4KiR DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
+			FocusFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
 
 			if DUFHPHeight() >= 32 then
 				FocusFrameTextureFrameTexture.spacer:Hide()
