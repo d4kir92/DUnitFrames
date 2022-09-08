@@ -117,9 +117,13 @@ end )
 
 function DUFUpdatePlayerFrame()
 	local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
-	PlayerFrameTexture:SetTexture(texture)
-	PlayerStatusTexture:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-Player-Status")
-	
+	if PlayerFrameTexture then
+		PlayerFrameTexture:SetTexture(texture)
+	end
+	if PlayerStatusTexture then
+		PlayerStatusTexture:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-Player-Status")
+	end
+
 	hooksecurefunc( PlayerFrameHealthBar, "SetHeight", function( self, height )
 		if self.dufsetheight then return end
 		self.dufsetheight = true
@@ -131,12 +135,12 @@ function DUFUpdatePlayerFrame()
 
 		if inVehicle then
 			PlayerFrameHealthBar:SetHeight( 12 )
-			if PlayerFrameTexture.spacer ~= nil then
+			if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
 				PlayerFrameTexture.spacer:Hide()
 			end
 		else
 			PlayerFrameHealthBar:SetHeight( DUFHPHeight() )
-			if PlayerFrameTexture.spacer ~= nil then
+			if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
 				PlayerFrameTexture.spacer:Show()
 			end
 		end
@@ -146,7 +150,7 @@ function DUFUpdatePlayerFrame()
 	PlayerFrameHealthBar:SetHeight( DUFHPHeight() )
 	PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
 
-	if PlayerFrameTexture.spacer == nil then
+	if PlayerFrameTexture and PlayerFrameTexture.spacer == nil then
 		PlayerFrameTexture.spacer = PlayerFrameTexture:GetParent():CreateTexture(nil, "ARTWORK")
 		PlayerFrameTexture.spacer:SetDrawLayer("ARTWORK", 7)
 
@@ -158,18 +162,20 @@ function DUFUpdatePlayerFrame()
 		end)
 		PlayerFrameTexture.spacer:SetVertexColor(1, 1, 1)
 	end
-	PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0);
-	PlayerFrameTexture.spacer:SetSize(128, 16)
-	PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUFHPHeight())
-	PlayerFrameTexture.spacer:SetTexture(texture .. "_Spacer")
+	if PlayerFrameTexture then
+		PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0);
+		PlayerFrameTexture.spacer:SetSize(128, 16)
+		PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUFHPHeight())
+		PlayerFrameTexture.spacer:SetTexture(texture .. "_Spacer")
 
-	if DUFHPHeight() >= 32 then
-		PlayerFrameTexture.spacer:Hide()
-	else
-		PlayerFrameTexture.spacer:Show()
+		if DUFHPHeight() >= 32 then
+			PlayerFrameTexture.spacer:Hide()
+		else
+			PlayerFrameTexture.spacer:Show()
+		end
+
+		PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	end
-
-	PlayerFrameTexture:SetVertexColor(1, 1, 1)
 
 	PlayerFrameManaBar:SetHeight(38 - DUFHPHeight())
 	PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 -DUFHPHeight() - 1)
@@ -318,19 +324,21 @@ function DUFPlayerFrameSetup()
 	
 	PlayerName.Show = PlayerName.Hide
 	PlayerName:Hide()
-		
-	hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function(self, ...)
-		if self.dufsetvertexcolor then return end
-		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBorderColor("PLAYER")
-		self:SetVertexColor(r, g, b, 1)
-		if self.spacer then
-			self.spacer:SetVertexColor(self:GetVertexColor())
-		end
-		self.dufsetvertexcolor = false
-	end)
-	PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	
+	if PlayerFrameTexture then
+		hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function(self, ...)
+			if self.dufsetvertexcolor then return end
+			self.dufsetvertexcolor = true
+			local r, g, b = DUFGetBorderColor("PLAYER")
+			self:SetVertexColor(r, g, b, 1)
+			if self.spacer then
+				self.spacer:SetVertexColor(self:GetVertexColor())
+			end
+			self.dufsetvertexcolor = false
+		end)
+		PlayerFrameTexture:SetVertexColor(1, 1, 1)
+	end
+
 	if not PlayerFrameManaBarTextLeft.hooked then
 		PlayerFrameManaBarTextLeft.hooked = true
 		hooksecurefunc(PlayerFrameManaBarTextLeft, "Show", function(self, ...)

@@ -138,7 +138,9 @@ end
 
 
 function DUFUpdateTextureColors()
-	PlayerFrameTexture:SetVertexColor(1, 1, 1)
+	if PlayerFrameTexture then
+		PlayerFrameTexture:SetVertexColor(1, 1, 1)
+	end
 	TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
 	if FocusFrameTextureFrameTexture then
 		FocusFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
@@ -183,9 +185,13 @@ function DUFInitSettings()
 		text:SetText("Settings")
 
 		DUFCreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "Default"}, function()
-			UnitFramePortrait_Update(PlayerFrame)
+			if PlayerFrame then
+				UnitFramePortrait_Update(PlayerFrame)
+			end
 			for id = 1, 4 do
-				UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
+				if _G["PartyMemberFrame" .. id] then
+					UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
+				end
 			end
 		end)
 
@@ -348,8 +354,12 @@ function f:OnEvent(event, ...)
 
 		DUFLoaded = true 
 
-		UnitFramePortrait_Update(PlayerPortrait)
-		PlayerFrameTexture:SetVertexColor(1, 1, 1)
+		if PlayerPortrait then
+			UnitFramePortrait_Update(PlayerPortrait)
+		end
+		if PlayerFrameTexture then
+			PlayerFrameTexture:SetVertexColor(1, 1, 1)
+		end
 
 		DUFPlayerFrameSetup()
 		DUFTargetFrameSetup()
@@ -360,9 +370,13 @@ function f:OnEvent(event, ...)
 			DUFPartyMemberFramesSetup()
 		end
 
-		UnitFramePortrait_Update(PlayerFrame)
+		if PlayerFrame then
+			UnitFramePortrait_Update(PlayerFrame)
+		end
 		for id = 1, 4 do
-			UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
+			if _G["PartyMemberFrame" .. id] then
+				UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
+			end
 		end
 
 		-- PlayerFrame
