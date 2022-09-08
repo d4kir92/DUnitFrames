@@ -1,5 +1,5 @@
 ## Interface: 90207
-## Version: 1.0.0
+## Version: 1.0.1
 ## Title: DUnitFrames |T134167/:16:16:0:0|t by |cFFAAAAFFD4KiR |T132115/:16:16:0:0|t 
 ## Notes: Unit Frames
 ## Author: D4KiR
