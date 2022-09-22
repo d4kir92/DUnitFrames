@@ -60,12 +60,23 @@ function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 	SL:SetObeyStepOnDrag(steps)
 	SL:SetValueStep(steps)
 
+	SL.oldval = nil
 	SL:SetScript("OnValueChanged", function(self, val)
 		val = string.format("%.0f", val)
-		DUFTAB[key] = tonumber(val)
-		SL.Text:SetText(DUFGT(lstr) .. ": " .. val)
-		if func ~= nil then
-			func()
+		if vmin and val < vmin then
+			val = vmin
+		end
+		if vmax and val > vmax then
+			val = vmax
+		end
+		if val ~= self.oldval then
+			self.oldval = val
+			SL.Text:SetText( DUFGT(lstr) .. ": " .. val )
+
+			DUFTAB[key] = tonumber(val)
+			if func ~= nil then
+				func()
+			end
 		end
 	end)
 
@@ -168,7 +179,7 @@ function DUFInitSettings()
 
 		local DUFSettings = {}
 
-		local DUFname = "DUnitFrames |T134167/:16:16:0:0|t by |cff3FC7EBD4KiR |T132115/:16:16:0:0|t"
+		local DUFname = "DUnitFrames |T134167:16:16:0:0|t by |cff3FC7EBD4KiR |T132115:16:16:0:0|t"
 
 		local settingname = DUFname
 		DUFSettings.panel = CreateFrame("FRAME")

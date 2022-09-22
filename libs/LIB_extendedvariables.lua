@@ -1,5 +1,5 @@
 
-local EVVersion = 19
+local EVVersion = 22
 local EVLatest = nil
 local EVLoaded = false
 
@@ -11,6 +11,7 @@ elseif select(4, GetBuildInfo()) > 29999 then
 elseif select(4, GetBuildInfo()) > 19999 then
 	EVBUILD = "TBC"
 end
+
 
 local function EVOnEvent(self, event, ...)
 	if GEVVersion == nil then
@@ -726,27 +727,31 @@ local function EVOnEvent(self, event, ...)
 
 				-- PartyMemberFrames
 				for i = 1, 4 do
-					local pmf = _G["PartyMemberFrame" .. i .. "Texture"]:GetParent()
+					if _G["PartyMemberFrame" .. i .. "Texture"] then
+						local pmf = _G["PartyMemberFrame" .. i .. "Texture"]:GetParent()
 
-					-- Covenant Icon
-					pmf.CovenantIcon = pmf:CreateTexture(nil, "ARTWORK")
-					pmf.CovenantIcon:SetDrawLayer("ARTWORK", 7)
-					pmf.CovenantIcon:SetSize(20, 20)
-					pmf.CovenantIcon:SetPoint("CENTER", pmf, "TOPLEFT", 36, -6)
+						-- Covenant Icon
+						pmf.CovenantIcon = pmf:CreateTexture(nil, "ARTWORK")
+						pmf.CovenantIcon:SetDrawLayer("ARTWORK", 7)
+						pmf.CovenantIcon:SetSize(20, 20)
+						pmf.CovenantIcon:SetPoint("CENTER", pmf, "TOPLEFT", 36, -6)
+					end
 				end
 				function PFEThink()
 					for i = 1, 4 do
-						local pmf = _G["PartyMemberFrame" .. i .. "Texture"]:GetParent()
+						if _G["PartyMemberFrame" .. i .. "Texture"] then
+							local pmf = _G["PartyMemberFrame" .. i .. "Texture"]:GetParent()
 
-						if UnitCovenantID and UnitIsPlayer("PARTY" .. i) and UnitCovenantID(DBNameByUnit("PARTY" .. i)) > -1 then
-							local cov = UnitCovenantID(DBNameByUnit("PARTY" .. i))
-							pmf.CovenantIcon:Show()
-							local sw, sh = EVGetCovenantSize(cov, 20)
-							pmf.CovenantIcon:SetSize(sw, sh)
-							pmf.CovenantIcon:SetAtlas(covenants[cov])
-						else
-							pmf.CovenantIcon:Hide()
-						end	
+							if UnitCovenantID and UnitIsPlayer("PARTY" .. i) and UnitCovenantID(DBNameByUnit("PARTY" .. i)) > -1 then
+								local cov = UnitCovenantID(DBNameByUnit("PARTY" .. i))
+								pmf.CovenantIcon:Show()
+								local sw, sh = EVGetCovenantSize(cov, 20)
+								pmf.CovenantIcon:SetSize(sw, sh)
+								pmf.CovenantIcon:SetAtlas(covenants[cov])
+							else
+								pmf.CovenantIcon:Hide()
+							end	
+						end
 					end
 
 					C_Timer.After(0.5, PFEThink)
