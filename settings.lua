@@ -62,7 +62,7 @@ function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 
 	SL.oldval = nil
 	SL:SetScript("OnValueChanged", function(self, val)
-		val = string.format("%.0f", val)
+		val = tonumber( string.format("%.0f", val) )
 		if vmin and val < vmin then
 			val = vmin
 		end
@@ -73,7 +73,7 @@ function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 			self.oldval = val
 			SL.Text:SetText( DUFGT(lstr) .. ": " .. val )
 
-			DUFTAB[key] = tonumber(val)
+			DUFTAB[key] = val
 			if func ~= nil then
 				func()
 			end
