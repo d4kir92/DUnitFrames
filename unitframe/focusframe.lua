@@ -93,6 +93,13 @@ if FocusFrame then
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
+					if DUFGetDisplayMode() == "PERCENT" then
+
+					else
+						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
+							self:SetText(DUFNN(UnitHealth("FOCUS")) .. "/" .. DUFNN(UnitHealthMax("FOCUS")))
+						end
+					end
 					self.dufsettext = false
 				end)
 				FocusFrameHealthBarText:SetText(FocusFrameHealthBarText:GetText())
@@ -131,6 +138,13 @@ if FocusFrame then
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
+					end
+					if DUFGetDisplayMode() == "PERCENT" then
+
+					else
+						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
+							self:SetText(DUFNN(UnitPower("FOCUS")) .. "/" .. DUFNN(UnitPowerMax("FOCUS")))
+						end
 					end
 					self.dufsettext = false
 				end)
@@ -179,6 +193,13 @@ if FocusFrame then
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
+					if DUFGetDisplayMode() == "PERCENT" then
+
+					else
+						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
+							self:SetText(DUFNN(UnitHealth("FOCUS")) .. "/" .. DUFNN(UnitHealthMax("FOCUS")))
+						end
+					end
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameHealthBarText:SetText(FocusFrameTextureFrameHealthBarText:GetText())
@@ -217,6 +238,13 @@ if FocusFrame then
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
+					end
+					if DUFGetDisplayMode() == "PERCENT" then
+
+					else
+						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
+							self:SetText(DUFNN(UnitPower("FOCUS")) .. "/" .. DUFNN(UnitPowerMax("FOCUS")))
+						end
 					end
 					self.dufsettext = false
 				end)

@@ -26,6 +26,10 @@ function DUFDottedNumber(num)
 	return ret:reverse()
 end
 
+function DUFGetDisplayMode()
+	return GetCVar("statusTextDisplay")
+end
+
 hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.unit == nil or self.portrait == nil then return end
 

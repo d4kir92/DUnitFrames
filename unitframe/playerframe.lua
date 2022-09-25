@@ -279,6 +279,13 @@ function DUFPlayerFrameSetup()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
+		if DUFGetDisplayMode() == "PERCENT" then
+
+		else
+			if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
+				self:SetText(DUFNN(UnitHealth("PLAYER")) .. "/" .. DUFNN(UnitHealthMax("PLAYER")))
+			end
+		end
 		self.dufsettext = false
 	end)
 	PlayerFrameHealthBarText:SetText(PlayerFrameHealthBarText:GetText())
@@ -317,6 +324,13 @@ function DUFPlayerFrameSetup()
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
+		end
+		if DUFGetDisplayMode() == "PERCENT" then
+			
+		else
+			if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
+				self:SetText(DUFNN(UnitPower("PLAYER")) .. "/" .. DUFNN(UnitPowerMax("PLAYER")))
+			end
 		end
 		self.dufsettext = false
 	end)
