@@ -224,7 +224,7 @@ function DUFTargetFrameSetup()
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
 				if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-					self:SetText(DUFNN(UnitPower("TARGET")))
+					--self:SetText(DUFNN(UnitPower("TARGET")))
 				end
 				self.dufsettext = false
 			end)
@@ -241,7 +241,7 @@ function DUFTargetFrameSetup()
 
 				else
 					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitPower("TARGET")) .. "/" .. DUFNN(UnitPowerMax("TARGET")))
+						--self:SetText(DUFNN(UnitPower("TARGET")) .. "/" .. DUFNN(UnitPowerMax("TARGET")))
 					end
 				end
 				self.dufsettext = false

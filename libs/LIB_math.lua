@@ -61,11 +61,23 @@ function DUFNN(value, short)
 	elseif DUFGetConfig("numbermode", "X.X Dynamic") == "X.XXX" then
 		return DUFDottedNumber(value)
 	elseif DUFGetConfig("numbermode", "X.X Dynamic") == "XK" then
-		return format("%.0f K", value / 1000)
+		if value > 1000 then
+			return format("%.0f K", value / 1000)
+		else
+			return value
+		end
 	elseif DUFGetConfig("numbermode", "X.X Dynamic") == "X.XK" then
-		return format("%.1f K", value / 1000)
+		if value > 1000 then
+			return format("%.1f K", value / 1000)
+		else
+			return value
+		end
 	elseif DUFGetConfig("numbermode", "X.X Dynamic") == "X.XXK" then
-		return format("%.2f K", value / 1000)
+		if value > 1000 then
+			return format("%.2f K", value / 1000)
+		else
+			return value
+		end
 	else
 		return value
 	end

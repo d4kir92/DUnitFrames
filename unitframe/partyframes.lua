@@ -207,6 +207,39 @@ function DUFPartyMemberFramesSetup()
 			end )
 		end
 	end
+
+	for i = 1, 4 do
+		for id = 1, 4 do
+			local debuff = _G["PartyMemberFrame" .. i .. "Debuff" .. id]
+			local parent = _G["PartyMemberFrame" .. i .. "Debuff" .. id - 1]
+			if parent == nil then
+				parent = _G["PartyMemberFrame" .. i]
+			end
+			if debuff then
+				if false then
+					debuff.Hide = debuff.Show
+					debuff:Show()
+				end
+
+				hooksecurefunc( debuff, "SetPoint", function(self)
+					if self.dufsetpoint then return end
+					self.dufsetpoint = true
+					
+					self:ClearAllPoints()
+					if parent == _G["PartyMemberFrame" .. i] then
+						local py = -6
+						self:SetPoint( "BOTTOMLEFT", parent, "BOTTOMRIGHT", -80, py )
+					else
+						self:SetPoint( "LEFT", parent, "RIGHT", 4, 0 )
+					end
+
+					self.dufsetpoint = false
+				end )
+				debuff:ClearAllPoints()
+				debuff:SetPoint( "LEFT", parent, "RIGHT", 4, 0 )
+			end
+		end
+	end
 end
 
 function DUFUpdatePartyMemberFrames()
