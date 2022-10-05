@@ -102,6 +102,7 @@ end
 
 function DUFModifyText( text, cur, max, from )
 	if text then
+		text = string.gsub( text, "%.", "" ) -- remove point
 		if text == "" then
 			return ""
 		end
