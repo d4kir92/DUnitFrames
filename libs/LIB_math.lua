@@ -1,5 +1,5 @@
 
-function DUFNN(value, short)
+function DUFNN( value, short )
 	value = tonumber(value) or value
 	if DUFGetConfig("numbermode", "X.X Dynamic") == "X Dynamic" then
 		if value > 999999999 then
@@ -83,7 +83,7 @@ function DUFNN(value, short)
 	end
 end
 
-function DUFPN(vcur, vmax)
+function DUFPN( vcur, vmax )
 	if vcur == nil or vmax == nil then return end
 	vcur = tonumber(vcur)
 	vmax = tonumber(vmax)
@@ -98,4 +98,30 @@ function DUFPN(vcur, vmax)
 	else
 		return ""
 	end
+end
+
+function DUFModifyText( text, cur, max, from )
+	if text then
+		if text == "" then
+			return ""
+		end
+		local tex = tonumber( text )
+		if tex then
+			if type( tex ) == "number" then
+				return DUFNN( cur )
+			end
+		else
+			local c, m = strsplit( "/", text )
+			c = tonumber( c )
+			m = tonumber( m )
+			if c and m then
+				return DUFNN( c ) .. "/" .. DUFNN( m )
+			else
+				return text
+			end
+		end
+	else
+		return text
+	end
+	return "ERROR! SEND TO DEVELOPER (DUnitFrames) " .. tostring( text ) .. " from: " .. tostring( from )
 end

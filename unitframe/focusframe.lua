@@ -58,94 +58,92 @@ if FocusFrame then
 			if FocusFrameHealthBarTextLeft.hooked == nil then
 				FocusFrameHealthBarTextLeft.hooked = true
 
-				hooksecurefunc(FocusFrameHealthBarTextRight, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameHealthBarTextRight, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitHealth("FOCUS")))
-					end
+				
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextRight" )
+					self:SetText( newText )
+	
 					self.dufsettext = false
 				end)
 				FocusFrameHealthBarTextRight:SetText(FocusFrameHealthBarTextRight:GetText())
 
-				hooksecurefunc(FocusFrameHealthBarTextLeft, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameHealthBarTextLeft, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-						self:SetText(DUFPN(UnitHealth("FOCUS"), UnitHealthMax("FOCUS")))
-					end
+					
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextLeft" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameHealthBarTextLeft:SetText(FocusFrameHealthBarTextLeft:GetText())
 
-				hooksecurefunc(FocusFrameHealthBarText, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameHealthBarText, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetDisplayMode() == "PERCENT" then
+					
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarText" )
+					self:SetText( newText )
 
-					else
-						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-							self:SetText(DUFNN(UnitHealth("FOCUS")) .. "/" .. DUFNN(UnitHealthMax("FOCUS")))
-						end
-					end
 					self.dufsettext = false
 				end)
 				FocusFrameHealthBarText:SetText(FocusFrameHealthBarText:GetText())
 
-				hooksecurefunc(FocusFrameManaBarTextLeft, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameManaBarTextLeft, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-						self:SetText(DUFPN(UnitPower("FOCUS"), UnitPowerMax("FOCUS")))
-					end
+					
+					local newText = DUFModifyText( text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextLeft" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameManaBarTextLeft:SetText(FocusFrameManaBarTextLeft:GetText())
 				
-				hooksecurefunc(FocusFrameManaBarTextRight, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameManaBarTextRight, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitPower("FOCUS")))
-					end
+					
+					local newText = DUFModifyText( text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextRight" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameManaBarTextRight:SetText(FocusFrameManaBarTextRight:GetText())
 
-				hooksecurefunc(FocusFrameManaBarText, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameManaBarText, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetDisplayMode() == "PERCENT" then
+					
+					local newText = DUFModifyText( text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarText" )
+					self:SetText( newText )
 
-					else
-						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-							self:SetText(DUFNN(UnitPower("FOCUS")) .. "/" .. DUFNN(UnitPowerMax("FOCUS")))
-						end
-					end
 					self.dufsettext = false
 				end)
 				FocusFrameManaBarText:SetText(FocusFrameManaBarText:GetText())
@@ -157,95 +155,93 @@ if FocusFrame then
 				FocusFrameTextureFrameHealthBarTextLeft.hooked = true
 
 				FocusFrameTextureFrameHealthBarTextLeft.Hide = FocusFrameTextureFrameHealthBarTextLeft.Show
-				hooksecurefunc(FocusFrameTextureFrameHealthBarTextLeft, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameTextureFrameHealthBarTextLeft, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-						self:SetText(DUFPN(UnitHealth("FOCUS"), UnitHealthMax("FOCUS")))
-					end
+					
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "TargetFrameManaBarTextLeft" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameHealthBarTextLeft:SetText(FocusFrameTextureFrameHealthBarTextLeft:GetText())
 				
 				FocusFrameTextureFrameHealthBarTextRight.Hide = FocusFrameTextureFrameHealthBarTextRight.Show
-				hooksecurefunc(FocusFrameTextureFrameHealthBarTextRight, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameTextureFrameHealthBarTextRight, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitHealth("FOCUS")))
-					end
+					
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextRight" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameHealthBarTextRight:SetText(FocusFrameTextureFrameHealthBarTextRight:GetText())
 
-				hooksecurefunc(FocusFrameTextureFrameHealthBarText, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameTextureFrameHealthBarText, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetDisplayMode() == "PERCENT" then
+					
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarText" )
+					self:SetText( newText )
 
-					else
-						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-							self:SetText(DUFNN(UnitHealth("FOCUS")) .. "/" .. DUFNN(UnitHealthMax("FOCUS")))
-						end
-					end
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameHealthBarText:SetText(FocusFrameTextureFrameHealthBarText:GetText())
 
-				hooksecurefunc(FocusFrameTextureFrameManaBarTextLeft, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameTextureFrameManaBarTextLeft, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-						self:SetText(DUFPN(UnitPower("FOCUS"), UnitPowerMax("FOCUS")))
-					end
+					
+					local newText = DUFModifyText( text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextLeft" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameManaBarTextLeft:SetText(FocusFrameTextureFrameManaBarTextLeft:GetText())
 				
-				hooksecurefunc(FocusFrameTextureFrameManaBarTextRight, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameTextureFrameManaBarTextRight, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitPower("FOCUS")))
-					end
+						
+					local newText = DUFModifyText( text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextRight" )
+					self:SetText( newText )
+
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameManaBarTextRight:SetText(FocusFrameTextureFrameManaBarTextRight:GetText())
 
-				hooksecurefunc(FocusFrameTextureFrameManaBarText, "SetText", function(self, ...)
+				hooksecurefunc(FocusFrameTextureFrameManaBarText, "SetText", function( self, text )
 					if self.dufsettext then return end
 					self.dufsettext = true
 					local fontFamily, fontSize, fontFlags = self:GetFont()
 					if fontSize ~= DUFFontSize then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
-					if DUFGetDisplayMode() == "PERCENT" then
+						
+					local newText = DUFModifyText( text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarText" )
+					self:SetText( newText )
 
-					else
-						if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-							self:SetText(DUFNN(UnitPower("FOCUS")) .. "/" .. DUFNN(UnitPowerMax("FOCUS")))
-						end
-					end
 					self.dufsettext = false
 				end)
 				FocusFrameTextureFrameManaBarText:SetText(FocusFrameTextureFrameManaBarText:GetText())

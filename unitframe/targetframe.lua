@@ -56,94 +56,92 @@ function DUFTargetFrameSetup()
 		if TargetFrameHealthBarTextLeft.hooked == nil then
 			TargetFrameHealthBarTextLeft.hooked = true
 
-			hooksecurefunc(TargetFrameHealthBarTextRight, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameHealthBarTextRight, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-					self:SetText(DUFNN(UnitHealth("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText())
 
-			hooksecurefunc(TargetFrameHealthBarTextLeft, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameHealthBarTextLeft, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-					--self:SetText(DUFPN(UnitHealth("TARGET"), UnitHealthMax("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText())
 
-			hooksecurefunc(TargetFrameHealthBarText, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameHealthBarText, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetDisplayMode() == "PERCENT" then
+				
+				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText" )
+				self:SetText( newText )
 
-				else
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitHealth("TARGET")) .. "/" .. DUFNN(UnitHealthMax("TARGET")))
-					end
-				end
 				self.dufsettext = false
 			end)
 			TargetFrameHealthBarText:SetText(TargetFrameHealthBarText:GetText())
 
-			hooksecurefunc(TargetFrameManaBarTextLeft, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameManaBarTextLeft, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-					--self:SetText(DUFPN(UnitPower("TARGET"), UnitPowerMax("TARGET")))
-				end
+			
+				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameManaBarTextLeft:SetText(TargetFrameManaBarTextLeft:GetText())
 			
-			hooksecurefunc(TargetFrameManaBarTextRight, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameManaBarTextRight, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-					self:SetText(DUFNN(UnitPower("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameManaBarTextRight:SetText(TargetFrameManaBarTextRight:GetText())
 
-			hooksecurefunc(TargetFrameManaBarText, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameManaBarText, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetDisplayMode() == "PERCENT" then
+				
+				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText" )
+				self:SetText( newText )
 
-				else
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitPower("TARGET")) .. "/" .. DUFNN(UnitPowerMax("TARGET")))
-					end
-				end
 				self.dufsettext = false
 			end)
 			TargetFrameManaBarText:SetText(TargetFrameManaBarText:GetText())
@@ -155,95 +153,93 @@ function DUFTargetFrameSetup()
 			TargetFrameTextureFrameHealthBarTextLeft.hooked = true
 
 			--TargetFrameTextureFrameHealthBarTextLeft.Hide = TargetFrameTextureFrameHealthBarTextLeft.Show
-			hooksecurefunc(TargetFrameTextureFrameHealthBarTextLeft, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameTextureFrameHealthBarTextLeft, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-					--self:SetText(DUFPN(UnitHealth("TARGET"), UnitHealthMax("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameTextureFrameHealthBarTextLeft:SetText(TargetFrameTextureFrameHealthBarTextLeft:GetText())
 			
 			--TargetFrameTextureFrameHealthBarTextRight.Hide = TargetFrameTextureFrameHealthBarTextRight.Show
-			hooksecurefunc(TargetFrameTextureFrameHealthBarTextRight, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameTextureFrameHealthBarTextRight, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-					self:SetText(DUFNN(UnitHealth("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameTextureFrameHealthBarTextRight:SetText(TargetFrameTextureFrameHealthBarTextRight:GetText())
 
-			hooksecurefunc(TargetFrameTextureFrameHealthBarText, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameTextureFrameHealthBarText, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetDisplayMode() == "PERCENT" then
+				
+				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText" )
+				self:SetText( newText )
 
-				else
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						self:SetText(DUFNN(UnitHealth("TARGET")) .. "/" .. DUFNN(UnitHealthMax("TARGET")))
-					end
-				end
 				self.dufsettext = false
 			end)
 			TargetFrameTextureFrameHealthBarText:SetText(TargetFrameTextureFrameHealthBarText:GetText())
 
-			hooksecurefunc(TargetFrameTextureFrameManaBarTextLeft, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameTextureFrameManaBarTextLeft, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-					--self:SetText(DUFPN(UnitPower("TARGET"), UnitPowerMax("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameTextureFrameManaBarTextLeft:SetText(TargetFrameTextureFrameManaBarTextLeft:GetText())
 			
-			hooksecurefunc(TargetFrameTextureFrameManaBarTextRight, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameTextureFrameManaBarTextRight, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-					--self:SetText(DUFNN(UnitPower("TARGET")))
-				end
+				
+				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight" )
+				self:SetText( newText )
+
 				self.dufsettext = false
 			end)
 			TargetFrameTextureFrameManaBarTextRight:SetText(TargetFrameTextureFrameManaBarTextRight:GetText())
 
-			hooksecurefunc(TargetFrameTextureFrameManaBarText, "SetText", function(self, ...)
+			hooksecurefunc(TargetFrameTextureFrameManaBarText, "SetText", function( self, text )
 				if self.dufsettext then return end
 				self.dufsettext = true
 				local fontFamily, fontSize, fontFlags = self:GetFont()
 				if fontSize ~= DUFFontSize then
 					self:SetFont(fontFamily, DUFFontSize, fontFlags)
 				end
-				if DUFGetDisplayMode() == "PERCENT" then
+				
+				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText" )
+				self:SetText( newText )
 
-				else
-					if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-						--self:SetText(DUFNN(UnitPower("TARGET")) .. "/" .. DUFNN(UnitPowerMax("TARGET")))
-					end
-				end
 				self.dufsettext = false
 			end)
 			TargetFrameTextureFrameManaBarText:SetText(TargetFrameTextureFrameManaBarText:GetText())

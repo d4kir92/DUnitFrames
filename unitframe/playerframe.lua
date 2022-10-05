@@ -244,94 +244,93 @@ function DUFPlayerFrameSetup()
 	PlayerFrameHealthBar.dr, PlayerFrameHealthBar.dg, PlayerFrameHealthBar.db = PlayerFrameHealthBar:GetStatusBarColor()
 	PlayerFrameHealthBar:SetStatusBarColor(1, 1, 1)
 
-	hooksecurefunc(PlayerFrameHealthBarTextRight, "SetText", function(self, ...)
+	hooksecurefunc(PlayerFrameHealthBarTextRight, "SetText", function( self, text )
 		if self.dufsettext then return end
 		self.dufsettext = true
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
-		if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-			self:SetText(DUFNN(UnitHealth("PLAYER")))
-		end
+		
+		local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight" )
+		self:SetText( newText )
+
 		self.dufsettext = false
 	end)
 	PlayerFrameHealthBarTextRight:SetText(PlayerFrameHealthBarTextRight:GetText())
-	
-	hooksecurefunc(PlayerFrameHealthBarTextLeft, "SetText", function(self, ...)
+		
+	hooksecurefunc(PlayerFrameHealthBarTextLeft, "SetText", function( self, text )
 		if self.dufsettext then return end
 		self.dufsettext = true
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
-		if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-			self:SetText(DUFPN(UnitHealth("PLAYER"), UnitHealthMax("PLAYER")))
-		end
+
+		local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft" )
+		self:SetText( newText )
+
 		self.dufsettext = false
 	end)
-	PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextRight:GetText())
+	PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextLeft:GetText())
 
-	hooksecurefunc(PlayerFrameHealthBarText, "SetText", function(self, ...)
+	
+	hooksecurefunc(PlayerFrameHealthBarText, "SetText", function( self, text )
 		if self.dufsettext then return end
 		self.dufsettext = true
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
-		if DUFGetDisplayMode() == "PERCENT" then
 
-		else
-			if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-				self:SetText(DUFNN(UnitHealth("PLAYER")) .. "/" .. DUFNN(UnitHealthMax("PLAYER")))
-			end
-		end
+		local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText" )
+		self:SetText( newText )
+
 		self.dufsettext = false
 	end)
 	PlayerFrameHealthBarText:SetText(PlayerFrameHealthBarText:GetText())
 	
-	hooksecurefunc(PlayerFrameManaBarTextLeft, "SetText", function(self, ...)
+	hooksecurefunc(PlayerFrameManaBarTextLeft, "SetText", function( self, text )
 		if self.dufsettext then return end
 		self.dufsettext = true
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
-		if DUFGetConfig("percentmode", "X.X%") ~= "Default" then
-			self:SetText(DUFPN(UnitPower("PLAYER"), UnitPowerMax("PLAYER")))
-		end
+
+		local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft" )
+		self:SetText( newText )
+
 		self.dufsettext = false
 	end)
 	PlayerFrameManaBarTextLeft:SetText(PlayerFrameManaBarTextLeft:GetText())
 	
-	hooksecurefunc(PlayerFrameManaBarTextRight, "SetText", function(self, ...)
+	hooksecurefunc(PlayerFrameManaBarTextRight, "SetText", function( self, text )
 		if self.dufsettext then return end
 		self.dufsettext = true
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
-		if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-			self:SetText(DUFNN(UnitPower("PLAYER")))
-		end
+		
+		local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight" )
+		self:SetText( newText )
+
 		self.dufsettext = false
 	end)
 	PlayerFrameManaBarTextRight:SetText(PlayerFrameManaBarTextRight:GetText())
 	
-	hooksecurefunc(PlayerFrameManaBarText, "SetText", function(self, ...)
+	hooksecurefunc(PlayerFrameManaBarText, "SetText", function( self, text )
 		if self.dufsettext then return end
 		self.dufsettext = true
 		local fontFamily, fontSize, fontFlags = self:GetFont()
 		if fontSize ~= DUFFontSize then
 			self:SetFont(fontFamily, DUFFontSize, fontFlags)
 		end
-		if DUFGetDisplayMode() == "PERCENT" then
-			
-		else
-			if DUFGetConfig("numbermode", "X.X Dynamic") ~= "Default" then
-				self:SetText(DUFNN(UnitPower("PLAYER")) .. "/" .. DUFNN(UnitPowerMax("PLAYER")))
-			end
-		end
+		
+		local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText" )
+		self:SetText( newText )
+
 		self.dufsettext = false
 	end)
 	PlayerFrameManaBarText:SetText(PlayerFrameManaBarText:GetText())
