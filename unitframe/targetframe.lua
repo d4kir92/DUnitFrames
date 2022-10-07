@@ -546,7 +546,7 @@ function DUFTargetFrameSetup()
 				ClearInspectPlayer()
 				local id, name, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
 				if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) then
-					if icon and UnitIsPlayer( "TARGET" ) then
+					if icon then
 						TargetFramePortrait:SetTexture(icon)
 						TargetFramePortrait:SetTexCoord(0, 1, 0, 1)
 					end
