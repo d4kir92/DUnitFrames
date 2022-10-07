@@ -523,7 +523,6 @@ if FocusFrame then
 						if icon then
 							FocusFramePortrait:SetTexture(icon)
 							FocusFramePortrait:SetTexCoord(0, 1, 0, 1)
-							FocusFramePortrait:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask")
 						end
 					end
 				end
