@@ -163,7 +163,7 @@ if FocusFrame then
 						self:SetFont(fontFamily, DUFFontSize, fontFlags)
 					end
 					
-					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "TargetFrameManaBarTextLeft" )
+					local newText = DUFModifyText( text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextLeft" )
 					self:SetText( newText )
 
 					self.dufsettext = false
@@ -393,9 +393,6 @@ if FocusFrame then
 				FocusFrameManaBarTextLeft:SetPoint("LEFT", FocusFrameManaBar, "LEFT", 2, 0)
 				FocusFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, 0)
 				FocusFrameManaBarText:SetPoint("CENTER", FocusFrameManaBar, "CENTER", 0, 0)
-				FocusFrameManaBarTextLeft:Show()
-				FocusFrameManaBarTextRight:Show()
-				FocusFrameManaBarText:Show()
 			elseif FocusFrameTextureFrameHealthBarTextLeft ~= nil then
 				FocusFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", FocusFrameHealthBar, "LEFT", 2, 0)
 				FocusFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", FocusFrameHealthBar, "RIGHT", -2, 0)
@@ -429,9 +426,6 @@ if FocusFrame then
 				FocusFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", FocusFrameManaBar, "LEFT", 2, -1)
 				FocusFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, -1)
 				FocusFrameTextureFrameManaBarText:SetPoint("CENTER", FocusFrameManaBar, "CENTER", 0, 0)
-				FocusFrameTextureFrameManaBarTextLeft:Show()
-				FocusFrameTextureFrameManaBarTextRight:Show()
-				FocusFrameTextureFrameManaBarText:Show()
 			end
 
 			if InspectFocusSpec then

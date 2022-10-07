@@ -183,10 +183,6 @@ function DUFUpdatePlayerFrame()
 	PlayerFrameManaBar:SetHeight(38 - DUFHPHeight())
 	PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 -DUFHPHeight() - 1)
 
-	PlayerFrameManaBarTextLeft:Show()
-	PlayerFrameManaBarTextRight:Show()
-	PlayerFrameManaBarText:Show()
-
 	PlayerFrameHealthBarTextLeft:SetPoint("LEFT", PlayerFrameHealthBar, "LEFT", 2, 0)
 	PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", 0, 0)
 	PlayerFrameHealthBarText:SetPoint("CENTER", PlayerFrameHealthBar, "CENTER", 0, 0)

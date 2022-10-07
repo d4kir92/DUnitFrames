@@ -391,9 +391,6 @@ function DUFTargetFrameSetup()
 			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
 			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, 0)
 			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
-			TargetFrameManaBarTextLeft:Show()
-			TargetFrameManaBarTextRight:Show()
-			TargetFrameManaBarText:Show()
 		elseif TargetFrameTextureFrameHealthBarTextLeft ~= nil then
 			TargetFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
 			TargetFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -2, 0)
@@ -427,9 +424,6 @@ function DUFTargetFrameSetup()
 			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -1)
 			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, -1)
 			TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
-			TargetFrameTextureFrameManaBarTextLeft:Show()
-			TargetFrameTextureFrameManaBarTextRight:Show()
-			TargetFrameTextureFrameManaBarText:Show()
 		end
 
 		if CanInspect and GetInspectSpecialization then
