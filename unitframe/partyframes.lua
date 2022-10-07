@@ -46,7 +46,7 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(_G["PartyMemberFrame" .. id .. "HealthBar"], "SetStatusBarColor", function(self, ...)
 				if self.dufsetvertexcolor then return end
 				self.dufsetvertexcolor = true
-				local r, g, b = DUFGetBarColor("PARTY" .. id)
+				local r, g, b = DUFGetBarColor( "PARTY" .. id, self )
 				if r and g and b then
 					self:SetStatusBarColor(r, g, b)
 				end
@@ -113,18 +113,25 @@ function DUFPartyMemberFramesSetup()
 						PartyMemberFrame.hptr:SetFont(STANDARD_TEXT_FONT, 10, "THINOUTLINE")
 						PartyMemberFrame.hptr:SetPoint("RIGHT", _G["PartyMemberFrame" .. id .. "HealthBar"], "RIGHT", 0, 0)
 					end
+
+					local cur = 1
+					local max = 1
+					if UnitHealthMax( "PARTY" .. id ) > 0 then
+						cur = UnitHealth( "PARTY" .. id )
+						max = UnitHealthMax( "PARTY" .. id )
+					end
 					if GetCVar( "statusTextDisplay" ) == "PERCENT" then
-						PartyMemberFrame.hptc:SetText( string.format("%.0f", UnitHealth( "PARTY" .. id ) / UnitHealthMax( "PARTY" .. id ) * 100 ) .. "%" )
+						PartyMemberFrame.hptc:SetText( string.format("%.0f", cur / max * 100 ) .. "%" )
 						PartyMemberFrame.hptl:SetText( "" )
 						PartyMemberFrame.hptr:SetText( "" )
 					elseif GetCVar( "statusTextDisplay" ) == "NUMERIC" then
-						PartyMemberFrame.hptc:SetText( string.format("%s/%s", DUFNN( UnitHealth( "PARTY" .. id ) ), DUFNN( UnitHealthMax( "PARTY" .. id ) ) ) )
+						PartyMemberFrame.hptc:SetText( string.format("%s/%s", DUFNN( cur ), DUFNN( max ) ) )
 						PartyMemberFrame.hptl:SetText( "" )
 						PartyMemberFrame.hptr:SetText( "" )
 					elseif GetCVar( "statusTextDisplay" ) == "BOTH" then
 						PartyMemberFrame.hptc:SetText( "" )
-						PartyMemberFrame.hptl:SetText( string.format("%.0f", UnitHealth( "PARTY" .. id ) / UnitHealthMax( "PARTY" .. id ) * 100 ) .. "%" )
-						PartyMemberFrame.hptr:SetText( string.format("%s", DUFNN( UnitHealth( "PARTY" .. id ) ) ) )
+						PartyMemberFrame.hptl:SetText( string.format("%.0f", cur / max * 100 ) .. "%" )
+						PartyMemberFrame.hptr:SetText( string.format("%s", DUFNN( cur ) ) )
 					else
 						PartyMemberFrame.hptc:SetText( "" )
 						PartyMemberFrame.hptl:SetText( "" )
@@ -144,18 +151,25 @@ function DUFPartyMemberFramesSetup()
 						PartyMemberFrame.potr:SetFont(STANDARD_TEXT_FONT, 9, "THINOUTLINE")
 						PartyMemberFrame.potr:SetPoint("RIGHT", _G["PartyMemberFrame" .. id .. "ManaBar"], "RIGHT", 0, 0)
 					end
+
+					local curP = 1
+					local maxP = 1
+					if UnitPowerMax( "PARTY" .. id ) > 0 then
+						curP = UnitPower( "PARTY" .. id )
+						maxP = UnitPowerMax( "PARTY" .. id )
+					end
 					if GetCVar( "statusTextDisplay" ) == "PERCENT" then
-						PartyMemberFrame.potc:SetText( string.format("%.0f", UnitPower( "PARTY" .. id ) / UnitPowerMax( "PARTY" .. id ) * 100 ) .. "%" )
+						PartyMemberFrame.potc:SetText( string.format("%.0f", curP / maxP * 100 ) .. "%" )
 						PartyMemberFrame.potl:SetText( "" )
 						PartyMemberFrame.potr:SetText( "" )
 					elseif GetCVar( "statusTextDisplay" ) == "NUMERIC" then
-						PartyMemberFrame.potc:SetText( string.format("%s/%s", DUFNN( UnitPower( "PARTY" .. id ) ), DUFNN( UnitPowerMax( "PARTY" .. id ) ) ) )
+						PartyMemberFrame.potc:SetText( string.format("%s/%s", DUFNN( curP ), DUFNN( maxP ) ) )
 						PartyMemberFrame.potl:SetText( "" )
 						PartyMemberFrame.potr:SetText( "" )
 					elseif GetCVar( "statusTextDisplay" ) == "BOTH" then
 						PartyMemberFrame.potc:SetText( "" )
-						PartyMemberFrame.potl:SetText( string.format("%.0f", UnitPower( "PARTY" .. id ) / UnitPowerMax( "PARTY" .. id ) * 100 ) .. "%" )
-						PartyMemberFrame.potr:SetText( string.format("%s", DUFNN( UnitPower( "PARTY" .. id ) ) ) )
+						PartyMemberFrame.potl:SetText( string.format("%.0f", curP / maxP * 100 ) .. "%" )
+						PartyMemberFrame.potr:SetText( string.format("%s", DUFNN( curP ) ) )
 					else
 						PartyMemberFrame.potc:SetText( "" )
 						PartyMemberFrame.potl:SetText( "" )

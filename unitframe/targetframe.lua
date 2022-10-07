@@ -43,7 +43,7 @@ function DUFTargetFrameSetup()
 	hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function(self, ...)
 		if self.dufsetvertexcolor then return end
 		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBarColor("TARGET")
+		local r, g, b = DUFGetBarColor( "TARGET", self )
 		if r and g and b then
 			self:SetStatusBarColor(r, g, b)
 		end
@@ -538,9 +538,6 @@ function DUFTargetFrameSetup()
 	if CanInspect and GetInspectSpecialization then
 		local f = CreateFrame("Frame")
 		function InspectTargetSpec()
-			if TargetFramePortrait.spec ~= nil then
-				TargetFramePortrait.spec:SetTexture(nil)
-			end
 			if UnitIsPlayer("TARGET") then
 				if CanInspect("TARGET") and CheckInteractDistance("TARGET", 1) then
 					f:RegisterEvent("INSPECT_READY")
@@ -548,19 +545,17 @@ function DUFTargetFrameSetup()
 				end
 			end
 		end
-		f:SetScript("OnEvent", function(self, event, ...)
+		f:SetScript("OnEvent", function( self, event, ... )
 			if GetInspectSpecialization ~= nil then
-				local currentSpec = GetInspectSpecialization("TARGET")
+				local currentSpec = GetInspectSpecialization( "TARGET" )
 				f:UnregisterEvent("INSPECT_READY")
 				ClearInspectPlayer()
 				local id, name, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
 				if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) then
-					if TargetFramePortrait.spec == nil then
-						TargetFramePortrait.spec = TargetFrame:CreateTexture(nil, "Artwork")
-						TargetFramePortrait.spec:SetAllPoints(TargetFramePortrait)
+					if icon and UnitIsPlayer( "TARGET" ) then
+						TargetFramePortrait:SetTexture(icon)
+						TargetFramePortrait:SetTexCoord(0, 1, 0, 1)
 					end
-					TargetFramePortrait.spec:SetTexture(icon)
-					TargetFramePortrait.spec:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask")
 				end
 			end
 		end)

@@ -2,10 +2,10 @@
 
 local DUFFontSize = 12
 
-function DUFGetBorderColor(unit)
-	local r = 1
-	local g = 1
-	local b = 1
+function DUFGetBorderColor( unit )
+	local r = nil
+	local g = nil
+	local b = nil
 	local mode = DUFGetConfig("bordermode")
 	local PlayerClass, PlayerClassEng, PlayerClassIndex = UnitClass(unit)
 	if mode then
@@ -30,13 +30,7 @@ function DUFGetBorderColor(unit)
 			g = 0
 			b = 0
 		else
-			if MAIGetUIColor then
-				r, g, b = MAIGetUIColor()
-			else
-				r = 1
-				g = 1
-				b = 1
-			end
+			-- Nothing
 		end
 	end
 	return r, g, b
@@ -82,6 +76,15 @@ function DUFGetBarColor(unit, frame)
 		r = 0
 		g = 0.6
 		b = 0.1
+	end
+
+	if UnitPlayerControlled and UnitIsTapDenied then
+		if not UnitPlayerControlled( unit ) and UnitIsTapDenied( unit ) then
+			return 0.75, 0.75, 0.75
+		end
+	end
+	if not UnitIsConnected( unit ) then
+		return 0.5, 0.5, 0.5
 	end
 	return r, g, b
 end
@@ -235,7 +238,7 @@ function DUFPlayerFrameSetup()
 	hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarColor", function(self, ...)
 		if self.dufsetvertexcolor then return end
 		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBarColor("PLAYER", self)
+		local r, g, b = DUFGetBarColor( "PLAYER", self )
 		if r and g and b then
 			self:SetStatusBarColor(r, g, b)
 		end

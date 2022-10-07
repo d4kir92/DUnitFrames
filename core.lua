@@ -30,13 +30,21 @@ function DUFGetDisplayMode()
 	return GetCVar("statusTextDisplay")
 end
 
-hooksecurefunc("UnitFramePortrait_Update", function(self)
+hooksecurefunc( "UnitFramePortrait_Update", function( self, ... )
 	if self.unit == nil or self.portrait == nil then return end
-
+	
 	--if self:GetName() == "TargetFrameToT" then return end -- IMPORTANT
 
 	if self.dufsetportrai then return end
 	self.dufsetportrai = true
+
+	--self.portrait:SetMask( nil )
+	if self.mask == nil then
+		self.mask = self:CreateMaskTexture()
+		self.mask:SetAllPoints( self.portrait )
+		self.mask:SetTexture( "Interface/CHARACTERFRAME/TempPortraitAlphaMask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE" )
+		self.portrait:AddMaskTexture( self.mask )
+	end
 
 	if UnitIsPlayer(self.unit) then
 		local class, classEng, classID = UnitClass(self.unit)
@@ -69,7 +77,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 	end
 
 	self.dufsetportrai = false
-end)
+end )
 
 function DUFClamp(va, mi, ma)
 	if va < mi then

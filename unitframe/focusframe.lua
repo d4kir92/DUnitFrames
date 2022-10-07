@@ -45,7 +45,7 @@ if FocusFrame then
 		hooksecurefunc(FocusFrameHealthBar, "SetStatusBarColor", function(self, ...)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBarColor("FOCUS")
+			local r, g, b = DUFGetBarColor( "FOCUS", self )
 			if r and g and b then
 				self:SetStatusBarColor(r, g, b)
 			end
@@ -506,9 +506,6 @@ if FocusFrame then
 		if CanInspect and GetInspectSpecialization then
 			local f = CreateFrame("Frame")
 			function InspectFocusSpec()
-				if FocusFramePortrait.spec ~= nil then
-					FocusFramePortrait.spec:SetTexture(nil)
-				end
 				if UnitIsPlayer("FOCUS") then
 					if CanInspect("FOCUS") and CheckInteractDistance("FOCUS", 1) then
 						f:RegisterEvent("INSPECT_READY")
@@ -523,12 +520,11 @@ if FocusFrame then
 					ClearInspectPlayer()
 					local id, name, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
 					if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) then
-						if FocusFramePortrait.spec == nil then
-							FocusFramePortrait.spec = FocusFrame:CreateTexture(nil, "Artwork")
-							FocusFramePortrait.spec:SetAllPoints(FocusFramePortrait)
+						if icon then
+							FocusFramePortrait:SetTexture(icon)
+							FocusFramePortrait:SetTexCoord(0, 1, 0, 1)
+							FocusFramePortrait:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask")
 						end
-						FocusFramePortrait.spec:SetTexture(icon)
-						FocusFramePortrait.spec:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask")
 					end
 				end
 			end)
