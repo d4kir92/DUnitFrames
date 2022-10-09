@@ -40,17 +40,18 @@ function DUFTargetFrameSetup()
 		TargetFrameTextureFrameManaBarTextRight = TargetFrameTextureFrame.ManaBarTextRight
 	end
 
-	hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function(self, ...)
+	hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
 		if self.dufsetvertexcolor then return end
 		self.dufsetvertexcolor = true
 		local r, g, b = DUFGetBarColor( "TARGET", self )
 		if r and g and b then
-			self:SetStatusBarColor(r, g, b)
+			self:SetStatusBarColor( r, g, b )
+		else
+			self:SetStatusBarColor( oR, oG, oB )
 		end
 		self.dufsetvertexcolor = false
 	end)
-	TargetFrameHealthBar.dr, TargetFrameHealthBar.dg, TargetFrameHealthBar.db = TargetFrameHealthBar:GetStatusBarColor()
-	TargetFrameHealthBar:SetStatusBarColor(1, 1, 1)
+	TargetFrameHealthBar:SetStatusBarColor( TargetFrameHealthBar:GetStatusBarColor() )
 
 	if TargetFrameHealthBarTextLeft ~= nil then
 		if TargetFrameHealthBarTextLeft.hooked == nil then
@@ -454,9 +455,13 @@ function DUFTargetFrameSetup()
 		
 		if ThreatBorder and ThreatBorder:IsShown() then
 			y = 24
-			local r, g, b = DUFGetBorderColor("TARGET")
+			local r, g, b = DUFGetBorderColor( "TARGET", self )
 			if ThreatBorder then
-				ThreatBorder:SetVertexColor(r, g, b)
+				if r and g and b then
+					ThreatBorder:SetVertexColor( r, g, b, 1 )
+				else
+					ThreatBorder:SetVertexColor( oR, oG, oB, 1)
+				end
 			end
 		else
 			local isTanking, status, threatpct, rawthreatpct, threatvalue, percentOfLead = UnitDetailedThreatSituation("PLAYER", "TARGET");
@@ -502,11 +507,15 @@ function DUFTargetFrameSetup()
 	end)
 	TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
 
-	hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function(self, ...)
+	hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function( self, oR, oG, oB )
 		if self.dufsetvertexcolor then return end
 		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBorderColor("TARGET")
-		self:SetVertexColor(r, g, b, 1)
+		local r, g, b = DUFGetBorderColor( "TARGET", self )
+		if r and g and b then
+			self:SetVertexColor( r, g, b, 1 )
+		else
+			self:SetVertexColor( oR, oG, oB, 1)
+		end
 		if self.spacer then
 			self.spacer:SetVertexColor(self:GetVertexColor())
 		end
@@ -514,11 +523,15 @@ function DUFTargetFrameSetup()
 	end)
 	TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
 
-	hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function(self, ...)
+	hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
 		if self.dufsetvertexcolor then return end
 		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBorderColor("TARGETTARGET")
-		self:SetVertexColor(r, g, b, 1)
+		local r, g, b = DUFGetBorderColor( "TARGETTARGET", self )
+		if r and g and b then
+			self:SetVertexColor( r, g, b, 1 )
+		else
+			self:SetVertexColor( oR, oG, oB, 1)
+		end
 		self.dufsetvertexcolor = false
 	end)
 	TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)

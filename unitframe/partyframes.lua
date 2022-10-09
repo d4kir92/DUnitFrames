@@ -43,12 +43,14 @@ function DUFPartyMemberFramesSetup()
 			end)
 			_G["PartyMemberFrame" .. id .. "ManaBar"]:SetStatusBarTexture("")
 		
-			hooksecurefunc(_G["PartyMemberFrame" .. id .. "HealthBar"], "SetStatusBarColor", function(self, ...)
+			hooksecurefunc(_G["PartyMemberFrame" .. id .. "HealthBar"], "SetStatusBarColor", function( self, oR, oG, oB )
 				if self.dufsetvertexcolor then return end
 				self.dufsetvertexcolor = true
 				local r, g, b = DUFGetBarColor( "PARTY" .. id, self )
 				if r and g and b then
-					self:SetStatusBarColor(r, g, b)
+					self:SetStatusBarColor( r, g, b )
+				else
+					self:SetStatusBarColor( oR, oG, oB )
 				end
 				self.dufsetvertexcolor = false
 			end)
@@ -198,22 +200,30 @@ function DUFPartyMemberFramesSetup()
 			end)
 			_G["PartyMemberFrame" .. id .. "Name"]:SetText(_G["PartyMemberFrame" .. id .. "Name"]:GetText())
 
-			hooksecurefunc(_G["PartyMemberFrame" .. id .. "Texture"], "SetVertexColor", function(self, ...)
+			hooksecurefunc(_G["PartyMemberFrame" .. id .. "Texture"], "SetVertexColor", function( self,  oR, oG, oB )
 				if self.dufsetvertexcolor then return end
 				self.dufsetvertexcolor = true
-				local r, g, b = DUFGetBorderColor("PARTY" .. id)
-				self:SetVertexColor(r, g, b, 1)
+				local r, g, b = DUFGetBorderColor( "PARTY" .. id, self )
+				if r and g and b then
+					self:SetVertexColor( r, g, b, 1 )
+				else
+					self:SetVertexColor( oR, oG, oB, 1)
+				end
 				self.dufsetvertexcolor = false
 			end)
 			_G["PartyMemberFrame" .. id .. "Texture"]:SetVertexColor(1, 1, 1)
 
 			C_Timer.After( 2, function()
 				if _G["PartyFrameXPBar" .. id] then
-					hooksecurefunc(_G["PartyFrameXPBar" .. id].textureLvlBg, "SetVertexColor", function(self, ...)
+					hooksecurefunc(_G["PartyFrameXPBar" .. id].textureLvlBg, "SetVertexColor", function( self,  oR, oG, oB )
 						if self.dufsetvertexcolor then return end
 						self.dufsetvertexcolor = true
-						local r, g, b = DUFGetBorderColor("PARTY" .. id)
-						self:SetVertexColor(r, g, b, 1)
+						local r, g, b = DUFGetBorderColor( "PARTY" .. id, self )
+						if r and g and b then
+							self:SetVertexColor( r, g, b, 1 )
+						else
+							self:SetVertexColor( oR, oG, oB, 1)
+						end
 						self.dufsetvertexcolor = false
 					end)
 					_G["PartyFrameXPBar" .. id].textureLvlBg:SetVertexColor(1, 1, 1)

@@ -2,10 +2,18 @@
 
 local DUFFontSize = 12
 
-function DUFGetBorderColor( unit )
+local borderTab = {}
+function DUFGetBorderColor( unit, frame )
+	if frame and not tContains( borderTab, frame ) then
+		tinsert( borderTab, frame )
+	end
+
 	local r = nil
 	local g = nil
 	local b = nil
+	if frame and frame.brcr == nil and frame.brcg == nil and frame.brcb == nil then
+		frame.brcr, frame.brcg, frame.brcb = frame:GetVertexColor()
+	end
 	local mode = DUFGetConfig("bordermode")
 	local PlayerClass, PlayerClassEng, PlayerClassIndex = UnitClass(unit)
 	if mode then
@@ -30,22 +38,26 @@ function DUFGetBorderColor( unit )
 			g = 0
 			b = 0
 		else
-			-- Nothing
+			r, g, b = frame.brcr, frame.brcg, frame.brcb
 		end
 	end
 	return r, g, b
 end
 
-function DUFGetBarColor(unit, frame)
+local barTab = {}
+function DUFGetBarColor( unit, frame )
+	if frame and not tContains( barTab, frame ) then
+		tinsert( barTab, frame )
+	end
+
 	local r = nil
 	local g = nil
 	local b = nil
-	if frame and frame.dr and frame.dg and frame.db then
-		r = frame.dr
-		g = frame.dg
-		b = frame.db
+	if frame and frame.bacr == nil and frame.bacg == nil and frame.bacb == nil then
+		frame.bacr, frame.bacg, frame.bacb = frame:GetStatusBarColor()
 	end
 	local mode = DUFGetConfig("barmode")
+	--"Class+Status", "Class", "Status", "Default"
 	local PlayerClass, PlayerClassEng, PlayerClassIndex = UnitClass(unit)
 	if mode then
 		if mode == "Class+Status" then
@@ -60,22 +72,9 @@ function DUFGetBarColor(unit, frame)
 			end
 		elseif mode == "Status" then
 			r, g, b = GameTooltip_UnitColor(unit);
-		elseif mode == "Dark" then
-			r = 0.1
-			g = 0.1
-			b = 0.1
-		elseif mode == "Black" then
-			r = 0
-			g = 0
-			b = 0
 		else
-			-- Nothing
+			r, g, b = frame.bacr, frame.bacg, frame.bacb
 		end
-	end
-	if DUFGetConfig("bordermode") == "Default" then
-		r = 0
-		g = 0.6
-		b = 0.1
 	end
 
 	if UnitPlayerControlled and UnitIsTapDenied then
@@ -87,6 +86,18 @@ function DUFGetBarColor(unit, frame)
 		return 0.5, 0.5, 0.5
 	end
 	return r, g, b
+end
+
+function DUFUpdateBorderColors()
+	for i, v in pairs( borderTab ) do
+		v:SetVertexColor( v:GetVertexColor() )
+	end
+end
+
+function DUFUpdateBarColors()
+	for i, v in pairs( barTab ) do
+		v:SetStatusBarColor( v:GetStatusBarColor() )
+	end
 end
 
 local pff = CreateFrame( "FRAME" )
@@ -231,17 +242,18 @@ function DUFPlayerFrameSetup()
 		PlayerFrameManaBarTextRight = PlayerFrame.ManaBarTextRight
 	end
 
-	hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarColor", function(self, ...)
+	hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
 		if self.dufsetvertexcolor then return end
 		self.dufsetvertexcolor = true
 		local r, g, b = DUFGetBarColor( "PLAYER", self )
 		if r and g and b then
-			self:SetStatusBarColor(r, g, b)
+			self:SetStatusBarColor( r, g, b )
+		else
+			self:SetStatusBarColor( oR, oG, oB )
 		end
 		self.dufsetvertexcolor = false
 	end)
-	PlayerFrameHealthBar.dr, PlayerFrameHealthBar.dg, PlayerFrameHealthBar.db = PlayerFrameHealthBar:GetStatusBarColor()
-	PlayerFrameHealthBar:SetStatusBarColor(1, 1, 1)
+	PlayerFrameHealthBar:SetStatusBarColor( PlayerFrameHealthBar:GetStatusBarColor() )
 
 	hooksecurefunc(PlayerFrameHealthBarTextRight, "SetText", function( self, text )
 		if self.dufsettext then return end
@@ -338,11 +350,15 @@ function DUFPlayerFrameSetup()
 	PlayerName:Hide()
 	
 	if PlayerFrameTexture then
-		hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function(self, ...)
+		hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor("PLAYER")
-			self:SetVertexColor(r, g, b, 1)
+			local r, g, b = DUFGetBorderColor( "PLAYER", self )
+			if r and g and b then
+				self:SetVertexColor( r, g, b, 1 )
+			else
+				self:SetVertexColor( oR, oG, oB, 1)
+			end
 			if self.spacer then
 				self.spacer:SetVertexColor(self:GetVertexColor())
 			end

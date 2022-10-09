@@ -42,17 +42,18 @@ if FocusFrame then
 			FocusFrameTextureFrameManaBarTextRight = FocusFrameTextureFrame.ManaBarTextRight
 		end
 
-		hooksecurefunc(FocusFrameHealthBar, "SetStatusBarColor", function(self, ...)
+		hooksecurefunc(FocusFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
 			local r, g, b = DUFGetBarColor( "FOCUS", self )
 			if r and g and b then
-				self:SetStatusBarColor(r, g, b)
+				self:SetStatusBarColor( r, g, b )
+			else
+				self:SetStatusBarColor( oR, oG, oB )
 			end
 			self.dufsetvertexcolor = false
 		end)
-		FocusFrameHealthBar.dr, FocusFrameHealthBar.dg, FocusFrameHealthBar.db = FocusFrameHealthBar:GetStatusBarColor()
-		FocusFrameHealthBar:SetStatusBarColor(1, 1, 1)
+		FocusFrameHealthBar:SetStatusBarColor( FocusFrameHealthBar:GetStatusBarColor() )
 
 		if FocusFrameHealthBarTextLeft ~= nil then
 			if FocusFrameHealthBarTextLeft.hooked == nil then
@@ -456,9 +457,11 @@ if FocusFrame then
 
 			if ThreatBorder and ThreatBorder:IsShown() then
 				y = 24
-				local r, g, b = DUFGetBorderColor("FOCUS")
-				if ThreatBorder then
-					ThreatBorder:SetVertexColor(r, g, b)
+				local r, g, b = DUFGetBorderColor( "FOCUS", ThreatBorder )
+				if r and g and b then
+					ThreatBorder:SetVertexColor( r, g, b, 1 )
+				else
+					ThreatBorder:SetVertexColor( oR, oG, oB, 1)
 				end
 			end
 
@@ -483,11 +486,15 @@ if FocusFrame then
 		end)
 		FocusFrameTextureFrameName:SetText(FocusFrameTextureFrameName:GetText())
 
-		hooksecurefunc(FocusFrameTextureFrameTexture, "SetVertexColor", function(self, ...)
+		hooksecurefunc(FocusFrameTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor("FOCUS")
-			self:SetVertexColor(r, g, b, 1)
+			local r, g, b = DUFGetBorderColor( "FOCUS", self )
+			if r and g and b then
+				self:SetVertexColor( r, g, b, 1 )
+			else
+				self:SetVertexColor( oR, oG, oB, 1)
+			end
 			if self.spacer then
 				self.spacer:SetVertexColor(self:GetVertexColor())
 			end

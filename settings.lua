@@ -146,25 +146,6 @@ function DUFCreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 	return CB
 end
 
-
-
-function DUFUpdateTextureColors()
-	if PlayerFrameTexture then
-		PlayerFrameTexture:SetVertexColor(1, 1, 1)
-	end
-	TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
-	if FocusFrameTextureFrameTexture then
-		FocusFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
-	end
-	for id = 1, 4 do
-		if _G["PartyMemberFrame" .. id .. "Texture"] then
-			_G["PartyMemberFrame" .. id .. "Texture"]:SetVertexColor(1, 1, 1)
-		end
-	end
-end
-
-
-
 local Y = 0
 local H = 16
 local BR = 30
@@ -193,9 +174,9 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings")
+		text:SetText("Settings (v1.2.4)")
 
-		DUFCreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "Default"}, function()
+		DUFCreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "Default"}, function()
 			if PlayerFrame then
 				UnitFramePortrait_Update(PlayerFrame)
 			end
@@ -207,11 +188,11 @@ function DUFInitSettings()
 		end)
 
 		DUFCreateComboBox(DUFSettings.panel, "bordermode", "Class+Status", 0, -60, "bordermode", {"Class+Status", "Class", "Status", "Dark", "Black", "Default"}, function()
-			DUFUpdateTextureColors()
+			DUFUpdateBorderColors()
 		end)
 
 		DUFCreateComboBox(DUFSettings.panel, "barmode", "Class+Status", 0, -90, "barmode", {"Class+Status", "Class", "Status", "Default"}, function()
-			DUFUpdateTextureColors()
+			DUFUpdateBarColors()
 		end)
 
 		DUFCreateComboBox(DUFSettings.panel, "numbermode", "X.X Dynamic", 0, -120, "numbermode", {"Default", "X Dynamic", "X.X Dynamic", "X.XX Dynamic", "X.XXX", "XK", "X.XK", "X.XXK"}, function()
