@@ -174,9 +174,9 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.2.4)")
+		text:SetText("Settings (v1.2.5)")
 
-		DUFCreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "Default"}, function()
+		DUFCreateComboBox( DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then
 				UnitFramePortrait_Update(PlayerFrame)
 			end
@@ -185,7 +185,7 @@ function DUFInitSettings()
 					UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
 				end
 			end
-		end)
+		end )
 
 		DUFCreateComboBox(DUFSettings.panel, "bordermode", "Class+Status", 0, -60, "bordermode", {"Class+Status", "Class", "Status", "Dark", "Black", "Default"}, function()
 			DUFUpdateBorderColors()
