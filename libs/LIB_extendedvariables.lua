@@ -1,5 +1,5 @@
 
-local EVVersion = 22
+local EVVersion = 23
 local EVLatest = nil
 local EVLoaded = false
 
@@ -460,32 +460,34 @@ local function EVOnEvent(self, event, ...)
 
 				-- TARGET
 				local tf = _G["TargetFrameTextureFrame"]
-				tf.text = tf:CreateFontString(nil, "ARTWORK")
-				tf.text:SetPoint("CENTER", tf, "TOPRIGHT", -74, -6)
-				tf.text:SetFont(STANDARD_TEXT_FONT, 8, "")
-				tf.text:SetText("")
-				tf.text:SetShadowOffset(1, -1)
+				if tf then
+					tf.text = tf:CreateFontString(nil, "ARTWORK")
+					tf.text:SetPoint("CENTER", tf, "TOPRIGHT", -74, -6)
+					tf.text:SetFont(STANDARD_TEXT_FONT, 8, "")
+					tf.text:SetText("")
+					tf.text:SetShadowOffset(1, -1)
 
-				function EVILVLTFThink()
-					local tf = _G["TargetFrameTextureFrame"]
-					local ilvl = UnitILvl("TARGET")
-					if EVTAB["ilvl"] then
-						if tf.ilvl ~= ilvl then
-							tf.ilvl = ilvl
+					function EVILVLTFThink()
+						local tf = _G["TargetFrameTextureFrame"]
+						local ilvl = UnitILvl("TARGET")
+						if EVTAB["ilvl"] then
+							if tf.ilvl ~= ilvl then
+								tf.ilvl = ilvl
 
-							if ilvl > 0 then
-								tf.text:SetText(string.format("%.1f", ilvl))
-							else
-								tf.text:SetText("")
+								if ilvl > 0 then
+									tf.text:SetText(string.format("%.1f", ilvl))
+								else
+									tf.text:SetText("")
+								end
 							end
+						else
+							tf.text:SetText("")
 						end
-					else
-						tf.text:SetText("")
-					end
 
-					C_Timer.After(0.1, EVILVLTFThink)
+						C_Timer.After(0.1, EVILVLTFThink)
+					end
+					EVILVLTFThink()
 				end
-				EVILVLTFThink()
 			end
 
 
@@ -760,27 +762,29 @@ local function EVOnEvent(self, event, ...)
 
 				-- TARGET
 				local tf = _G["TargetFrameTextureFrame"]
-				-- Covenant Icon
-				tf.CovenantIcon = tf:CreateTexture(nil, "ARTWORK")
-				tf.CovenantIcon:SetDrawLayer("ARTWORK", 7)
-				tf.CovenantIcon:SetSize(20, 20)
-				tf.CovenantIcon:SetPoint("CENTER", tf, "TOPRIGHT", -104, -22)
+				if tf then
+					-- Covenant Icon
+					tf.CovenantIcon = tf:CreateTexture(nil, "ARTWORK")
+					tf.CovenantIcon:SetDrawLayer("ARTWORK", 7)
+					tf.CovenantIcon:SetSize(20, 20)
+					tf.CovenantIcon:SetPoint("CENTER", tf, "TOPRIGHT", -104, -22)
 
-				function EVCOVTFThink()
-					local pmf = _G["TargetFrameTextureFrame"]
-					if UnitCovenantID and UnitExists("TARGET") and UnitIsPlayer("TARGET") and UnitCovenantID(DBNameByUnit("TARGET")) > -1 then
-						local cov = UnitCovenantID(DBNameByUnit("TARGET"))
-						pmf.CovenantIcon:Show()
-						local sw, sh = EVGetCovenantSize(cov, 20)
-						pmf.CovenantIcon:SetSize(sw, sh)
-						pmf.CovenantIcon:SetAtlas(covenants[cov])
-					else
-						pmf.CovenantIcon:Hide()
+					function EVCOVTFThink()
+						local pmf = _G["TargetFrameTextureFrame"]
+						if UnitCovenantID and UnitExists("TARGET") and UnitIsPlayer("TARGET") and UnitCovenantID(DBNameByUnit("TARGET")) > -1 then
+							local cov = UnitCovenantID(DBNameByUnit("TARGET"))
+							pmf.CovenantIcon:Show()
+							local sw, sh = EVGetCovenantSize(cov, 20)
+							pmf.CovenantIcon:SetSize(sw, sh)
+							pmf.CovenantIcon:SetAtlas(covenants[cov])
+						else
+							pmf.CovenantIcon:Hide()
+						end
+
+						C_Timer.After(0.1, EVCOVTFThink)
 					end
-
-					C_Timer.After(0.1, EVCOVTFThink)
+					EVCOVTFThink()
 				end
-				EVCOVTFThink()
 			end
 		end
 	end
