@@ -2,35 +2,37 @@
 local DUFFontSize = 12
 
 function DUFTargetFrameSetup()
-	hooksecurefunc(TargetFrameHealthBar, "SetStatusBarTexture", function(self, texture)
-		if self.settexture then return end
-		self.settexture = true
+	if TargetFrameHealthBar then
+		hooksecurefunc(TargetFrameHealthBar, "SetStatusBarTexture", function(self, texture)
+			if self.settexture then return end
+			self.settexture = true
 
-		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-		else
-			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-		end
+			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			else
+				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+			end
 
-		self.settexture = false
-	end)
-	TargetFrameHealthBar:SetStatusBarTexture("")
+			self.settexture = false
+		end)
+		TargetFrameHealthBar:SetStatusBarTexture("")
+	end
+	if TargetFrameManaBar then
+		hooksecurefunc(TargetFrameManaBar, "SetStatusBarTexture", function(self, texture)
+			if self.settexture then return end
+			self.settexture = true
+			
+			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			else
+				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+			end
 
-	hooksecurefunc(TargetFrameManaBar, "SetStatusBarTexture", function(self, texture)
-		if self.settexture then return end
-		self.settexture = true
-		
-		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-		else
-			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-		end
-
-		self.settexture = false
-	end)
-	TargetFrameManaBar:SetStatusBarTexture("")
-
-	if TargetFrameTextureFrame.HealthBarTextLeft then
+			self.settexture = false
+		end)
+		TargetFrameManaBar:SetStatusBarTexture("")
+	end
+	if TargetFrameTextureFrame and TargetFrameTextureFrame.HealthBarTextLeft then
 		TargetFrameTextureFrameHealthBarText = TargetFrameTextureFrame.HealthBarText
 		TargetFrameTextureFrameHealthBarTextLeft = TargetFrameTextureFrame.HealthBarTextLeft
 		TargetFrameTextureFrameHealthBarTextRight = TargetFrameTextureFrame.HealthBarTextRight
@@ -40,19 +42,20 @@ function DUFTargetFrameSetup()
 		TargetFrameTextureFrameManaBarTextRight = TargetFrameTextureFrame.ManaBarTextRight
 	end
 
-	hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
-		if self.dufsetvertexcolor then return end
-		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBarColor( "TARGET", self )
-		if r and g and b then
-			self:SetStatusBarColor( r, g, b )
-		else
-			self:SetStatusBarColor( oR, oG, oB )
-		end
-		self.dufsetvertexcolor = false
-	end)
-	TargetFrameHealthBar:SetStatusBarColor( TargetFrameHealthBar:GetStatusBarColor() )
-
+	if TargetFrameHealthBar then
+		hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
+			if self.dufsetvertexcolor then return end
+			self.dufsetvertexcolor = true
+			local r, g, b = DUFGetBarColor( "TARGET", self )
+			if r and g and b then
+				self:SetStatusBarColor( r, g, b )
+			else
+				self:SetStatusBarColor( oR, oG, oB )
+			end
+			self.dufsetvertexcolor = false
+		end)
+		TargetFrameHealthBar:SetStatusBarColor( TargetFrameHealthBar:GetStatusBarColor() )
+	end
 	if TargetFrameHealthBarTextLeft ~= nil then
 		if TargetFrameHealthBarTextLeft.hooked == nil then
 			TargetFrameHealthBarTextLeft.hooked = true
@@ -248,75 +251,79 @@ function DUFTargetFrameSetup()
 	end
 
 	-- #TargetFrame
-	hooksecurefunc(TargetFrameHealthBar, "SetHeight", function(self)
-		if self.dufsetheight then return end
-		self.dufsetheight = true
+	if TargetFrameHealthBar then
+		hooksecurefunc(TargetFrameHealthBar, "SetHeight", function(self)
+			if self.dufsetheight then return end
+			self.dufsetheight = true
 
-		self:SetHeight(DUFHPHeight())
+			self:SetHeight(DUFHPHeight())
 
-		self.dufsetheight = false
-	end)
-	TargetFrameHealthBar:SetHeight(27)
-	hooksecurefunc(TargetFrameHealthBar, "SetSize", function(self)
-		if self.dufsetsize then return end
-		self.dufsetsize = true
+			self.dufsetheight = false
+		end)
+		TargetFrameHealthBar:SetHeight(27)
+		hooksecurefunc(TargetFrameHealthBar, "SetSize", function(self)
+			if self.dufsetsize then return end
+			self.dufsetsize = true
 
-		self:SetHeight(DUFHPHeight())
+			self:SetHeight(DUFHPHeight())
 
-		self.dufsetsize = false
-	end)
-	hooksecurefunc(TargetFrameHealthBar, "SetPoint", function(self)
-		if self.dufsetpoint then return end
-		self.dufsetpoint = true
+			self.dufsetsize = false
+		end)
+		hooksecurefunc(TargetFrameHealthBar, "SetPoint", function(self)
+			if self.dufsetpoint then return end
+			self.dufsetpoint = true
 
-		self:SetPoint("TOPLEFT", 6, -24)
+			self:SetPoint("TOPLEFT", 6, -24)
 
-		self.dufsetpoint = false
-	end)
-	TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+			self.dufsetpoint = false
+		end)
+		TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+	end
+	if TargetFrameManaBar then
+		hooksecurefunc(TargetFrameManaBar, "SetHeight", function(self)
+			if self.dufsetheight then return end
+			self.dufsetheight = true
 
-	hooksecurefunc(TargetFrameManaBar, "SetHeight", function(self)
-		if self.dufsetheight then return end
-		self.dufsetheight = true
+			if 38 - DUFHPHeight() > 1 then
+				self:SetHeight(38 - DUFHPHeight())
+			else
+				self:SetHeight(1)
+			end
 
-		if 38 - DUFHPHeight() > 1 then
-			self:SetHeight(38 - DUFHPHeight())
-		else
-			self:SetHeight(1)
-		end
+			self.dufsetheight = false
+		end)
+		TargetFrameManaBar:SetHeight(27)
+		hooksecurefunc(TargetFrameManaBar, "SetSize", function(self)
+			if self.dufsetsize then return end
+			self.dufsetsize = true
 
-		self.dufsetheight = false
-	end)
-	TargetFrameManaBar:SetHeight(27)
-	hooksecurefunc(TargetFrameManaBar, "SetSize", function(self)
-		if self.dufsetsize then return end
-		self.dufsetsize = true
+			if 38 - DUFHPHeight() > 1 then
+				self:SetHeight(38 - DUFHPHeight())
+			else
+				self:SetHeight(1)
+			end
 
-		if 38 - DUFHPHeight() > 1 then
-			self:SetHeight(38 - DUFHPHeight())
-		else
-			self:SetHeight(1)
-		end
+			self.dufsetsize = false
+		end)
+		hooksecurefunc(TargetFrameManaBar, "SetPoint", function(self)
+			if self.dufsetpoint then return end
+			self.dufsetpoint = true
 
-		self.dufsetsize = false
-	end)
-	hooksecurefunc(TargetFrameManaBar, "SetPoint", function(self)
-		if self.dufsetpoint then return end
-		self.dufsetpoint = true
+			self:SetPoint("TOPLEFT", 6, -23 -DUFHPHeight() - 1)
 
-		self:SetPoint("TOPLEFT", 6, -23 -DUFHPHeight() - 1)
-
-		self.dufsetpoint = false
-	end)
-	TargetFrameManaBar:SetPoint("TOPLEFT", 6, -24)
-
-	TargetFrameBackground:SetHeight(40)
-	TargetFrameBackground:ClearAllPoints()
-	TargetFrameBackground:SetPoint("TOPLEFT", 6, -24)
-
-	TargetFrameNameBackground.Show = TargetFrameNameBackground.Hide
-	TargetFrameNameBackground:Hide()
-
+			self.dufsetpoint = false
+		end)
+		TargetFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+	end
+	if TargetFrameBackground then
+		TargetFrameBackground:SetHeight(40)
+		TargetFrameBackground:ClearAllPoints()
+		TargetFrameBackground:SetPoint("TOPLEFT", 6, -24)
+	end
+	if TargetFrameNameBackground then
+		TargetFrameNameBackground.Show = TargetFrameNameBackground.Hide
+		TargetFrameNameBackground:Hide()
+	end
 	function DUFUpdateTargetTexture()
 		local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 		local class = UnitClassification("TARGET")
@@ -437,20 +444,22 @@ function DUFTargetFrameSetup()
 		ThreatBorder = select(3, {TargetFrameNumericalThreat:GetRegions()})
 	end
 	function TargetFrame.Think()
-		TargetFrameTextureFrameName:ClearAllPoints()
-		if TargetFrame.buffsOnTop then
-			local y = -4
-			if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
-				TargetFrameTextureFrameName:SetPoint("TOP", TargetFrameManaBar, "BOTTOM", 0, y)
+		if TargetFrameTextureFrameName then
+			TargetFrameTextureFrameName:ClearAllPoints()
+			if TargetFrame.buffsOnTop then
+				local y = -4
+				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+					TargetFrameTextureFrameName:SetPoint("TOP", TargetFrameManaBar, "BOTTOM", 0, y)
+				end
+			else
+				local y = 6
+				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+					TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, y)
+				end
 			end
-		else
-			local y = 6
-			if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
-				TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, y)
+			if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
+				TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFramePortrait, "TOP", 0, 12)
 			end
-		end
-		if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
-			TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFramePortrait, "TOP", 0, 12)
 		end
 		
 		if ThreatBorder and ThreatBorder:IsShown() then
@@ -490,56 +499,60 @@ function DUFTargetFrameSetup()
 	end
 	TargetFrame.Think()
 
-	hooksecurefunc(TargetFrameTextureFrameName, "SetText", function(self, text, ...)
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFGetConfig("namesize", 10) then
-			self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags)--, "OUTLINE")
-			self:SetShadowOffset(1, -1)
-		end
-		if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
-			self:Hide()
-		else
-			self:Show()
-		end
-		self.dufsettext = false
-	end)
-	TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
-
-	hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function( self, oR, oG, oB )
-		if self.dufsetvertexcolor then return end
-		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBorderColor( "TARGET", self )
-		if r and g and b then
-			self:SetVertexColor( r, g, b, 1 )
-		else
-			self:SetVertexColor( oR, oG, oB, 1)
-		end
-		if self.spacer then
-			self.spacer:SetVertexColor(self:GetVertexColor())
-		end
-		self.dufsetvertexcolor = false
-	end)
-	TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
-
-	hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
-		if self.dufsetvertexcolor then return end
-		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBorderColor( "TARGETTARGET", self )
-		if r and g and b then
-			self:SetVertexColor( r, g, b, 1 )
-		else
-			self:SetVertexColor( oR, oG, oB, 1)
-		end
-		self.dufsetvertexcolor = false
-	end)
-	TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
-	function TargetFrameToT.Think()
-		TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
-		C_Timer.After(0.1, TargetFrameToT.Think)
+	if TargetFrameTextureFrameName then
+		hooksecurefunc(TargetFrameTextureFrameName, "SetText", function(self, text, ...)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFGetConfig("namesize", 10) then
+				self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags)--, "OUTLINE")
+				self:SetShadowOffset(1, -1)
+			end
+			if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
+				self:Hide()
+			else
+				self:Show()
+			end
+			self.dufsettext = false
+		end)
+		TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
 	end
-	TargetFrameToT.Think()
+	if TargetFrameTextureFrameTexture then
+		hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function( self, oR, oG, oB )
+			if self.dufsetvertexcolor then return end
+			self.dufsetvertexcolor = true
+			local r, g, b = DUFGetBorderColor( "TARGET", self )
+			if r and g and b then
+				self:SetVertexColor( r, g, b, 1 )
+			else
+				self:SetVertexColor( oR, oG, oB, 1)
+			end
+			if self.spacer then
+				self.spacer:SetVertexColor(self:GetVertexColor())
+			end
+			self.dufsetvertexcolor = false
+		end)
+		TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
+	end
+	if TargetFrameToTTextureFrameTexture then
+		hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
+			if self.dufsetvertexcolor then return end
+			self.dufsetvertexcolor = true
+			local r, g, b = DUFGetBorderColor( "TARGETTARGET", self )
+			if r and g and b then
+				self:SetVertexColor( r, g, b, 1 )
+			else
+				self:SetVertexColor( oR, oG, oB, 1)
+			end
+			self.dufsetvertexcolor = false
+		end)
+		TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
+		function TargetFrameToT.Think()
+			TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
+			C_Timer.After(0.1, TargetFrameToT.Think)
+		end
+		TargetFrameToT.Think()
+	end
 
 
 	if CanInspect and GetInspectSpecialization then

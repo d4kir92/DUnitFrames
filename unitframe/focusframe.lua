@@ -4,35 +4,38 @@ local DUFFontSize = 12
 
 if FocusFrame then
 	function DUFFocusFrameSetup()
-		hooksecurefunc(FocusFrameHealthBar, "SetStatusBarTexture", function(self, texture)
-			if self.settexture then return end
-			self.settexture = true
+		if FocusFrameHealthBar then
+			hooksecurefunc(FocusFrameHealthBar, "SetStatusBarTexture", function(self, texture)
+				if self.settexture then return end
+				self.settexture = true
+		
+				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+					self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+				else
+					self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+				end
+		
+				self.settexture = false
+			end)
+			FocusFrameHealthBar:SetStatusBarTexture("")
+		end
+		if FocusFrameManaBar then
+			hooksecurefunc(FocusFrameManaBar, "SetStatusBarTexture", function(self, texture)
+				if self.settexture then return end
+				self.settexture = true
+				
+				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+					self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+				else
+					self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+				end
+		
+				self.settexture = false
+			end)
+			FocusFrameManaBar:SetStatusBarTexture("")
+		end
 	
-			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-			else
-				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-			end
-	
-			self.settexture = false
-		end)
-		FocusFrameHealthBar:SetStatusBarTexture("")
-	
-		hooksecurefunc(FocusFrameManaBar, "SetStatusBarTexture", function(self, texture)
-			if self.settexture then return end
-			self.settexture = true
-			
-			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-			else
-				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-			end
-	
-			self.settexture = false
-		end)
-		FocusFrameManaBar:SetStatusBarTexture("")
-	
-		if FocusFrameTextureFrame.HealthBarTextLeft then
+		if FocusFrameTextureFrame and FocusFrameTextureFrame.HealthBarTextLeft then
 			FocusFrameTextureFrameHealthBarText = FocusFrameTextureFrame.HealthBarText
 			FocusFrameTextureFrameHealthBarTextLeft = FocusFrameTextureFrame.HealthBarTextLeft
 			FocusFrameTextureFrameHealthBarTextRight = FocusFrameTextureFrame.HealthBarTextRight
@@ -41,19 +44,20 @@ if FocusFrame then
 			FocusFrameTextureFrameManaBarTextLeft = FocusFrameTextureFrame.ManaBarTextLeft
 			FocusFrameTextureFrameManaBarTextRight = FocusFrameTextureFrame.ManaBarTextRight
 		end
-
-		hooksecurefunc(FocusFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
-			if self.dufsetvertexcolor then return end
-			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBarColor( "FOCUS", self )
-			if r and g and b then
-				self:SetStatusBarColor( r, g, b )
-			else
-				self:SetStatusBarColor( oR, oG, oB )
-			end
-			self.dufsetvertexcolor = false
-		end)
-		FocusFrameHealthBar:SetStatusBarColor( FocusFrameHealthBar:GetStatusBarColor() )
+		if FocusFrameHealthBar then
+			hooksecurefunc(FocusFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
+				if self.dufsetvertexcolor then return end
+				self.dufsetvertexcolor = true
+				local r, g, b = DUFGetBarColor( "FOCUS", self )
+				if r and g and b then
+					self:SetStatusBarColor( r, g, b )
+				else
+					self:SetStatusBarColor( oR, oG, oB )
+				end
+				self.dufsetvertexcolor = false
+			end)
+			FocusFrameHealthBar:SetStatusBarColor( FocusFrameHealthBar:GetStatusBarColor() )
+		end
 
 		if FocusFrameHealthBarTextLeft ~= nil then
 			if FocusFrameHealthBarTextLeft.hooked == nil then
@@ -250,74 +254,79 @@ if FocusFrame then
 		end
 
 		-- #FocusFrame
-		hooksecurefunc(FocusFrameHealthBar, "SetHeight", function(self)
-			if self.dufsetheight then return end
-			self.dufsetheight = true
+		if FocusFrameHealthBar then
+			hooksecurefunc(FocusFrameHealthBar, "SetHeight", function(self)
+				if self.dufsetheight then return end
+				self.dufsetheight = true
 
-			self:SetHeight(DUFHPHeight())
+				self:SetHeight(DUFHPHeight())
 
-			self.dufsetheight = false
-		end)
-		FocusFrameHealthBar:SetHeight(27)
-		hooksecurefunc(FocusFrameHealthBar, "SetSize", function(self)
-			if self.dufsetsize then return end
-			self.dufsetsize = true
+				self.dufsetheight = false
+			end)
+			FocusFrameHealthBar:SetHeight(27)
+			hooksecurefunc(FocusFrameHealthBar, "SetSize", function(self)
+				if self.dufsetsize then return end
+				self.dufsetsize = true
 
-			self:SetHeight(DUFHPHeight())
+				self:SetHeight(DUFHPHeight())
 
-			self.dufsetsize = false
-		end)
-		hooksecurefunc(FocusFrameHealthBar, "SetPoint", function(self)
-			if self.dufsetpoint then return end
-			self.dufsetpoint = true
+				self.dufsetsize = false
+			end)
+			hooksecurefunc(FocusFrameHealthBar, "SetPoint", function(self)
+				if self.dufsetpoint then return end
+				self.dufsetpoint = true
 
-			self:SetPoint("TOPLEFT", 6, -24)
+				self:SetPoint("TOPLEFT", 6, -24)
 
-			self.dufsetpoint = false
-		end)
-		FocusFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+				self.dufsetpoint = false
+			end)
+			FocusFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+		end
+		if FocusFrameManaBar then
+			hooksecurefunc(FocusFrameManaBar, "SetHeight", function(self)
+				if self.dufsetheight then return end
+				self.dufsetheight = true
 
-		hooksecurefunc(FocusFrameManaBar, "SetHeight", function(self)
-			if self.dufsetheight then return end
-			self.dufsetheight = true
+				if 38 - DUFHPHeight() > 1 then
+					self:SetHeight(38 - DUFHPHeight())
+				else
+					self:SetHeight(1)
+				end	
 
-			if 38 - DUFHPHeight() > 1 then
-				self:SetHeight(38 - DUFHPHeight())
-			else
-				self:SetHeight(1)
-			end	
+				self.dufsetheight = false
+			end)
+			FocusFrameManaBar:SetHeight(27)
+			hooksecurefunc(FocusFrameManaBar, "SetSize", function(self)
+				if self.dufsetsize then return end
+				self.dufsetsize = true
 
-			self.dufsetheight = false
-		end)
-		FocusFrameManaBar:SetHeight(27)
-		hooksecurefunc(FocusFrameManaBar, "SetSize", function(self)
-			if self.dufsetsize then return end
-			self.dufsetsize = true
+				if 38 - DUFHPHeight() > 1 then
+					self:SetHeight(38 - DUFHPHeight())
+				else
+					self:SetHeight(1)
+				end	
 
-			if 38 - DUFHPHeight() > 1 then
-				self:SetHeight(38 - DUFHPHeight())
-			else
-				self:SetHeight(1)
-			end	
+				self.dufsetsize = false
+			end)
+			hooksecurefunc(FocusFrameManaBar, "SetPoint", function(self)
+				if self.dufsetpoint then return end
+				self.dufsetpoint = true
 
-			self.dufsetsize = false
-		end)
-		hooksecurefunc(FocusFrameManaBar, "SetPoint", function(self)
-			if self.dufsetpoint then return end
-			self.dufsetpoint = true
+				self:SetPoint("TOPLEFT", 6, -23 -DUFHPHeight() - 1)
 
-			self:SetPoint("TOPLEFT", 6, -23 -DUFHPHeight() - 1)
-
-			self.dufsetpoint = false
-		end)
-		FocusFrameManaBar:SetPoint("TOPLEFT", 6, -24)
-
-		FocusFrameBackground:SetHeight(40)
-		FocusFrameBackground:ClearAllPoints()
-		FocusFrameBackground:SetPoint("TOPLEFT", 6, -24)
-
-		FocusFrameNameBackground.Show = FocusFrameNameBackground.Hide
-		FocusFrameNameBackground:Hide()
+				self.dufsetpoint = false
+			end)
+			FocusFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+		end
+		if FocusFrameBackground then
+			FocusFrameBackground:SetHeight(40)
+			FocusFrameBackground:ClearAllPoints()
+			FocusFrameBackground:SetPoint("TOPLEFT", 6, -24)
+		end
+		if FocusFrameNameBackground then
+			FocusFrameNameBackground.Show = FocusFrameNameBackground.Hide
+			FocusFrameNameBackground:Hide()
+		end
 
 		function DUFUpdateFocusTexture()
 			local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
@@ -439,20 +448,22 @@ if FocusFrame then
 			ThreatBorder = select(3, {FocusFrameNumericalThreat:GetRegions()})
 		end
 		function FocusFrame.Think()
-			FocusFrameTextureFrameName:ClearAllPoints()
-			if FocusFrame.buffsOnTop then
-				local y = -4
-				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
-					FocusFrameTextureFrameName:SetPoint("TOP", FocusFrameManaBar, "BOTTOM", 0, y)
+			if FocusFrameTextureFrameName then
+				FocusFrameTextureFrameName:ClearAllPoints()
+				if FocusFrame.buffsOnTop then
+					local y = -4
+					if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+						FocusFrameTextureFrameName:SetPoint("TOP", FocusFrameManaBar, "BOTTOM", 0, y)
+					end
+				else
+					local y = 6
+					if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+						FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFrameHealthBar, "TOP", 0, y)
+					end
 				end
-			else
-				local y = 6
-				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
-					FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFrameHealthBar, "TOP", 0, y)
+				if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
+					FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFramePortrait, "TOP", 0, 12)
 				end
-			end
-			if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
-				FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFramePortrait, "TOP", 0, 12)
 			end
 
 			if ThreatBorder and ThreatBorder:IsShown() then
@@ -469,39 +480,42 @@ if FocusFrame then
 		end
 		FocusFrame.Think()
 
-		hooksecurefunc(FocusFrameTextureFrameName, "SetText", function(self, text, ...)
-			if self.dufsettext then return end
-			self.dufsettext = true
-			local fontFamily, fontSize, fontFlags = self:GetFont()
-			if fontSize ~= DUFGetConfig("namesize", 10) then
-				self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags)--, "OUTLINE")
-				self:SetShadowOffset(1, -1)
-			end
-			if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
-				self:Hide()
-			else
-				self:Show()
-			end
-			self.dufsettext = false
-		end)
-		FocusFrameTextureFrameName:SetText(FocusFrameTextureFrameName:GetText())
+		if FocusFrameTextureFrameName then
+			hooksecurefunc(FocusFrameTextureFrameName, "SetText", function(self, text, ...)
+				if self.dufsettext then return end
+				self.dufsettext = true
+				local fontFamily, fontSize, fontFlags = self:GetFont()
+				if fontSize ~= DUFGetConfig("namesize", 10) then
+					self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags)--, "OUTLINE")
+					self:SetShadowOffset(1, -1)
+				end
+				if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
+					self:Hide()
+				else
+					self:Show()
+				end
+				self.dufsettext = false
+			end)
+			FocusFrameTextureFrameName:SetText(FocusFrameTextureFrameName:GetText())
+		end
 
-		hooksecurefunc(FocusFrameTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
-			if self.dufsetvertexcolor then return end
-			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor( "FOCUS", self )
-			if r and g and b then
-				self:SetVertexColor( r, g, b, 1 )
-			else
-				self:SetVertexColor( oR, oG, oB, 1)
-			end
-			if self.spacer then
-				self.spacer:SetVertexColor(self:GetVertexColor())
-			end
-			self.dufsetvertexcolor = false
-		end)
-		FocusFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
-
+		if FocusFrameTextureFrameTexture then
+			hooksecurefunc(FocusFrameTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
+				if self.dufsetvertexcolor then return end
+				self.dufsetvertexcolor = true
+				local r, g, b = DUFGetBorderColor( "FOCUS", self )
+				if r and g and b then
+					self:SetVertexColor( r, g, b, 1 )
+				else
+					self:SetVertexColor( oR, oG, oB, 1)
+				end
+				if self.spacer then
+					self.spacer:SetVertexColor(self:GetVertexColor())
+				end
+				self.dufsetvertexcolor = false
+			end)
+			FocusFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
+		end
 
 
 		if CanInspect and GetInspectSpecialization then
