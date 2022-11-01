@@ -3,7 +3,7 @@
 local LibDD = LibStub:GetLibrary("LibUIDropDownMenu-4.0")
 
 DUFBUILD = "CLASSIC"
-if select(4, GetBuildInfo()) > 90000 then
+if select(4, GetBuildInfo()) >= 100000 then
 	DUFBUILD = "RETAIL"
 elseif select(4, GetBuildInfo()) > 29999 then
 	DUFBUILD = "WRATH"
@@ -174,7 +174,7 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.2.7)")
+		text:SetText("Settings (v1.2.8)")
 
 		DUFCreateComboBox( DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then

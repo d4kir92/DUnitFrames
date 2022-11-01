@@ -4,7 +4,7 @@ local EVLatest = nil
 local EVLoaded = false
 
 EVBUILD = "CLASSIC"
-if select(4, GetBuildInfo()) > 90000 then
+if select(4, GetBuildInfo()) >= 100000 then
 	EVBUILD = "RETAIL"
 elseif select(4, GetBuildInfo()) > 29999 then
 	EVBUILD = "WRATH"
