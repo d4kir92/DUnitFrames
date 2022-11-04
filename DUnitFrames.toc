@@ -1,5 +1,5 @@
 ## Interface: 100000
-## Version: 1.2.8
+## Version: 1.2.9
 ## Title: DUnitFrames |T134167:16:16:0:0|t by |cff3FC7EBD4KiR |T132115:16:16:0:0|t 
 ## Notes: Unit Frames
 ## Author: D4KiR
@@ -10,8 +10,8 @@
 ## X-Wago-ID: kRNLAb6o
 
 # External Libs
-libs\LibStub\LibStub.lua
-libs\LibUIDropDownMenu\LibUIDropDownMenu.xml
+libs\!LibUIDropDownMenu\LibStub\LibStub.lua
+libs\!LibUIDropDownMenu\LibUIDropDownMenu\LibUIDropDownMenu.xml
 
 locale/enUS.lua
 locale/deDE.lua
