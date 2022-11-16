@@ -679,8 +679,10 @@ local function EVOnEvent(self, event, ...)
 						end
 					--end
 				end
-				GameTooltip:HookScript("OnTooltipSetUnit", OnGameTooltipSetUnit)
-
+				if GameTooltip.OnTooltipSetUnit then
+					GameTooltip:HookScript("OnTooltipSetUnit", OnGameTooltipSetUnit)
+				end
+				
 				-- LFG
 				hooksecurefunc("LFGListApplicationViewer_UpdateApplicantMember", function(member, id, index)
 					local name, class, localizedClass, level, itemLevel, honorLevel, tank, healer, damage, assignedRole, relationship = C_LFGList.GetApplicantMemberInfo(id, index)
