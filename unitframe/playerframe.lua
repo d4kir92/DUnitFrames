@@ -204,33 +204,37 @@ function DUFUpdatePlayerFrame()
 end
 
 function DUFPlayerFrameSetup()
-	hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarTexture", function(self, texture)
-		if self.settexture then return end
-		self.settexture = true
+	if PlayerFrameHealthBar then
+		hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarTexture", function(self, texture)
+			if self.settexture then return end
+			self.settexture = true
 
-		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-		else
-			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-		end
+			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			else
+				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+			end
 
-		self.settexture = false
-	end)
-	PlayerFrameHealthBar:SetStatusBarTexture("")
+			self.settexture = false
+		end)
+		PlayerFrameHealthBar:SetStatusBarTexture("")
+	end
 
-	hooksecurefunc(PlayerFrameManaBar, "SetStatusBarTexture", function(self, texture)
-		if self.settexture then return end
-		self.settexture = true
-		
-		if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-			self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-		else
-			self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-		end
+	if PlayerFrameManaBar then
+		hooksecurefunc(PlayerFrameManaBar, "SetStatusBarTexture", function(self, texture)
+			if self.settexture then return end
+			self.settexture = true
+			
+			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+			else
+				self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+			end
 
-		self.settexture = false
-	end)
-	PlayerFrameManaBar:SetStatusBarTexture("")
+			self.settexture = false
+		end)
+		PlayerFrameManaBar:SetStatusBarTexture("")
+	end
 
 	if PlayerFrame.HealthBarTextLeft then
 		PlayerFrameHealthBarText = PlayerFrame.HealthBarText
@@ -242,112 +246,127 @@ function DUFPlayerFrameSetup()
 		PlayerFrameManaBarTextRight = PlayerFrame.ManaBarTextRight
 	end
 
-	hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
-		if self.dufsetvertexcolor then return end
-		self.dufsetvertexcolor = true
-		local r, g, b = DUFGetBarColor( "PLAYER", self )
-		if r and g and b then
-			self:SetStatusBarColor( r, g, b )
-		else
-			self:SetStatusBarColor( oR, oG, oB )
-		end
-		self.dufsetvertexcolor = false
-	end)
-	PlayerFrameHealthBar:SetStatusBarColor( PlayerFrameHealthBar:GetStatusBarColor() )
+	if PlayerFrameHealthBar then
+		hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
+			if self.dufsetvertexcolor then return end
+			self.dufsetvertexcolor = true
+			local r, g, b = DUFGetBarColor( "PLAYER", self )
+			if r and g and b then
+				self:SetStatusBarColor( r, g, b )
+			else
+				self:SetStatusBarColor( oR, oG, oB )
+			end
+			self.dufsetvertexcolor = false
+		end)
+		PlayerFrameHealthBar:SetStatusBarColor( PlayerFrameHealthBar:GetStatusBarColor() )
+	end
 
-	hooksecurefunc(PlayerFrameHealthBarTextRight, "SetText", function( self, text )
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFFontSize then
-			self:SetFont(fontFamily, DUFFontSize, fontFlags)
-		end
-		
-		local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight" )
-		self:SetText( newText )
+	if PlayerFrameHealthBarTextRight then
+		hooksecurefunc(PlayerFrameHealthBarTextRight, "SetText", function( self, text )
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+			
+			local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight" )
+			self:SetText( newText )
 
-		self.dufsettext = false
-	end)
-	PlayerFrameHealthBarTextRight:SetText(PlayerFrameHealthBarTextRight:GetText())
-		
-	hooksecurefunc(PlayerFrameHealthBarTextLeft, "SetText", function( self, text )
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFFontSize then
-			self:SetFont(fontFamily, DUFFontSize, fontFlags)
-		end
+			self.dufsettext = false
+		end)
+		PlayerFrameHealthBarTextRight:SetText(PlayerFrameHealthBarTextRight:GetText())
+	end
 
-		local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft" )
-		self:SetText( newText )
+	if PlayerFrameHealthBarTextLeft then
+		hooksecurefunc(PlayerFrameHealthBarTextLeft, "SetText", function( self, text )
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-		self.dufsettext = false
-	end)
-	PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextLeft:GetText())
+			local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft" )
+			self:SetText( newText )
 
+			self.dufsettext = false
+		end)
+		PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextLeft:GetText())
+	end
 	
-	hooksecurefunc(PlayerFrameHealthBarText, "SetText", function( self, text )
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFFontSize then
-			self:SetFont(fontFamily, DUFFontSize, fontFlags)
-		end
+	if PlayerFrameHealthBarText then
+		hooksecurefunc(PlayerFrameHealthBarText, "SetText", function( self, text )
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-		local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText" )
-		self:SetText( newText )
+			local newText = DUFModifyText( text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText" )
+			self:SetText( newText )
 
-		self.dufsettext = false
-	end)
-	PlayerFrameHealthBarText:SetText(PlayerFrameHealthBarText:GetText())
-	
-	hooksecurefunc(PlayerFrameManaBarTextLeft, "SetText", function( self, text )
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFFontSize then
-			self:SetFont(fontFamily, DUFFontSize, fontFlags)
-		end
+			self.dufsettext = false
+		end)
+		PlayerFrameHealthBarText:SetText(PlayerFrameHealthBarText:GetText())
+	end
 
-		local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft" )
-		self:SetText( newText )
+	if PlayerFrameManaBarTextLeft then
+		hooksecurefunc(PlayerFrameManaBarTextLeft, "SetText", function( self, text )
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-		self.dufsettext = false
-	end)
-	PlayerFrameManaBarTextLeft:SetText(PlayerFrameManaBarTextLeft:GetText())
-	
-	hooksecurefunc(PlayerFrameManaBarTextRight, "SetText", function( self, text )
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFFontSize then
-			self:SetFont(fontFamily, DUFFontSize, fontFlags)
-		end
-		
-		local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight" )
-		self:SetText( newText )
+			local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft" )
+			self:SetText( newText )
 
-		self.dufsettext = false
-	end)
-	PlayerFrameManaBarTextRight:SetText(PlayerFrameManaBarTextRight:GetText())
-	
-	hooksecurefunc(PlayerFrameManaBarText, "SetText", function( self, text )
-		if self.dufsettext then return end
-		self.dufsettext = true
-		local fontFamily, fontSize, fontFlags = self:GetFont()
-		if fontSize ~= DUFFontSize then
-			self:SetFont(fontFamily, DUFFontSize, fontFlags)
-		end
-		
-		local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText" )
-		self:SetText( newText )
+			self.dufsettext = false
+		end)
+		PlayerFrameManaBarTextLeft:SetText(PlayerFrameManaBarTextLeft:GetText())
+	end
 
-		self.dufsettext = false
-	end)
-	PlayerFrameManaBarText:SetText(PlayerFrameManaBarText:GetText())
-	
-	PlayerName.Show = PlayerName.Hide
-	PlayerName:Hide()
+	if PlayerFrameManaBarTextRight then
+		hooksecurefunc(PlayerFrameManaBarTextRight, "SetText", function( self, text )
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+			
+			local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight" )
+			self:SetText( newText )
+
+			self.dufsettext = false
+		end)
+		PlayerFrameManaBarTextRight:SetText(PlayerFrameManaBarTextRight:GetText())
+	end
+
+	if PlayerFrameManaBarText then
+		hooksecurefunc(PlayerFrameManaBarText, "SetText", function( self, text )
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+			
+			local newText = DUFModifyText( text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText" )
+			self:SetText( newText )
+
+			self.dufsettext = false
+		end)
+		PlayerFrameManaBarText:SetText(PlayerFrameManaBarText:GetText())
+	end
+
+	if PlayerName then
+		PlayerName.Show = PlayerName.Hide
+		PlayerName:Hide()
+	end
 	
 	if PlayerFrameTexture then
 		hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
