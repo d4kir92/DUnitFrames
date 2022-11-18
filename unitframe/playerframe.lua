@@ -138,32 +138,33 @@ function DUFUpdatePlayerFrame()
 		PlayerStatusTexture:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-Player-Status")
 	end
 
-	hooksecurefunc( PlayerFrameHealthBar, "SetHeight", function( self, height )
-		if self.dufsetheight then return end
-		self.dufsetheight = true
+	if PlayerFrameHealthBar then
+		hooksecurefunc( PlayerFrameHealthBar, "SetHeight", function( self, height )
+			if self.dufsetheight then return end
+			self.dufsetheight = true
 
-		local inVehicle = false
-		if UnitInVehicle or pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
-			inVehicle = UnitInVehicle( "PLAYER" )
-		end
-
-		if inVehicle then
-			PlayerFrameHealthBar:SetHeight( 12 )
-			if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
-				PlayerFrameTexture.spacer:Hide()
+			local inVehicle = false
+			if UnitInVehicle or pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
+				inVehicle = UnitInVehicle( "PLAYER" )
 			end
-		else
-			PlayerFrameHealthBar:SetHeight( DUFHPHeight() )
-			if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
-				PlayerFrameTexture.spacer:Show()
+
+			if inVehicle then
+				PlayerFrameHealthBar:SetHeight( 12 )
+				if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
+					PlayerFrameTexture.spacer:Hide()
+				end
+			else
+				PlayerFrameHealthBar:SetHeight( DUFHPHeight() )
+				if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
+					PlayerFrameTexture.spacer:Show()
+				end
 			end
-		end
 
-		self.dufsetheight = false
-	end )
-	PlayerFrameHealthBar:SetHeight( DUFHPHeight() )
-	PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
-
+			self.dufsetheight = false
+		end )
+		PlayerFrameHealthBar:SetHeight( DUFHPHeight() )
+		PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
+	end
 	if PlayerFrameTexture and PlayerFrameTexture.spacer == nil then
 		PlayerFrameTexture.spacer = PlayerFrameTexture:GetParent():CreateTexture(nil, "ARTWORK")
 		PlayerFrameTexture.spacer:SetDrawLayer("ARTWORK", 7)
@@ -191,16 +192,22 @@ function DUFUpdatePlayerFrame()
 		PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	end
 
-	PlayerFrameManaBar:SetHeight(38 - DUFHPHeight())
-	PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 -DUFHPHeight() - 1)
+	if PlayerFrameManaBar then
+		PlayerFrameManaBar:SetHeight(38 - DUFHPHeight())
+		PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 -DUFHPHeight() - 1)
+	end
+	
+	if PlayerFrameHealthBarTextLeft then
+		PlayerFrameHealthBarTextLeft:SetPoint("LEFT", PlayerFrameHealthBar, "LEFT", 2, 0)
+		PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", 0, 0)
+		PlayerFrameHealthBarText:SetPoint("CENTER", PlayerFrameHealthBar, "CENTER", 0, 0)
+	end
 
-	PlayerFrameHealthBarTextLeft:SetPoint("LEFT", PlayerFrameHealthBar, "LEFT", 2, 0)
-	PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", 0, 0)
-	PlayerFrameHealthBarText:SetPoint("CENTER", PlayerFrameHealthBar, "CENTER", 0, 0)
-
-	PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
-	PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
-	PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
+	if PlayerFrameManaBarTextLeft then
+		PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
+		PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
+		PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
+	end
 end
 
 function DUFPlayerFrameSetup()
@@ -386,7 +393,7 @@ function DUFPlayerFrameSetup()
 		PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	end
 
-	if not PlayerFrameManaBarTextLeft.hooked then
+	if PlayerFrameManaBarTextLeft and not PlayerFrameManaBarTextLeft.hooked then
 		PlayerFrameManaBarTextLeft.hooked = true
 		hooksecurefunc(PlayerFrameManaBarTextLeft, "Show", function(self, ...)
 			if DUFHPHeight() >= 32 then
@@ -394,7 +401,7 @@ function DUFPlayerFrameSetup()
 			end
 		end)
 	end
-	if not PlayerFrameManaBarTextRight.hooked then
+	if PlayerFrameManaBarTextRight and not PlayerFrameManaBarTextRight.hooked then
 		PlayerFrameManaBarTextRight.hooked = true
 		hooksecurefunc(PlayerFrameManaBarTextRight, "Show", function(self, ...)
 			if DUFHPHeight() >= 32 then
@@ -402,7 +409,7 @@ function DUFPlayerFrameSetup()
 			end
 		end)
 	end
-	if not PlayerFrameManaBarText.hooked then
+	if PlayerFrameManaBarText and not PlayerFrameManaBarText.hooked then
 		PlayerFrameManaBarText.hooked = true
 		hooksecurefunc(PlayerFrameManaBarText, "Show", function(self, ...)
 			if DUFHPHeight() >= 32 then
@@ -411,31 +418,33 @@ function DUFPlayerFrameSetup()
 		end)
 	end
 
-	hooksecurefunc(PlayerFrameManaBar, "SetHeight", function(self)
-		if self.dufsetheight then return end
-		self.dufsetheight = true
+	if PlayerFrameManaBar then
+		hooksecurefunc(PlayerFrameManaBar, "SetHeight", function(self)
+			if self.dufsetheight then return end
+			self.dufsetheight = true
 
-		if 38 - DUFHPHeight() > 1 then
-			self:SetHeight(38 - DUFHPHeight())
-		else
-			self:SetHeight(1)
-		end	
+			if 38 - DUFHPHeight() > 1 then
+				self:SetHeight(38 - DUFHPHeight())
+			else
+				self:SetHeight(1)
+			end	
 
-		self.dufsetheight = false
-	end)
-	PlayerFrameManaBar:SetHeight(27)
-	hooksecurefunc(PlayerFrameManaBar, "SetSize", function(self)
-		if self.dufsetsize then return end
-		self.dufsetsize = true
+			self.dufsetheight = false
+		end)
+		PlayerFrameManaBar:SetHeight(27)
+		hooksecurefunc(PlayerFrameManaBar, "SetSize", function(self)
+			if self.dufsetsize then return end
+			self.dufsetsize = true
 
-		if 38 - DUFHPHeight() > 1 then
-			self:SetHeight(38 - DUFHPHeight())
-		else
-			self:SetHeight(1)
-		end	
+			if 38 - DUFHPHeight() > 1 then
+				self:SetHeight(38 - DUFHPHeight())
+			else
+				self:SetHeight(1)
+			end	
 
-		self.dufsetsize = false
-	end)
+			self.dufsetsize = false
+		end)
+	end
 
 	-- EXTRAS
 	ALT_MANA_BAR_PAIR_DISPLAY_INFO = {
