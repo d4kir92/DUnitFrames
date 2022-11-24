@@ -174,7 +174,7 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.2.17)")
+		text:SetText("Settings (v1.2.18)")
 
 		DUFCreateComboBox( DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then
@@ -330,8 +330,6 @@ function DUFInitSettings()
 	end
 end
 
-
-SetCVar( "ScriptErrors", 1 )
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 
