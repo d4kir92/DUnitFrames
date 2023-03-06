@@ -2,7 +2,7 @@
 ## Interface-BCC: 20504
 ## Interface-Wrath: 30400
 
-## Version: 1.2.30
+## Version: 1.2.31
 ## Title: DUnitFrames |T134167:16:16:0:0|t by |cff3FC7EBD4KiR |T132115:16:16:0:0|t 
 ## Notes: Unit Frames
 ## Author: D4KiR
