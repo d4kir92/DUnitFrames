@@ -1,5 +1,7 @@
 -- By D4KiR
 
+local ADDON_NAME = ...
+
 local HIDDEN = CreateFrame("FRAME", "HIDDEN", UIParent)
 HIDDEN:Hide()
 
@@ -124,3 +126,37 @@ function f.Think()
 	C_Timer.After(0.02, f.Think)
 end
 f.Think()
+
+local frame = CreateFrame("frame")
+frame:RegisterEvent("ADDON_LOADED")
+frame:SetScript("OnEvent", function(self, event, addonName)
+	if ( event == "ADDON_LOADED" and addonName == ADDON_NAME ) then
+		if DUFBUILD ~= "WRATH" and DUFBUILD ~= "RETAIL" then
+			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarText", "BORDER", "TextStatusBarText")
+			TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameTextureFrame, "CENTER", -50, 3)
+
+			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarTextLeft", "BORDER", "TextStatusBarText")
+			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameTextureFrame, "LEFT", 8, 3)
+
+			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarTextRight", "BORDER", "TextStatusBarText")
+			TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameTextureFrame, "RIGHT", -110, 3)
+
+			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarText", "BORDER", "TextStatusBarText")
+			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameTextureFrame, "CENTER", -50, -8)
+
+			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarTextLeft", "BORDER", "TextStatusBarText")
+			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameTextureFrame, "LEFT", 8, -8)
+
+			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarTextRight", "BORDER", "TextStatusBarText")
+			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameTextureFrame, "RIGHT", -110, -8)
+
+			TargetFrameHealthBar.LeftText = TargetFrameHealthBarTextLeft;
+			TargetFrameHealthBar.RightText = TargetFrameHealthBarTextRight
+			TargetFrameManaBar.LeftText = TargetFrameManaBarTextLeft;
+			TargetFrameManaBar.RightText = TargetFrameManaBarTextRight;
+
+			UnitFrameHealthBar_Initialize( "target", TargetFrameHealthBar, TargetFrameHealthBarText, true )
+			UnitFrameManaBar_Initialize( "target", TargetFrameManaBar, TargetFrameManaBarText, true )
+		end
+	end
+end )
