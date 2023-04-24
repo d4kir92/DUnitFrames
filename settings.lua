@@ -1,8 +1,7 @@
 -- By D4KiR
-
 local LibDD = LibStub:GetLibrary("LibUIDropDownMenu-4.0")
-
 DUFBUILD = "CLASSIC"
+
 if select(4, GetBuildInfo()) >= 100000 then
 	DUFBUILD = "RETAIL"
 elseif select(4, GetBuildInfo()) > 29999 then
@@ -11,69 +10,59 @@ elseif select(4, GetBuildInfo()) > 19999 then
 	DUFBUILD = "TBC"
 end
 
-local vars = false
-local addo = false
-
 local DUFLoaded = false
-
 DUFTAB = DUFTAB or {}
 DUFTABPC = DUFTABPC or {}
 
 function DUFGetConfig(key, value, pc)
-	if DUFLoaded then
-		if DUFTAB ~= nil and DUFTABPC ~= nil then
-			if pc then
-				if DUFTABPC[key] ~= nil then
-					value = DUFTABPC[key]
-				else
-					DUFTABPC[key] = value
-				end
+	if DUFLoaded and DUFTAB ~= nil and DUFTABPC ~= nil then
+		if pc then
+			if DUFTABPC[key] ~= nil then
+				value = DUFTABPC[key]
 			else
-				if DUFTAB[key] ~= nil then
-					value = DUFTAB[key]
-				else
-					DUFTAB[key] = value
-				end
+				DUFTABPC[key] = value
+			end
+		else
+			if DUFTAB[key] ~= nil then
+				value = DUFTAB[key]
+			else
+				DUFTAB[key] = value
 			end
 		end
 	end
+
 	return value
 end
 
-
-
 function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 	local SL = CreateFrame("Slider", nil, parent, "OptionsSliderTemplate")
-
 	SL:SetWidth(600)
 	SL:SetPoint("TOPLEFT", x, y)
-
 	SL.Low:SetText(vmin)
 	SL.High:SetText(vmax)
-	
 	SL.Text:SetText(DUFGT(lstr) .. ": " .. DUFGetConfig(key, vval))
-
 	SL:SetMinMaxValues(vmin, vmax)
-
 	SL:SetValue(DUFGetConfig(key, vval))
-
 	SL:SetObeyStepOnDrag(steps)
 	SL:SetValueStep(steps)
-
 	SL.oldval = nil
+
 	SL:SetScript("OnValueChanged", function(self, val)
-		val = tonumber( string.format("%.0f", val) )
+		val = tonumber(string.format("%.0f", val))
+
 		if vmin and val < vmin then
 			val = vmin
 		end
+
 		if vmax and val > vmax then
 			val = vmax
 		end
+
 		if val ~= self.oldval then
 			self.oldval = val
-			SL.Text:SetText( DUFGT(lstr) .. ": " .. val )
-
+			SL.Text:SetText(DUFGT(lstr) .. ": " .. val)
 			DUFTAB[key] = val
+
 			if func ~= nil then
 				func()
 			end
@@ -86,21 +75,20 @@ end
 function DUFCreateCheckBox(parent, key, vval, x, y, lstr, pc)
 	local CB = CreateFrame("CheckButton", nil, parent, "ChatConfigCheckButtonTemplate")
 	CB:SetSize(24, 24)
-
 	CB:SetPoint("TOPLEFT", x, y)
-
 	CB.Text:SetPoint("LEFT", CB, "RIGHT", 0, 0)
 	CB.Text:SetText(DUFGT(lstr))
-
 	CB:SetChecked(DUFGetConfig(key, vval))
 
 	CB:SetScript("OnClick", function(self, val)
 		val = CB:GetChecked()
+
 		if pc then
 			DUFTABPC[key] = val
 		else
 			DUFTAB[key] = val
 		end
+
 		CB.Text:SetText(DUFGT(lstr))
 	end)
 
@@ -110,14 +98,11 @@ end
 function DUFCreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 	local CB = LibDD:Create_UIDropDownMenu("Frame", parent)
 	CB:SetPoint("TOPLEFT", x, y)
-
-	
-	CB.text = CB:CreateFontString(nil, "ARTWORK") 
+	CB.text = CB:CreateFontString(nil, "ARTWORK")
 	CB.text:SetFont(STANDARD_TEXT_FONT, 12, "")
 	CB.text:SetText(DUFGT(lstr))
 	CB.text:SetPoint("LEFT", CB, "RIGHT", 0, 3)
 	CB.Text:SetText(DUFGT(lstr) .. ": " .. tostring(DUFGetConfig(key, vval)))
-
 	LibDD:UIDropDownMenu_SetWidth(CB, 120)
 	LibDD:UIDropDownMenu_SetText(CB, DUFGetConfig(key, vval))
 
@@ -134,7 +119,6 @@ function DUFCreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 
 	function CB:SetValue(newValue)
 		DUFTAB[key] = newValue
-
 		LibDD:UIDropDownMenu_SetText(CB, newValue)
 		LibDD:CloseDropDownMenus()
 
@@ -147,45 +131,39 @@ function DUFCreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 end
 
 local Y = 0
-local H = 16
-local BR = 30
 
-local SORTTAB = {}
 SORTTAB = {"Group", "Role"}
 
 local dufsetting = false
+
 function DUFInitSettings()
 	if not dufsetting then
 		dufsetting = true
-
 		local DUFSettings = {}
-
 		local DUFname = "DUnitFrames |T134167:16:16:0:0|t by |cff3FC7EBD4KiR |T132115:16:16:0:0|t"
-
 		local settingname = DUFname
 		DUFSettings.panel = CreateFrame("FRAME")
 		DUFSettings.panel.name = settingname
-
 		Y = 0
 		H = 16
 		BR = 30
-
 		Y = Y - 10
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.2.36)")
+		text:SetText("Settings (v1.2.37)")
 
-		DUFCreateComboBox( DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
+		DUFCreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then
 				UnitFramePortrait_Update(PlayerFrame)
 			end
+
 			for id = 1, 4 do
 				if _G["PartyMemberFrame" .. id] then
 					UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
 				end
 			end
-		end )
+		end)
 
 		DUFCreateComboBox(DUFSettings.panel, "bordermode", "Class+Status", 0, -60, "bordermode", {"Class+Status", "Class", "Status", "Dark", "Black", "Default"}, function()
 			DUFUpdateBorderColors()
@@ -199,9 +177,11 @@ function DUFInitSettings()
 			if PlayerFrameHealthBarTextRight then
 				PlayerFrameHealthBarTextRight:SetText(PlayerFrameHealthBarTextRight:GetText())
 			end
+
 			if TargetFrameHealthBarTextRight then
 				TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText())
 			end
+
 			if FocusFrameTextureFrameHealthBarTextRight then
 				FocusFrameTextureFrameHealthBarTextRight:SetText(FocusFrameTextureFrameHealthBarTextRight:GetText())
 			end
@@ -211,9 +191,11 @@ function DUFInitSettings()
 			if PlayerFrameHealthBarTextLeft then
 				PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextLeft:GetText())
 			end
+
 			if TargetFrameHealthBarTextLeft then
 				TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText())
 			end
+
 			if FocusFrameTextureFrameHealthBarTextLeft then
 				FocusFrameTextureFrameHealthBarTextLeft:SetText(FocusFrameTextureFrameHealthBarTextLeft:GetText())
 			end
@@ -227,17 +209,22 @@ function DUFInitSettings()
 			DUFUpdatePlayerFrame()
 			DUFUpdateTargetFrame()
 			DUFUpdateTargetTexture()
+
 			if DUFUpdateFocusFrame then
 				DUFUpdateFocusFrame()
 			end
+
 			if DUFUpdateFocusTexture then
 				DUFUpdateFocusTexture()
 			end
+
 			if DUFUpdatePartyMemberFrames then
 				DUFUpdatePartyMemberFrames()
 			end
+
 			for id = 1, 4 do
 				local func = _G["DUFUpdateParty" .. id .. "Texture"]
+
 				if func then
 					func()
 				end
@@ -248,6 +235,7 @@ function DUFInitSettings()
 			if TargetFrameTextureFrameName then
 				TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
 			end
+
 			if FocusFrameTextureFrameName then
 				FocusFrameTextureFrameName:SetText(FocusFrameTextureFrameName:GetText())
 			end
@@ -271,6 +259,7 @@ function DUFInitSettings()
 			if PlayerFrameHealthBar then
 				PlayerFrameHealthBar:SetStatusBarTexture("")
 			end
+
 			if PlayerFrameManaBar then
 				PlayerFrameManaBar:SetStatusBarTexture("")
 			end
@@ -278,6 +267,7 @@ function DUFInitSettings()
 			if TargetFrameHealthBar then
 				TargetFrameHealthBar:SetStatusBarTexture("")
 			end
+
 			if TargetFrameManaBar then
 				TargetFrameManaBar:SetStatusBarTexture("")
 			end
@@ -285,6 +275,7 @@ function DUFInitSettings()
 			if FocusFrameHealthBar then
 				FocusFrameHealthBar:SetStatusBarTexture("")
 			end
+
 			if FocusFrameManaBar then
 				FocusFrameManaBar:SetStatusBarTexture("")
 			end
@@ -294,33 +285,31 @@ function DUFInitSettings()
 		b:SetSize(200, 24) -- width, height
 		b:SetText("DISCORD")
 		b:SetPoint("BOTTOMLEFT", 10, 10)
+
 		b:SetScript("OnClick", function()
 			local iconbtn = 32
 			local s = CreateFrame("Frame", nil, UIParent) -- or you actual parent instead
 			s:SetSize(300, 2 * iconbtn + 2 * 10)
 			s:SetPoint("CENTER")
-
 			s.texture = s:CreateTexture(nil, "BACKGROUND")
 			s.texture:SetColorTexture(0, 0, 0, 0.5)
 			s.texture:SetAllPoints(s)
-
-			s.text = s:CreateFontString(nil,"ARTWORK") 
+			s.text = s:CreateFontString(nil, "ARTWORK")
 			s.text:SetFont(STANDARD_TEXT_FONT, 11, "")
 			s.text:SetText("Feedback")
 			s.text:SetPoint("CENTER", s, "TOP", 0, -10)
-
 			local eb = CreateFrame("EditBox", "logEditBox", s, "InputBoxTemplate")
 			eb:SetFrameStrata("DIALOG")
 			eb:SetSize(280, iconbtn)
 			eb:SetAutoFocus(false)
 			eb:SetText("https://discord.gg/UeBsafs")
 			eb:SetPoint("TOPLEFT", 10, -10 - iconbtn)
-
 			s.close = CreateFrame("Button", "closediscord", s, "UIPanelButtonTemplate")
 			s.close:SetFrameStrata("DIALOG")
 			s.close:SetPoint("TOPLEFT", 300 - 10 - iconbtn, -10)
 			s.close:SetSize(iconbtn, iconbtn)
 			s.close:SetText("X")
+
 			s.close:SetScript("OnClick", function(self, btn, down)
 				s:Hide()
 			end)
@@ -332,8 +321,8 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
-
 local once = true
+
 function f:OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" and once then
 		once = false
@@ -342,20 +331,23 @@ function f:OnEvent(event, ...)
 			DUFTAB["bartexture"] = 0
 		end
 
-		DUFLoaded = true 
+		DUFLoaded = true
 
 		if PlayerPortrait then
 			UnitFramePortrait_Update(PlayerPortrait)
 		end
+
 		if PlayerFrameTexture then
 			PlayerFrameTexture:SetVertexColor(1, 1, 1)
 		end
 
 		DUFPlayerFrameSetup()
 		DUFTargetFrameSetup()
+
 		if DUFFocusFrameSetup then
 			DUFFocusFrameSetup()
 		end
+
 		if DUFPartyMemberFramesSetup then
 			DUFPartyMemberFramesSetup()
 		end
@@ -363,6 +355,7 @@ function f:OnEvent(event, ...)
 		if PlayerFrame then
 			UnitFramePortrait_Update(PlayerFrame)
 		end
+
 		for id = 1, 4 do
 			if _G["PartyMemberFrame" .. id] then
 				UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
@@ -370,12 +363,13 @@ function f:OnEvent(event, ...)
 		end
 
 		-- PlayerFrame
-		hooksecurefunc("PlayerFrame_ToPlayerArt", DUFUpdatePlayerFrame);
+		hooksecurefunc("PlayerFrame_ToPlayerArt", DUFUpdatePlayerFrame)
 
 		-- TargetFrame
 		if TargetFrame_CheckClassification then
 			hooksecurefunc("TargetFrame_CheckClassification", function()
 				DUFUpdateTargetTexture()
+
 				if DUFUpdateFocusTexture then
 					DUFUpdateFocusTexture()
 				end
@@ -385,4 +379,5 @@ function f:OnEvent(event, ...)
 		DUFInitSettings()
 	end
 end
+
 f:SetScript("OnEvent", f.OnEvent)

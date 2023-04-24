@@ -1,4 +1,3 @@
-
 local DUFFontSize = 12
 
 function DUFTargetFrameSetup()
@@ -15,13 +14,15 @@ function DUFTargetFrameSetup()
 
 			self.settexture = false
 		end)
+
 		TargetFrameHealthBar:SetStatusBarTexture("")
 	end
+
 	if TargetFrameManaBar then
 		hooksecurefunc(TargetFrameManaBar, "SetStatusBarTexture", function(self, texture)
 			if self.settexture then return end
 			self.settexture = true
-			
+
 			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
 				self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 			else
@@ -30,224 +31,237 @@ function DUFTargetFrameSetup()
 
 			self.settexture = false
 		end)
+
 		TargetFrameManaBar:SetStatusBarTexture("")
 	end
+
 	if TargetFrameTextureFrame and TargetFrameTextureFrame.HealthBarTextLeft then
 		TargetFrameTextureFrameHealthBarText = TargetFrameTextureFrame.HealthBarText
 		TargetFrameTextureFrameHealthBarTextLeft = TargetFrameTextureFrame.HealthBarTextLeft
 		TargetFrameTextureFrameHealthBarTextRight = TargetFrameTextureFrame.HealthBarTextRight
-
 		TargetFrameTextureFrameManaBarText = TargetFrameTextureFrame.ManaBarText
 		TargetFrameTextureFrameManaBarTextLeft = TargetFrameTextureFrame.ManaBarTextLeft
 		TargetFrameTextureFrameManaBarTextRight = TargetFrameTextureFrame.ManaBarTextRight
 	end
 
 	if TargetFrameHealthBar then
-		hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function( self, oR, oG, oB )
+		hooksecurefunc(TargetFrameHealthBar, "SetStatusBarColor", function(self, oR, oG, oB)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBarColor( "TARGET", self )
+			local r, g, b = DUFGetBarColor("TARGET", self)
+
 			if r and g and b then
-				self:SetStatusBarColor( r, g, b )
+				self:SetStatusBarColor(r, g, b)
 			else
-				self:SetStatusBarColor( oR, oG, oB )
+				self:SetStatusBarColor(oR, oG, oB)
 			end
+
 			self.dufsetvertexcolor = false
 		end)
-		TargetFrameHealthBar:SetStatusBarColor( TargetFrameHealthBar:GetStatusBarColor() )
+
+		TargetFrameHealthBar:SetStatusBarColor(TargetFrameHealthBar:GetStatusBarColor())
 	end
-	if TargetFrameHealthBarTextLeft ~= nil then
-		if TargetFrameHealthBarTextLeft.hooked == nil then
-			TargetFrameHealthBarTextLeft.hooked = true
 
-			hooksecurefunc(TargetFrameHealthBarTextRight, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight" )
-				self:SetText( newText )
+	if TargetFrameHealthBarTextLeft ~= nil and TargetFrameHealthBarTextLeft.hooked == nil then
+		TargetFrameHealthBarTextLeft.hooked = true
 
-				self.dufsettext = false
-			end)
-			TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText())
+		hooksecurefunc(TargetFrameHealthBarTextRight, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
 
-			hooksecurefunc(TargetFrameHealthBarTextLeft, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft" )
-				self:SetText( newText )
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-				self.dufsettext = false
-			end)
-			TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText())
+			local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
 
-			hooksecurefunc(TargetFrameHealthBarText, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText" )
-				self:SetText( newText )
+		TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText())
 
-				self.dufsettext = false
-			end)
-			TargetFrameHealthBarText:SetText(TargetFrameHealthBarText:GetText())
+		hooksecurefunc(TargetFrameHealthBarTextLeft, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
 
-			hooksecurefunc(TargetFrameManaBarTextLeft, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-			
-				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft" )
-				self:SetText( newText )
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-				self.dufsettext = false
-			end)
-			TargetFrameManaBarTextLeft:SetText(TargetFrameManaBarTextLeft:GetText())
-			
-			hooksecurefunc(TargetFrameManaBarTextRight, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight" )
-				self:SetText( newText )
+			local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
 
-				self.dufsettext = false
-			end)
-			TargetFrameManaBarTextRight:SetText(TargetFrameManaBarTextRight:GetText())
+		TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText())
 
-			hooksecurefunc(TargetFrameManaBarText, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText" )
-				self:SetText( newText )
+		hooksecurefunc(TargetFrameHealthBarText, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
 
-				self.dufsettext = false
-			end)
-			TargetFrameManaBarText:SetText(TargetFrameManaBarText:GetText())
-		end
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameHealthBarText:SetText(TargetFrameHealthBarText:GetText())
+
+		hooksecurefunc(TargetFrameManaBarTextLeft, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameManaBarTextLeft:SetText(TargetFrameManaBarTextLeft:GetText())
+
+		hooksecurefunc(TargetFrameManaBarTextRight, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameManaBarTextRight:SetText(TargetFrameManaBarTextRight:GetText())
+
+		hooksecurefunc(TargetFrameManaBarText, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameManaBarText:SetText(TargetFrameManaBarText:GetText())
 	end
-	
-	if TargetFrameTextureFrameHealthBarTextLeft ~= nil then
-		if TargetFrameTextureFrameHealthBarTextLeft.hooked == nil then
-			TargetFrameTextureFrameHealthBarTextLeft.hooked = true
 
-			--TargetFrameTextureFrameHealthBarTextLeft.Hide = TargetFrameTextureFrameHealthBarTextLeft.Show
-			hooksecurefunc(TargetFrameTextureFrameHealthBarTextLeft, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft" )
-				self:SetText( newText )
+	if TargetFrameTextureFrameHealthBarTextLeft ~= nil and TargetFrameTextureFrameHealthBarTextLeft.hooked == nil then
+		TargetFrameTextureFrameHealthBarTextLeft.hooked = true
 
-				self.dufsettext = false
-			end)
-			TargetFrameTextureFrameHealthBarTextLeft:SetText(TargetFrameTextureFrameHealthBarTextLeft:GetText())
-			
-			--TargetFrameTextureFrameHealthBarTextRight.Hide = TargetFrameTextureFrameHealthBarTextRight.Show
-			hooksecurefunc(TargetFrameTextureFrameHealthBarTextRight, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight" )
-				self:SetText( newText )
+		--TargetFrameTextureFrameHealthBarTextLeft.Hide = TargetFrameTextureFrameHealthBarTextLeft.Show
+		hooksecurefunc(TargetFrameTextureFrameHealthBarTextLeft, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
 
-				self.dufsettext = false
-			end)
-			TargetFrameTextureFrameHealthBarTextRight:SetText(TargetFrameTextureFrameHealthBarTextRight:GetText())
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-			hooksecurefunc(TargetFrameTextureFrameHealthBarText, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText" )
-				self:SetText( newText )
+			local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
 
-				self.dufsettext = false
-			end)
-			TargetFrameTextureFrameHealthBarText:SetText(TargetFrameTextureFrameHealthBarText:GetText())
+		TargetFrameTextureFrameHealthBarTextLeft:SetText(TargetFrameTextureFrameHealthBarTextLeft:GetText())
 
-			hooksecurefunc(TargetFrameTextureFrameManaBarTextLeft, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft" )
-				self:SetText( newText )
+		--TargetFrameTextureFrameHealthBarTextRight.Hide = TargetFrameTextureFrameHealthBarTextRight.Show
+		hooksecurefunc(TargetFrameTextureFrameHealthBarTextRight, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
 
-				self.dufsettext = false
-			end)
-			TargetFrameTextureFrameManaBarTextLeft:SetText(TargetFrameTextureFrameManaBarTextLeft:GetText())
-			
-			hooksecurefunc(TargetFrameTextureFrameManaBarTextRight, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight" )
-				self:SetText( newText )
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
 
-				self.dufsettext = false
-			end)
-			TargetFrameTextureFrameManaBarTextRight:SetText(TargetFrameTextureFrameManaBarTextRight:GetText())
+			local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
 
-			hooksecurefunc(TargetFrameTextureFrameManaBarText, "SetText", function( self, text )
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-				
-				local newText = DUFModifyText( text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText" )
-				self:SetText( newText )
+		TargetFrameTextureFrameHealthBarTextRight:SetText(TargetFrameTextureFrameHealthBarTextRight:GetText())
 
-				self.dufsettext = false
-			end)
-			TargetFrameTextureFrameManaBarText:SetText(TargetFrameTextureFrameManaBarText:GetText())
-		end
+		hooksecurefunc(TargetFrameTextureFrameHealthBarText, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameTextureFrameHealthBarText:SetText(TargetFrameTextureFrameHealthBarText:GetText())
+
+		hooksecurefunc(TargetFrameTextureFrameManaBarTextLeft, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameTextureFrameManaBarTextLeft:SetText(TargetFrameTextureFrameManaBarTextLeft:GetText())
+
+		hooksecurefunc(TargetFrameTextureFrameManaBarTextRight, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameTextureFrameManaBarTextRight:SetText(TargetFrameTextureFrameManaBarTextRight:GetText())
+
+		hooksecurefunc(TargetFrameTextureFrameManaBarText, "SetText", function(self, text)
+			if self.dufsettext then return end
+			self.dufsettext = true
+			local fontFamily, fontSize, fontFlags = self:GetFont()
+
+			if fontSize ~= DUFFontSize then
+				self:SetFont(fontFamily, DUFFontSize, fontFlags)
+			end
+
+			local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
+			self:SetText(newText)
+			self.dufsettext = false
+		end)
+
+		TargetFrameTextureFrameManaBarText:SetText(TargetFrameTextureFrameManaBarText:GetText())
 	end
 
 	-- #TargetFrame
@@ -255,30 +269,29 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(TargetFrameHealthBar, "SetHeight", function(self)
 			if self.dufsetheight then return end
 			self.dufsetheight = true
-
 			self:SetHeight(DUFHPHeight())
-
 			self.dufsetheight = false
 		end)
+
 		TargetFrameHealthBar:SetHeight(27)
+
 		hooksecurefunc(TargetFrameHealthBar, "SetSize", function(self)
 			if self.dufsetsize then return end
 			self.dufsetsize = true
-
 			self:SetHeight(DUFHPHeight())
-
 			self.dufsetsize = false
 		end)
+
 		hooksecurefunc(TargetFrameHealthBar, "SetPoint", function(self)
 			if self.dufsetpoint then return end
 			self.dufsetpoint = true
-
 			self:SetPoint("TOPLEFT", 6, -24)
-
 			self.dufsetpoint = false
 		end)
+
 		TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
 	end
+
 	if TargetFrameManaBar then
 		hooksecurefunc(TargetFrameManaBar, "SetHeight", function(self)
 			if self.dufsetheight then return end
@@ -292,7 +305,9 @@ function DUFTargetFrameSetup()
 
 			self.dufsetheight = false
 		end)
+
 		TargetFrameManaBar:SetHeight(27)
+
 		hooksecurefunc(TargetFrameManaBar, "SetSize", function(self)
 			if self.dufsetsize then return end
 			self.dufsetsize = true
@@ -305,28 +320,32 @@ function DUFTargetFrameSetup()
 
 			self.dufsetsize = false
 		end)
+
 		hooksecurefunc(TargetFrameManaBar, "SetPoint", function(self)
 			if self.dufsetpoint then return end
 			self.dufsetpoint = true
-
-			self:SetPoint("TOPLEFT", 6, -23 -DUFHPHeight() - 1)
-
+			self:SetPoint("TOPLEFT", 6, -23 - DUFHPHeight() - 1)
 			self.dufsetpoint = false
 		end)
+
 		TargetFrameManaBar:SetPoint("TOPLEFT", 6, -24)
 	end
+
 	if TargetFrameBackground then
 		TargetFrameBackground:SetHeight(40)
 		TargetFrameBackground:ClearAllPoints()
 		TargetFrameBackground:SetPoint("TOPLEFT", 6, -24)
 	end
+
 	if TargetFrameNameBackground then
 		TargetFrameNameBackground.Show = TargetFrameNameBackground.Hide
 		TargetFrameNameBackground:Hide()
 	end
+
 	function DUFUpdateTargetTexture()
 		local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 		local class = UnitClassification("TARGET")
+
 		if class == "worldboss" or class == "elite" then
 			texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Elite"
 		elseif class == "rareelite" then
@@ -334,7 +353,8 @@ function DUFTargetFrameSetup()
 		elseif class == "rare" then
 			texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame-Rare"
 		end
-		TargetFrameTextureFrameTexture:SetTexture(texture);
+
+		TargetFrameTextureFrameTexture:SetTexture(texture)
 
 		if class == "minus" then
 			TargetFrameFlash:SetTexture("")
@@ -343,14 +363,17 @@ function DUFTargetFrameSetup()
 		if TargetFrameTextureFrameTexture.spacer == nil then
 			TargetFrameTextureFrameTexture.spacer = TargetFrameTextureFrame:CreateTexture(nil, "ARTWORK")
 			TargetFrameTextureFrameTexture.spacer:SetDrawLayer("ARTWORK", 7)
+
 			hooksecurefunc(TargetFrameTextureFrameTexture.spacer, "SetVertexColor", function(self, r, g, b, a)
 				if self.dufsetvertexcolor then return end
 				self.dufsetvertexcolor = true
 				self:SetVertexColor(r, g, b, a)
 				self.dufsetvertexcolor = false
 			end)
+
 			TargetFrameTextureFrameTexture.spacer:SetVertexColor(1, 1, 1)
 		end
+
 		TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
 		TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUFHPHeight())
 		TargetFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
@@ -362,9 +385,7 @@ function DUFTargetFrameSetup()
 		end
 
 		TargetFrameTextureFrameTexture:SetVertexColor(0, 0, 0)
-
 		TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
-
 
 		if TargetFrameHealthBarTextLeft ~= nil then
 			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
@@ -373,22 +394,27 @@ function DUFTargetFrameSetup()
 
 			if not TargetFrameManaBarTextLeft.hooked then
 				TargetFrameManaBarTextLeft.hooked = true
+
 				hooksecurefunc(TargetFrameManaBarTextLeft, "Show", function(self, ...)
 					if DUFHPHeight() >= 32 then
 						self:Hide()
 					end
 				end)
 			end
+
 			if not TargetFrameManaBarTextRight.hooked then
 				TargetFrameManaBarTextRight.hooked = true
+
 				hooksecurefunc(TargetFrameManaBarTextRight, "Show", function(self, ...)
 					if DUFHPHeight() >= 32 then
 						self:Hide()
 					end
 				end)
 			end
+
 			if not TargetFrameManaBarText.hooked then
 				TargetFrameManaBarText.hooked = true
+
 				hooksecurefunc(TargetFrameManaBarText, "Show", function(self, ...)
 					if DUFHPHeight() >= 32 then
 						self:Hide()
@@ -406,29 +432,34 @@ function DUFTargetFrameSetup()
 
 			if not TargetFrameTextureFrameManaBarTextLeft.hooked then
 				TargetFrameTextureFrameManaBarTextLeft.hooked = true
+
 				hooksecurefunc(TargetFrameTextureFrameManaBarTextLeft, "Show", function(self, ...)
 					if DUFHPHeight() >= 32 then
 						self:Hide()
 					end
 				end)
 			end
+
 			if not TargetFrameTextureFrameManaBarTextRight.hooked then
 				TargetFrameTextureFrameManaBarTextRight.hooked = true
+
 				hooksecurefunc(TargetFrameTextureFrameManaBarTextRight, "Show", function(self, ...)
 					if DUFHPHeight() >= 32 then
 						self:Hide()
 					end
 				end)
 			end
+
 			if not TargetFrameTextureFrameManaBarText.hooked then
 				TargetFrameTextureFrameManaBarText.hooked = true
+
 				hooksecurefunc(TargetFrameTextureFrameManaBarText, "Show", function(self, ...)
 					if DUFHPHeight() >= 32 then
 						self:Hide()
 					end
 				end)
 			end
-		
+
 			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -1)
 			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, -1)
 			TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
@@ -440,44 +471,54 @@ function DUFTargetFrameSetup()
 	end
 
 	local ThreatBorder = nil
+
 	if TargetFrameNumericalThreat ~= nil then
 		ThreatBorder = select(3, {TargetFrameNumericalThreat:GetRegions()})
 	end
+
 	function TargetFrame.Think()
 		if TargetFrameTextureFrameName then
 			TargetFrameTextureFrameName:ClearAllPoints()
+
 			if TargetFrame.buffsOnTop then
 				local y = -4
+
 				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
 					TargetFrameTextureFrameName:SetPoint("TOP", TargetFrameManaBar, "BOTTOM", 0, y)
 				end
 			else
 				local y = 6
+
 				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
 					TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, y)
 				end
 			end
+
 			if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
 				TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFramePortrait, "TOP", 0, 12)
 			end
 		end
-		
+
 		if ThreatBorder and ThreatBorder:IsShown() then
 			y = 24
-			local r, g, b = DUFGetBorderColor( "TARGET", self )
+			local r, g, b = DUFGetBorderColor("TARGET", TargetFrame)
+
 			if ThreatBorder then
 				if r and g and b then
-					ThreatBorder:SetVertexColor( r, g, b, 1 )
+					ThreatBorder:SetVertexColor(r, g, b, 1)
 				else
-					ThreatBorder:SetVertexColor( oR, oG, oB, 1)
+					ThreatBorder:SetVertexColor(1, 0, 0, 1)
 				end
 			end
 		else
-			local isTanking, status, threatpct, rawthreatpct, threatvalue, percentOfLead = UnitDetailedThreatSituation("PLAYER", "TARGET");
+			local _, _, threatpct, _, _, _ = UnitDetailedThreatSituation("PLAYER", "TARGET")
+
 			if TargetFrame.DUFThreat == nil then
-				TargetFrame.DUFThreat = TargetFrame:CreateFontString(nil, "ARTWORK") 
+				TargetFrame.DUFThreat = TargetFrame:CreateFontString(nil, "ARTWORK")
 			end
+
 			TargetFrame.DUFThreat:SetFont(STANDARD_TEXT_FONT, 12, "")
+
 			if DUFGetConfig("namemode") == "Over Health" then
 				TargetFrame.DUFThreat:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, 20)
 			else
@@ -487,6 +528,7 @@ function DUFTargetFrameSetup()
 			if threatpct == nil then
 				threatpct = 0
 			end
+
 			if threatpct > 0 and DUFGetConfig("showthreat", true) then
 				threatpct = string.format("%.0f", threatpct)
 				TargetFrame.DUFThreat:SetText(threatpct .. "%")
@@ -497,6 +539,7 @@ function DUFTargetFrameSetup()
 
 		C_Timer.After(0.5, TargetFrame.Think)
 	end
+
 	TargetFrame.Think()
 
 	if TargetFrameTextureFrameName then
@@ -504,78 +547,91 @@ function DUFTargetFrameSetup()
 			if self.dufsettext then return end
 			self.dufsettext = true
 			local fontFamily, fontSize, fontFlags = self:GetFont()
+
 			if fontSize ~= DUFGetConfig("namesize", 10) then
-				self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags)--, "OUTLINE")
+				self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags) --, "OUTLINE")
 				self:SetShadowOffset(1, -1)
 			end
+
 			if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
 				self:Hide()
 			else
 				self:Show()
 			end
+
 			self.dufsettext = false
 		end)
+
 		TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
 	end
+
 	if TargetFrameTextureFrameTexture then
-		hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function( self, oR, oG, oB )
+		hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function(self, oR, oG, oB)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor( "TARGET", self )
+			local r, g, b = DUFGetBorderColor("TARGET", self)
+
 			if r and g and b then
-				self:SetVertexColor( r, g, b, 1 )
+				self:SetVertexColor(r, g, b, 1)
 			else
-				self:SetVertexColor( oR, oG, oB, 1)
+				self:SetVertexColor(oR, oG, oB, 1)
 			end
+
 			if self.spacer then
 				self.spacer:SetVertexColor(self:GetVertexColor())
 			end
+
 			self.dufsetvertexcolor = false
 		end)
+
 		TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
 	end
+
 	if TargetFrameToTTextureFrameTexture then
-		hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function( self,  oR, oG, oB )
+		hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function(self, oR, oG, oB)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor( "TARGETTARGET", self )
+			local r, g, b = DUFGetBorderColor("TARGETTARGET", self)
+
 			if r and g and b then
-				self:SetVertexColor( r, g, b, 1 )
+				self:SetVertexColor(r, g, b, 1)
 			else
-				self:SetVertexColor( oR, oG, oB, 1)
+				self:SetVertexColor(oR, oG, oB, 1)
 			end
+
 			self.dufsetvertexcolor = false
 		end)
+
 		TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
+
 		function TargetFrameToT.Think()
 			TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
 			C_Timer.After(0.1, TargetFrameToT.Think)
 		end
+
 		TargetFrameToT.Think()
 	end
 
-
 	if CanInspect and GetInspectSpecialization then
 		local f = CreateFrame("Frame")
+
 		function InspectTargetSpec()
-			if UnitIsPlayer("TARGET") then
-				if CanInspect("TARGET") and CheckInteractDistance("TARGET", 1) then
-					f:RegisterEvent("INSPECT_READY")
-					NotifyInspect("TARGET")
-				end
+			if UnitIsPlayer("TARGET") and CanInspect("TARGET") and CheckInteractDistance("TARGET", 1) then
+				f:RegisterEvent("INSPECT_READY")
+				NotifyInspect("TARGET")
 			end
 		end
-		f:SetScript("OnEvent", function( self, event, ... )
+
+		f:SetScript("OnEvent", function(self, event, ...)
 			if GetInspectSpecialization ~= nil then
-				local currentSpec = GetInspectSpecialization( "TARGET" )
+				local currentSpec = GetInspectSpecialization("TARGET")
 				f:UnregisterEvent("INSPECT_READY")
 				ClearInspectPlayer()
-				local id, name, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
-				if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) then
-					if icon then
-						TargetFramePortrait:SetTexture(icon)
-						TargetFramePortrait:SetTexCoord(0, 1, 0, 1)
-					end
+				local id, _, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
+
+				if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) and icon then
+					TargetFramePortrait:SetTexture(icon)
+					TargetFramePortrait:SetTexCoord(0, 1, 0, 1)
 				end
 			end
 		end)
