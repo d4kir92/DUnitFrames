@@ -1,9 +1,9 @@
-## Interface-Classic: 11403
+## Interface-Classic: 11404
 ## Interface-BCC: 20504
 ## Interface-Wrath: 30402
 ## Interface: 100100
 
-## Version: 1.2.40
+## Version: 1.2.41
 ## Title: DUnitFrames by |cff3FC7EBD4KiR |T132115:16:16:0:0|t 
 ## Notes: Unit Frames
 ## Author: D4KiR
