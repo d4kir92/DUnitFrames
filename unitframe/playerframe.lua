@@ -212,15 +212,39 @@ function DUFUpdatePlayerFrame()
 	end
 
 	if PlayerFrameHealthBarTextLeft then
-		PlayerFrameHealthBarTextLeft:SetPoint("LEFT", PlayerFrameHealthBar, "LEFT", 2, 0)
-		PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", 0, 0)
-		PlayerFrameHealthBarText:SetPoint("CENTER", PlayerFrameHealthBar, "CENTER", 0, 0)
+		if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			PlayerFrameHealthBarTextLeft:ClearAllPoints()
+			PlayerFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", PlayerFrameHealthBar, "BOTTOMLEFT", 2, 2)
+			PlayerFrameHealthBarTextRight:ClearAllPoints()
+			PlayerFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", PlayerFrameHealthBar, "BOTTOMRIGHT", 0, 2)
+			PlayerFrameHealthBarText:ClearAllPoints()
+			PlayerFrameHealthBarText:SetPoint("BOTTOM", PlayerFrameHealthBar, "BOTTOM", 0, 2)
+		else
+			PlayerFrameHealthBarTextLeft:ClearAllPoints()
+			PlayerFrameHealthBarTextLeft:SetPoint("LEFT", PlayerFrameHealthBar, "LEFT", 2, 0)
+			PlayerFrameHealthBarTextRight:ClearAllPoints()
+			PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", 0, 0)
+			PlayerFrameHealthBarText:ClearAllPoints()
+			PlayerFrameHealthBarText:SetPoint("CENTER", PlayerFrameHealthBar, "CENTER", 0, 0)
+		end
 	end
 
 	if PlayerFrameManaBarTextLeft then
-		PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
-		PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
-		PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
+		if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			PlayerFrameManaBarTextLeft:ClearAllPoints()
+			PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
+			PlayerFrameManaBarTextRight:ClearAllPoints()
+			PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
+			PlayerFrameManaBarText:ClearAllPoints()
+			PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
+		else
+			PlayerFrameManaBarTextLeft:ClearAllPoints()
+			PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
+			PlayerFrameManaBarTextRight:ClearAllPoints()
+			PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
+			PlayerFrameManaBarText:ClearAllPoints()
+			PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
+		end
 	end
 end
 
@@ -395,8 +419,25 @@ function DUFPlayerFrameSetup()
 	end
 
 	if PlayerName then
-		PlayerName.Show = PlayerName.Hide
-		PlayerName:Hide()
+		if DUFGetConfig("namemode", "Over Portrait") ~= "Inside Health" then
+			PlayerName.Show = PlayerName.Hide
+			PlayerName:Hide()
+		else
+			hooksecurefunc(PlayerName, "SetText", function(self, text, ...)
+				if self.dufsettext then return end
+				self.dufsettext = true
+				local fontFamily, fontSize, fontFlags = self:GetFont()
+
+				if fontSize ~= DUFGetConfig("namesize", 10) then
+					self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags) --, "OUTLINE")
+					self:SetShadowOffset(1, -1)
+				end
+
+				self.dufsettext = false
+			end)
+
+			PlayerName:SetText(PlayerName:GetText())
+		end
 	end
 
 	if PlayerFrameTexture then
@@ -532,6 +573,11 @@ function DUFPlayerFrameSetup()
 				PlayerFrameAlternateManaBar.texture:SetWidth(per * PlayerFrameAlternateManaBar:GetWidth() - 4)
 				PlayerFrameAlternateManaBar.textl:SetText(DUFPN(UnitPower("PLAYER", Enum.PowerType.Mana), UnitPowerMax("PLAYER", Enum.PowerType.Mana)))
 				PlayerFrameAlternateManaBar.textr:SetText(DUFNN(UnitPower("PLAYER", Enum.PowerType.Mana)))
+			end
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				PlayerName:ClearAllPoints()
+				PlayerName:SetPoint("TOP", PlayerFrameHealthBar, "TOP", 0, -1)
 			end
 
 			C_Timer.After(0.1, PlayerFrameAlternateManaBar.think)

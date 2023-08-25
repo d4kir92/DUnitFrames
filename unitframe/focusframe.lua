@@ -387,12 +387,30 @@ if FocusFrame then
 			end
 
 			FocusFrameTextureFrameTexture:SetVertexColor(0, 0, 0)
-			FocusFrameTextureFrameDeadText:SetPoint("CENTER", FocusFrameHealthBar, "CENTER", 0, 0)
+			FocusFrameTextureFrameDeadText:ClearAllPoints()
+			FocusFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				FocusFrameTextureFrameDeadText:ClearAllPoints()
+				FocusFrameTextureFrameDeadText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 0)
+			end
 
 			if FocusFrameHealthBarTextLeft ~= nil then
+				FocusFrameHealthBarTextLeft:ClearAllPoints()
 				FocusFrameHealthBarTextLeft:SetPoint("LEFT", FocusFrameHealthBar, "LEFT", 2, 0)
+				FocusFrameHealthBarTextRight:ClearAllPoints()
 				FocusFrameHealthBarTextRight:SetPoint("RIGHT", FocusFrameHealthBar, "RIGHT", -2, 0)
+				FocusFrameHealthBarText:ClearAllPoints()
 				FocusFrameHealthBarText:SetPoint("CENTER", FocusFrameHealthBar, "CENTER", 0, 0)
+
+				if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+					FocusFrameHealthBarTextLeft:ClearAllPoints()
+					FocusFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", FocusFrameHealthBar, "BOTTOMLEFT", 2, 2)
+					FocusFrameHealthBarTextRight:ClearAllPoints()
+					FocusFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", FocusFrameHealthBar, "BOTTOMRIGHT", -2, 2)
+					FocusFrameHealthBarText:ClearAllPoints()
+					FocusFrameHealthBarText:SetPoint("BOTTOM", FocusFrameHealthBar, "BOTTOM", 0, 2)
+				end
 
 				if not FocusFrameManaBarTextLeft.hooked then
 					FocusFrameManaBarTextLeft.hooked = true
@@ -424,9 +442,21 @@ if FocusFrame then
 					end)
 				end
 
+				FocusFrameManaBarTextLeft:ClearAllPoints()
 				FocusFrameManaBarTextLeft:SetPoint("LEFT", FocusFrameManaBar, "LEFT", 2, 0)
-				FocusFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, 0)
+				FocusFrameManaBarTextRight:ClearAllPoints()
+				FocusFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, -1)
+				FocusFrameManaBarText:ClearAllPoints()
 				FocusFrameManaBarText:SetPoint("CENTER", FocusFrameManaBar, "CENTER", 0, 0)
+
+				if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+					FocusFrameManaBarTextLeft:ClearAllPoints()
+					FocusFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", FocusFrameManaBar, "BOTTOMLEFT", 2, 0)
+					FocusFrameManaBarTextRight:ClearAllPoints()
+					FocusFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", FocusFrameManaBar, "BOTTOMRIGHT", -2, -1)
+					FocusFrameManaBarText:ClearAllPoints()
+					FocusFrameManaBarText:SetPoint("BOTTOM", FocusFrameManaBar, "BOTTOM", 0, 0)
+				end
 			elseif FocusFrameTextureFrameHealthBarTextLeft ~= nil then
 				FocusFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", FocusFrameHealthBar, "LEFT", 2, 0)
 				FocusFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", FocusFrameHealthBar, "RIGHT", -2, 0)
@@ -498,6 +528,11 @@ if FocusFrame then
 
 				if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
 					FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFramePortrait, "TOP", 0, 12)
+				end
+
+				if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+					FocusFrameTextureFrameName:ClearAllPoints()
+					FocusFrameTextureFrameName:SetPoint("TOP", FocusFrameHealthBar, "TOP", 0, -1)
 				end
 			end
 

@@ -151,7 +151,17 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 		TargetFrameHealthBar.RightText = TargetFrameHealthBarTextRight
 		TargetFrameManaBar.LeftText = TargetFrameManaBarTextLeft
 		TargetFrameManaBar.RightText = TargetFrameManaBarTextRight
+
+		function ShouldKnowUnitHealth()
+			return true
+		end
+
 		UnitFrameHealthBar_Initialize("target", TargetFrameHealthBar, TargetFrameHealthBarText, true)
 		UnitFrameManaBar_Initialize("target", TargetFrameManaBar, TargetFrameManaBarText, true)
+
+		if FocusFrame then
+			UnitFrameHealthBar_Initialize("focus", FocusFrameHealthBar, FocusFrameHealthBarText, true)
+			UnitFrameManaBar_Initialize("focus", FocusFrameManaBar, FocusFrameManaBarText, true)
+		end
 	end
 end)

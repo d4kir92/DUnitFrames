@@ -151,7 +151,7 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.2.45)")
+		text:SetText("Settings (v1.3.0)")
 
 		DUFCreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then
@@ -201,7 +201,7 @@ function DUFInitSettings()
 			end
 		end)
 
-		DUFCreateComboBox(DUFSettings.panel, "namemode", "Over Portrait", 0, -180, "namemode", {"Over Portrait", "Over Health", "Hide"}, function()
+		DUFCreateComboBox(DUFSettings.panel, "namemode", "Over Portrait", 0, -180, "namemode", {"Over Portrait", "Over Health", "Inside Health", "Hide"}, function()
 			TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
 		end)
 
@@ -232,6 +232,10 @@ function DUFInitSettings()
 		end)
 
 		DUFCreateSlider(DUFSettings.panel, "namesize", 10, 10, -280, 6, 20, 1, "namesize", function()
+			if PlayerName then
+				PlayerName:SetText(PlayerName:GetText())
+			end
+
 			if TargetFrameTextureFrameName then
 				TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText())
 			end

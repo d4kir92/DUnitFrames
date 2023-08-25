@@ -385,12 +385,30 @@ function DUFTargetFrameSetup()
 		end
 
 		TargetFrameTextureFrameTexture:SetVertexColor(0, 0, 0)
+		TargetFrameTextureFrameDeadText:ClearAllPoints()
 		TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 
+		if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			TargetFrameTextureFrameDeadText:ClearAllPoints()
+			TargetFrameTextureFrameDeadText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 0)
+		end
+
 		if TargetFrameHealthBarTextLeft ~= nil then
+			TargetFrameHealthBarTextLeft:ClearAllPoints()
 			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
+			TargetFrameHealthBarTextRight:ClearAllPoints()
 			TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -2, 0)
+			TargetFrameHealthBarText:ClearAllPoints()
 			TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				TargetFrameHealthBarTextLeft:ClearAllPoints()
+				TargetFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
+				TargetFrameHealthBarTextRight:ClearAllPoints()
+				TargetFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -2, 2)
+				TargetFrameHealthBarText:ClearAllPoints()
+				TargetFrameHealthBarText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 2)
+			end
 
 			if not TargetFrameManaBarTextLeft.hooked then
 				TargetFrameManaBarTextLeft.hooked = true
@@ -422,13 +440,37 @@ function DUFTargetFrameSetup()
 				end)
 			end
 
+			TargetFrameManaBarTextLeft:ClearAllPoints()
 			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
+			TargetFrameManaBarTextRight:ClearAllPoints()
 			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, -1)
+			TargetFrameManaBarText:ClearAllPoints()
 			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				TargetFrameManaBarTextLeft:ClearAllPoints()
+				TargetFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 0)
+				TargetFrameManaBarTextRight:ClearAllPoints()
+				TargetFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -2, -1)
+				TargetFrameManaBarText:ClearAllPoints()
+				TargetFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 0)
+			end
 		elseif TargetFrameTextureFrameHealthBarTextLeft ~= nil then
+			TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
 			TargetFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
+			TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
 			TargetFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -2, 0)
+			TargetFrameTextureFrameHealthBarText:ClearAllPoints()
 			TargetFrameTextureFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
+				TargetFrameTextureFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
+				TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
+				TargetFrameTextureFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -2, 2)
+				TargetFrameTextureFrameHealthBarText:ClearAllPoints()
+				TargetFrameTextureFrameHealthBarText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 2)
+			end
 
 			if not TargetFrameTextureFrameManaBarTextLeft.hooked then
 				TargetFrameTextureFrameManaBarTextLeft.hooked = true
@@ -460,9 +502,21 @@ function DUFTargetFrameSetup()
 				end)
 			end
 
+			TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
 			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -1)
+			TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
 			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, -1)
+			TargetFrameTextureFrameManaBarText:ClearAllPoints()
 			TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
+				TargetFrameTextureFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 2)
+				TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
+				TargetFrameTextureFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -2, 2)
+				TargetFrameTextureFrameManaBarText:ClearAllPoints()
+				TargetFrameTextureFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 2)
+			end
 		end
 
 		if CanInspect and GetInspectSpecialization then
@@ -496,6 +550,11 @@ function DUFTargetFrameSetup()
 
 			if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
 				TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFramePortrait, "TOP", 0, 12)
+			end
+
+			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				TargetFrameTextureFrameName:ClearAllPoints()
+				TargetFrameTextureFrameName:SetPoint("TOP", TargetFrameHealthBar, "TOP", 0, -1)
 			end
 		end
 
