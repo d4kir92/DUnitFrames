@@ -166,7 +166,6 @@ if FocusFrame then
 
 		if FocusFrameTextureFrameHealthBarTextLeft ~= nil and FocusFrameTextureFrameHealthBarTextLeft.hooked == nil then
 			FocusFrameTextureFrameHealthBarTextLeft.hooked = true
-			FocusFrameTextureFrameHealthBarTextLeft.Hide = FocusFrameTextureFrameHealthBarTextLeft.Show
 
 			hooksecurefunc(FocusFrameTextureFrameHealthBarTextLeft, "SetText", function(self, text)
 				if self.dufsettext then return end
@@ -183,7 +182,6 @@ if FocusFrame then
 			end)
 
 			FocusFrameTextureFrameHealthBarTextLeft:SetText(FocusFrameTextureFrameHealthBarTextLeft:GetText())
-			FocusFrameTextureFrameHealthBarTextRight.Hide = FocusFrameTextureFrameHealthBarTextRight.Show
 
 			hooksecurefunc(FocusFrameTextureFrameHealthBarTextRight, "SetText", function(self, text)
 				if self.dufsettext then return end
@@ -340,8 +338,7 @@ if FocusFrame then
 		end
 
 		if FocusFrameNameBackground then
-			FocusFrameNameBackground.Show = FocusFrameNameBackground.Hide
-			FocusFrameNameBackground:Hide()
+			FocusFrameNameBackground:SetParent(DUFHIDDEN)
 		end
 
 		function DUFUpdateFocusTexture()

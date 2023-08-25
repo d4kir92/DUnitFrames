@@ -165,7 +165,6 @@ function DUFTargetFrameSetup()
 	if TargetFrameTextureFrameHealthBarTextLeft ~= nil and TargetFrameTextureFrameHealthBarTextLeft.hooked == nil then
 		TargetFrameTextureFrameHealthBarTextLeft.hooked = true
 
-		--TargetFrameTextureFrameHealthBarTextLeft.Hide = TargetFrameTextureFrameHealthBarTextLeft.Show
 		hooksecurefunc(TargetFrameTextureFrameHealthBarTextLeft, "SetText", function(self, text)
 			if self.dufsettext then return end
 			self.dufsettext = true
@@ -182,7 +181,6 @@ function DUFTargetFrameSetup()
 
 		TargetFrameTextureFrameHealthBarTextLeft:SetText(TargetFrameTextureFrameHealthBarTextLeft:GetText())
 
-		--TargetFrameTextureFrameHealthBarTextRight.Hide = TargetFrameTextureFrameHealthBarTextRight.Show
 		hooksecurefunc(TargetFrameTextureFrameHealthBarTextRight, "SetText", function(self, text)
 			if self.dufsettext then return end
 			self.dufsettext = true
@@ -338,8 +336,7 @@ function DUFTargetFrameSetup()
 	end
 
 	if TargetFrameNameBackground then
-		TargetFrameNameBackground.Show = TargetFrameNameBackground.Hide
-		TargetFrameNameBackground:Hide()
+		TargetFrameNameBackground:SetParent(DUFHIDDEN)
 	end
 
 	function DUFUpdateTargetTexture()

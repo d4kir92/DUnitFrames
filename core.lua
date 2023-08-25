@@ -1,7 +1,7 @@
 -- By D4KiR
 local ADDON_NAME = ...
-local HIDDEN = CreateFrame("FRAME", "HIDDEN", UIParent)
-HIDDEN:Hide()
+DUFHIDDEN = CreateFrame("FRAME", "DUFHIDDEN", UIParent)
+DUFHIDDEN:Hide()
 
 function DUFHPHeight()
 	local height = DUFGetConfig("hpheight", 27)
@@ -75,7 +75,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self, ...)
 	end
 
 	if self.unit == "player" and ComboPointPlayerFrame and DUFGetConfig("hidecombopoints", false) then
-		ComboPointPlayerFrame:SetParent(HIDDEN)
+		ComboPointPlayerFrame:SetParent(DUFHIDDEN)
 	end
 
 	self.dufsetportrai = false

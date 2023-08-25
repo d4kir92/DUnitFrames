@@ -420,8 +420,7 @@ function DUFPlayerFrameSetup()
 
 	if PlayerName then
 		if DUFGetConfig("namemode", "Over Portrait") ~= "Inside Health" then
-			PlayerName.Show = PlayerName.Hide
-			PlayerName:Hide()
+			PlayerName:SetParent(DUFHIDDEN)
 		else
 			hooksecurefunc(PlayerName, "SetText", function(self, text, ...)
 				if self.dufsettext then return end

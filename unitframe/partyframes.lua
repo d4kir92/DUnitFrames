@@ -88,8 +88,7 @@ function DUFPartyMemberFramesSetup()
 			end)
 
 			_G["PartyMemberFrame" .. id .. "ManaBar"]:SetPoint("TOPLEFT", 6, -24)
-			_G["PartyMemberFrame" .. id .. "Background"].Show = _G["PartyMemberFrame" .. id .. "Background"].Hide
-			_G["PartyMemberFrame" .. id .. "Background"]:Hide()
+			_G["PartyMemberFrame" .. id .. "Background"]:SetParent(DUFHIDDEN)
 
 			function PartyMemberFrame.Think()
 				if UnitExists("PARTY" .. id) then
@@ -255,11 +254,6 @@ function DUFPartyMemberFramesSetup()
 			end
 
 			if debuff then
-				if false then
-					debuff.Hide = debuff.Show
-					debuff:Show()
-				end
-
 				hooksecurefunc(debuff, "SetPoint", function(self)
 					if self.dufsetpoint then return end
 					self.dufsetpoint = true
