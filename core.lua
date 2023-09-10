@@ -1,5 +1,5 @@
 -- By D4KiR
-local ADDON_NAME = ...
+local ADDON_NAME, DUnitFrames = ...
 DUFHIDDEN = CreateFrame("FRAME", "DUFHIDDEN", UIParent)
 DUFHIDDEN:Hide()
 
@@ -152,8 +152,10 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 		TargetFrameManaBar.LeftText = TargetFrameManaBarTextLeft
 		TargetFrameManaBar.RightText = TargetFrameManaBarTextRight
 
-		function ShouldKnowUnitHealth()
-			return true
+		if DUFBUILD ~= "RETAIL" and ShouldKnowUnitHealth and ShouldKnowUnitHealth("target") == false then
+			function ShouldKnowUnitHealth(unit)
+				return true
+			end
 		end
 
 		UnitFrameHealthBar_Initialize("target", TargetFrameHealthBar, TargetFrameHealthBarText, true)
