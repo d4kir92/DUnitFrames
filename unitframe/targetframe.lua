@@ -381,7 +381,7 @@ function DUFTargetFrameSetup()
 			TargetFrameTextureFrameTexture.spacer:Show()
 		end
 
-		TargetFrameTextureFrameTexture:SetVertexColor(0, 0, 0)
+		TargetFrameTextureFrameTexture:SetVertexColor(TargetFrameTextureFrameTexture:GetVertexColor())
 		TargetFrameTextureFrameDeadText:ClearAllPoints()
 		TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 
@@ -557,10 +557,10 @@ function DUFTargetFrameSetup()
 
 		if ThreatBorder and ThreatBorder:IsShown() then
 			y = 24
-			local r, g, b = DUFGetBorderColor("TARGET", TargetFrame)
+			local r, g, b, isDefault = DUFGetBorderColor("TARGET", TargetFrame)
 
 			if ThreatBorder then
-				if r and g and b then
+				if r and g and b and not isDefault then
 					ThreatBorder:SetVertexColor(r, g, b, 1)
 				else
 					ThreatBorder:SetVertexColor(1, 0, 0, 1)
@@ -625,9 +625,9 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(TargetFrameTextureFrameTexture, "SetVertexColor", function(self, oR, oG, oB)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor("TARGET", self)
+			local r, g, b, isDefault = DUFGetBorderColor("TARGET", self)
 
-			if r and g and b then
+			if r and g and b and not isDefault then
 				self:SetVertexColor(r, g, b, 1)
 			else
 				self:SetVertexColor(oR, oG, oB, 1)
@@ -640,16 +640,16 @@ function DUFTargetFrameSetup()
 			self.dufsetvertexcolor = false
 		end)
 
-		TargetFrameTextureFrameTexture:SetVertexColor(1, 1, 1)
+		TargetFrameTextureFrameTexture:SetVertexColor(TargetFrameTextureFrameTexture:GetVertexColor())
 	end
 
 	if TargetFrameToTTextureFrameTexture then
 		hooksecurefunc(TargetFrameToTTextureFrameTexture, "SetVertexColor", function(self, oR, oG, oB)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor("TARGETTARGET", self)
+			local r, g, b, isDefault = DUFGetBorderColor("TARGETTARGET", self)
 
-			if r and g and b then
+			if r and g and b and not isDefault then
 				self:SetVertexColor(r, g, b, 1)
 			else
 				self:SetVertexColor(oR, oG, oB, 1)

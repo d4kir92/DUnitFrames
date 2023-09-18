@@ -44,7 +44,7 @@ function DUFGetBorderColor(unit, frame)
 		end
 	end
 
-	return r, g, b
+	return r, g, b, mode == "Default"
 end
 
 local barTab = {}
@@ -443,9 +443,9 @@ function DUFPlayerFrameSetup()
 		hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function(self, oR, oG, oB)
 			if self.dufsetvertexcolor then return end
 			self.dufsetvertexcolor = true
-			local r, g, b = DUFGetBorderColor("PLAYER", self)
+			local r, g, b, isDefault = DUFGetBorderColor("PLAYER", self)
 
-			if r and g and b then
+			if r and g and b and not isDefault then
 				self:SetVertexColor(r, g, b, 1)
 			else
 				self:SetVertexColor(oR, oG, oB, 1)

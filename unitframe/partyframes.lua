@@ -211,9 +211,9 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(_G["PartyMemberFrame" .. id .. "Texture"], "SetVertexColor", function(self, oR, oG, oB)
 				if self.dufsetvertexcolor then return end
 				self.dufsetvertexcolor = true
-				local r, g, b = DUFGetBorderColor("PARTY" .. id, self)
+				local r, g, b, isDefault = DUFGetBorderColor("PARTY" .. id, self)
 
-				if r and g and b then
+				if r and g and b and not isDefault then
 					self:SetVertexColor(r, g, b, 1)
 				else
 					self:SetVertexColor(oR, oG, oB, 1)
@@ -229,9 +229,9 @@ function DUFPartyMemberFramesSetup()
 					hooksecurefunc(_G["PartyFrameXPBar" .. id].textureLvlBg, "SetVertexColor", function(self, oR, oG, oB)
 						if self.dufsetvertexcolor then return end
 						self.dufsetvertexcolor = true
-						local r, g, b = DUFGetBorderColor("PARTY" .. id, self)
+						local r, g, b, isDefault = DUFGetBorderColor("PARTY" .. id, self)
 
-						if r and g and b then
+						if r and g and b and not isDefault then
 							self:SetVertexColor(r, g, b, 1)
 						else
 							self:SetVertexColor(oR, oG, oB, 1)

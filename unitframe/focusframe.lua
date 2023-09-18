@@ -535,9 +535,9 @@ if FocusFrame then
 
 			if ThreatBorder and ThreatBorder:IsShown() then
 				y = 24
-				local r, g, b = DUFGetBorderColor("FOCUS", ThreatBorder)
+				local r, g, b, isDefault = DUFGetBorderColor("FOCUS", ThreatBorder)
 
-				if r and g and b then
+				if r and g and b and not isDefault then
 					ThreatBorder:SetVertexColor(r, g, b, 1)
 				else
 					ThreatBorder:SetVertexColor(1, 0, 0, 1)
@@ -576,9 +576,9 @@ if FocusFrame then
 			hooksecurefunc(FocusFrameTextureFrameTexture, "SetVertexColor", function(self, oR, oG, oB)
 				if self.dufsetvertexcolor then return end
 				self.dufsetvertexcolor = true
-				local r, g, b = DUFGetBorderColor("FOCUS", self)
+				local r, g, b, isDefault = DUFGetBorderColor("FOCUS", self)
 
-				if r and g and b then
+				if r and g and b and not isDefault then
 					self:SetVertexColor(r, g, b, 1)
 				else
 					self:SetVertexColor(oR, oG, oB, 1)
