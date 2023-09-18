@@ -195,10 +195,12 @@ function DUFPartyMemberFramesSetup()
 					self:SetShadowOffset(1, -1)
 				end
 
-				if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
-					self:Hide()
-				else
-					self:Show()
+				if not InCombatLockdown() then
+					if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
+						self:Hide()
+					else
+						self:Show()
+					end
 				end
 
 				self.dufsettext = false
