@@ -131,17 +131,17 @@ frame:SetScript(
 	function(self, event, addonName)
 		if event == "ADDON_LOADED" and addonName == ADDON_NAME and DUFBUILD ~= "WRATH" and DUFBUILD ~= "RETAIL" then
 			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarText", "BORDER", "TextStatusBarText")
-			TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameTextureFrame, "CENTER", -50, 3)
+			TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameHealth, "CENTER", -50, 0)
 			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarTextLeft", "BORDER", "TextStatusBarText")
-			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameTextureFrame, "LEFT", 8, 3)
+			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealth, "LEFT", 8, 0)
 			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarTextRight", "BORDER", "TextStatusBarText")
-			TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameTextureFrame, "RIGHT", -110, 3)
+			TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealth, "RIGHT", -110, 0)
 			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarText", "BORDER", "TextStatusBarText")
-			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameTextureFrame, "CENTER", -50, -8)
+			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", -50, 0)
 			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarTextLeft", "BORDER", "TextStatusBarText")
-			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameTextureFrame, "LEFT", 8, -8)
+			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 8, 0)
 			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarTextRight", "BORDER", "TextStatusBarText")
-			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameTextureFrame, "RIGHT", -110, -8)
+			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -110, 0)
 			TargetFrameHealthBar.LeftText = TargetFrameHealthBarTextLeft
 			TargetFrameHealthBar.RightText = TargetFrameHealthBarTextRight
 			TargetFrameManaBar.LeftText = TargetFrameManaBarTextLeft
