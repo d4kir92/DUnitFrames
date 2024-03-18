@@ -1,6 +1,6 @@
 ## Interface: 11501
 
-## Version: 1.3.24
+## Version: 1.3.25
 ## Title: DUnitFrames |T134167:16:16:0:0|t by |cff3FC7EBD4KiR |T132115:16:16:0:0|t 
 ## Notes: Unit Frames
 ## Author: D4KiR
@@ -15,17 +15,17 @@ libs\D4Lib\D4Lib.xml
 libs\!LibUIDropDownMenu\LibStub\LibStub.lua
 libs\!LibUIDropDownMenu\LibUIDropDownMenu\LibUIDropDownMenu.xml
 
-locale/enUS.lua
-locale/deDE.lua
-locale/ruRU.lua
-locale/zhTW.lua
-libs/LIB_lang.lua
-libs/LIB_math.lua
+locale\enUS.lua
+locale\deDE.lua
+locale\ruRU.lua
+locale\zhTW.lua
+libs\LIB_lang.lua
+libs\LIB_math.lua
 
 settings.lua
 
-unitframe/playerframe.lua
-unitframe/targetframe.lua
-unitframe/focusframe.lua
-unitframe/partyframes.lua
+unitframe\playerframe.lua
+unitframe\targetframe.lua
+unitframe\focusframe.lua
+unitframe\partyframes.lua
 core.lua
