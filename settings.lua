@@ -149,7 +149,7 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.26)")
+		text:SetText("Settings (v1.3.27)")
 		DUFCreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
@@ -414,7 +414,7 @@ local once = true
 function f:OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" and once then
 		once = false
-		D4:SetVersion(AddonName, 134167, "1.3.26")
+		D4:SetVersion(AddonName, 134167, "1.3.27")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
