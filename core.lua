@@ -155,14 +155,3 @@ frame:SetScript(
 		end
 	end
 )
-
-C_Timer.After(
-	4,
-	function()
-		if ShouldKnowUnitHealth and ShouldKnowUnitHealth("target") == false then
-			function ShouldKnowUnitHealth(unit)
-				return true
-			end
-		end
-	end
-)
