@@ -124,34 +124,3 @@ function f.Think()
 end
 
 f.Think()
-local frame = CreateFrame("frame")
-frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript(
-	"OnEvent",
-	function(self, event, addonName)
-		if event == "ADDON_LOADED" and addonName == ADDON_NAME and DUFBUILD ~= "WRATH" and DUFBUILD ~= "RETAIL" then
-			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarText", "BORDER", "TextStatusBarText")
-			TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameHealth, "CENTER", -50, 0)
-			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarTextLeft", "BORDER", "TextStatusBarText")
-			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealth, "LEFT", 8, 0)
-			TargetFrameTextureFrame:CreateFontString("TargetFrameHealthBarTextRight", "BORDER", "TextStatusBarText")
-			TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealth, "RIGHT", -110, 0)
-			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarText", "BORDER", "TextStatusBarText")
-			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", -50, 0)
-			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarTextLeft", "BORDER", "TextStatusBarText")
-			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 8, 0)
-			TargetFrameTextureFrame:CreateFontString("TargetFrameManaBarTextRight", "BORDER", "TextStatusBarText")
-			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -110, 0)
-			TargetFrameHealthBar.LeftText = TargetFrameHealthBarTextLeft
-			TargetFrameHealthBar.RightText = TargetFrameHealthBarTextRight
-			TargetFrameManaBar.LeftText = TargetFrameManaBarTextLeft
-			TargetFrameManaBar.RightText = TargetFrameManaBarTextRight
-			UnitFrameHealthBar_Initialize("target", TargetFrameHealthBar, TargetFrameHealthBarText, true)
-			UnitFrameManaBar_Initialize("target", TargetFrameManaBar, TargetFrameManaBarText, true)
-			if FocusFrame then
-				UnitFrameHealthBar_Initialize("focus", FocusFrameHealthBar, FocusFrameHealthBarText, true)
-				UnitFrameManaBar_Initialize("focus", FocusFrameManaBar, FocusFrameManaBarText, true)
-			end
-		end
-	end
-)
