@@ -70,229 +70,234 @@ function DUFTargetFrameSetup()
 		TargetFrameHealthBar:SetStatusBarColor(TargetFrameHealthBar:GetStatusBarColor())
 	end
 
-	if TargetFrameHealthBarTextLeft ~= nil and TargetFrameHealthBarTextLeft.hooked == nil then
-		TargetFrameHealthBarTextLeft.hooked = true
-		hooksecurefunc(
-			TargetFrameHealthBarTextRight,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
+	C_Timer.After(
+		3,
+		function()
+			if TargetFrameHealthBarTextLeft ~= nil and TargetFrameHealthBarTextLeft.hooked == nil then
+				TargetFrameHealthBarTextLeft.hooked = true
+				hooksecurefunc(
+					TargetFrameHealthBarTextRight,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
 
-				local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
-				self:SetText(newText)
-				self.dufsettext = false
+						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText())
+				hooksecurefunc(
+					TargetFrameHealthBarTextLeft,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText())
+				hooksecurefunc(
+					TargetFrameHealthBarText,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameHealthBarText:SetText(TargetFrameHealthBarText:GetText())
+				hooksecurefunc(
+					TargetFrameManaBarTextLeft,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameManaBarTextLeft:SetText(TargetFrameManaBarTextLeft:GetText())
+				hooksecurefunc(
+					TargetFrameManaBarTextRight,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameManaBarTextRight:SetText(TargetFrameManaBarTextRight:GetText())
+				hooksecurefunc(
+					TargetFrameManaBarText,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameManaBarText:SetText(TargetFrameManaBarText:GetText())
 			end
-		)
 
-		TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText())
-		hooksecurefunc(
-			TargetFrameHealthBarTextLeft,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
+			if TargetFrameTextureFrameHealthBarTextLeft ~= nil and TargetFrameTextureFrameHealthBarTextLeft.hooked == nil then
+				TargetFrameTextureFrameHealthBarTextLeft.hooked = true
+				hooksecurefunc(
+					TargetFrameTextureFrameHealthBarTextLeft,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
 
-				local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
-				self:SetText(newText)
-				self.dufsettext = false
+						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameTextureFrameHealthBarTextLeft:SetText(TargetFrameTextureFrameHealthBarTextLeft:GetText())
+				hooksecurefunc(
+					TargetFrameTextureFrameHealthBarTextRight,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameTextureFrameHealthBarTextRight:SetText(TargetFrameTextureFrameHealthBarTextRight:GetText())
+				hooksecurefunc(
+					TargetFrameTextureFrameHealthBarText,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameTextureFrameHealthBarText:SetText(TargetFrameTextureFrameHealthBarText:GetText())
+				hooksecurefunc(
+					TargetFrameTextureFrameManaBarTextLeft,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameTextureFrameManaBarTextLeft:SetText(TargetFrameTextureFrameManaBarTextLeft:GetText())
+				hooksecurefunc(
+					TargetFrameTextureFrameManaBarTextRight,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameTextureFrameManaBarTextRight:SetText(TargetFrameTextureFrameManaBarTextRight:GetText())
+				hooksecurefunc(
+					TargetFrameTextureFrameManaBarText,
+					"SetText",
+					function(self, text)
+						if self.dufsettext then return end
+						self.dufsettext = true
+						local fontFamily, fontSize, _ = self:GetFont()
+						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						end
+
+						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
+						self:SetText(newText)
+						self.dufsettext = false
+					end
+				)
+
+				TargetFrameTextureFrameManaBarText:SetText(TargetFrameTextureFrameManaBarText:GetText())
 			end
-		)
-
-		TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText())
-		hooksecurefunc(
-			TargetFrameHealthBarText,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameHealthBarText:SetText(TargetFrameHealthBarText:GetText())
-		hooksecurefunc(
-			TargetFrameManaBarTextLeft,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameManaBarTextLeft:SetText(TargetFrameManaBarTextLeft:GetText())
-		hooksecurefunc(
-			TargetFrameManaBarTextRight,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameManaBarTextRight:SetText(TargetFrameManaBarTextRight:GetText())
-		hooksecurefunc(
-			TargetFrameManaBarText,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameManaBarText:SetText(TargetFrameManaBarText:GetText())
-	end
-
-	if TargetFrameTextureFrameHealthBarTextLeft ~= nil and TargetFrameTextureFrameHealthBarTextLeft.hooked == nil then
-		TargetFrameTextureFrameHealthBarTextLeft.hooked = true
-		hooksecurefunc(
-			TargetFrameTextureFrameHealthBarTextLeft,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameTextureFrameHealthBarTextLeft:SetText(TargetFrameTextureFrameHealthBarTextLeft:GetText())
-		hooksecurefunc(
-			TargetFrameTextureFrameHealthBarTextRight,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameTextureFrameHealthBarTextRight:SetText(TargetFrameTextureFrameHealthBarTextRight:GetText())
-		hooksecurefunc(
-			TargetFrameTextureFrameHealthBarText,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameTextureFrameHealthBarText:SetText(TargetFrameTextureFrameHealthBarText:GetText())
-		hooksecurefunc(
-			TargetFrameTextureFrameManaBarTextLeft,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameTextureFrameManaBarTextLeft:SetText(TargetFrameTextureFrameManaBarTextLeft:GetText())
-		hooksecurefunc(
-			TargetFrameTextureFrameManaBarTextRight,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameTextureFrameManaBarTextRight:SetText(TargetFrameTextureFrameManaBarTextRight:GetText())
-		hooksecurefunc(
-			TargetFrameTextureFrameManaBarText,
-			"SetText",
-			function(self, text)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
-				end
-
-				local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
-				self:SetText(newText)
-				self.dufsettext = false
-			end
-		)
-
-		TargetFrameTextureFrameManaBarText:SetText(TargetFrameTextureFrameManaBarText:GetText())
-	end
+		end
+	)
 
 	-- #TargetFrame
 	if TargetFrameHealthBar then
@@ -442,19 +447,20 @@ function DUFTargetFrameSetup()
 		end
 
 		if TargetFrameHealthBarTextLeft ~= nil then
-			TargetFrameHealthBarTextLeft:ClearAllPoints()
-			TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
-			TargetFrameHealthBarTextRight:ClearAllPoints()
-			TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -2, 0)
-			TargetFrameHealthBarText:ClearAllPoints()
-			TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameHealthBarTextLeft:ClearAllPoints()
 				TargetFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
 				TargetFrameHealthBarTextRight:ClearAllPoints()
-				TargetFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -2, 2)
+				TargetFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -3, 2)
 				TargetFrameHealthBarText:ClearAllPoints()
 				TargetFrameHealthBarText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 2)
+			else
+				TargetFrameHealthBarTextLeft:ClearAllPoints()
+				TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
+				TargetFrameHealthBarTextRight:ClearAllPoints()
+				TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -3, 0)
+				TargetFrameHealthBarText:ClearAllPoints()
+				TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 			end
 
 			if not TargetFrameManaBarTextLeft.hooked then
@@ -497,31 +503,23 @@ function DUFTargetFrameSetup()
 			end
 
 			TargetFrameManaBarTextLeft:ClearAllPoints()
-			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -1)
+			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -2)
 			TargetFrameManaBarTextRight:ClearAllPoints()
-			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, -1)
+			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, -2)
 			TargetFrameManaBarText:ClearAllPoints()
-			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
-				TargetFrameManaBarTextLeft:ClearAllPoints()
-				TargetFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 0)
-				TargetFrameManaBarTextRight:ClearAllPoints()
-				TargetFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -2, -1)
-				TargetFrameManaBarText:ClearAllPoints()
-				TargetFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 0)
-			end
+			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, -2)
 		elseif TargetFrameTextureFrameHealthBarTextLeft ~= nil then
 			TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
 			TargetFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
 			TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
-			TargetFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -2, 0)
+			TargetFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -3, 0)
 			TargetFrameTextureFrameHealthBarText:ClearAllPoints()
 			TargetFrameTextureFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
 				TargetFrameTextureFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
 				TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
-				TargetFrameTextureFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -2, 2)
+				TargetFrameTextureFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -3, 2)
 				TargetFrameTextureFrameHealthBarText:ClearAllPoints()
 				TargetFrameTextureFrameHealthBarText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 2)
 			end
@@ -568,14 +566,14 @@ function DUFTargetFrameSetup()
 			TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
 			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -1)
 			TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
-			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -2, -1)
+			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, -1)
 			TargetFrameTextureFrameManaBarText:ClearAllPoints()
 			TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
 			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
 				TargetFrameTextureFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 2)
 				TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
-				TargetFrameTextureFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -2, 2)
+				TargetFrameTextureFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -3, 2)
 				TargetFrameTextureFrameManaBarText:ClearAllPoints()
 				TargetFrameTextureFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 2)
 			end
@@ -662,9 +660,9 @@ function DUFTargetFrameSetup()
 			function(self, text, ...)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFGetConfig("namesize", 10) then
-					self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags) --, "OUTLINE")
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) then
+					self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10))
 					self:SetShadowOffset(1, -1)
 				end
 

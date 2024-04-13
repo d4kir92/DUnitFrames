@@ -222,14 +222,14 @@ function DUFUpdatePlayerFrame()
 			PlayerFrameHealthBarTextLeft:ClearAllPoints()
 			PlayerFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", PlayerFrameHealthBar, "BOTTOMLEFT", 2, 2)
 			PlayerFrameHealthBarTextRight:ClearAllPoints()
-			PlayerFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", PlayerFrameHealthBar, "BOTTOMRIGHT", 0, 2)
+			PlayerFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", PlayerFrameHealthBar, "BOTTOMRIGHT", -3, 2)
 			PlayerFrameHealthBarText:ClearAllPoints()
 			PlayerFrameHealthBarText:SetPoint("BOTTOM", PlayerFrameHealthBar, "BOTTOM", 0, 2)
 		else
 			PlayerFrameHealthBarTextLeft:ClearAllPoints()
 			PlayerFrameHealthBarTextLeft:SetPoint("LEFT", PlayerFrameHealthBar, "LEFT", 2, 0)
 			PlayerFrameHealthBarTextRight:ClearAllPoints()
-			PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", 0, 0)
+			PlayerFrameHealthBarTextRight:SetPoint("RIGHT", PlayerFrameHealthBar, "RIGHT", -3, 0)
 			PlayerFrameHealthBarText:ClearAllPoints()
 			PlayerFrameHealthBarText:SetPoint("CENTER", PlayerFrameHealthBar, "CENTER", 0, 0)
 		end
@@ -240,14 +240,14 @@ function DUFUpdatePlayerFrame()
 			PlayerFrameManaBarTextLeft:ClearAllPoints()
 			PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
 			PlayerFrameManaBarTextRight:ClearAllPoints()
-			PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
+			PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", -3, 0)
 			PlayerFrameManaBarText:ClearAllPoints()
 			PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
 		else
 			PlayerFrameManaBarTextLeft:ClearAllPoints()
 			PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
 			PlayerFrameManaBarTextRight:ClearAllPoints()
-			PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", 0, 0)
+			PlayerFrameManaBarTextRight:SetPoint("RIGHT", PlayerFrameManaBar, "RIGHT", -3, 0)
 			PlayerFrameManaBarText:ClearAllPoints()
 			PlayerFrameManaBarText:SetPoint("CENTER", PlayerFrameManaBar, "CENTER", 0, 0)
 		end
@@ -332,9 +332,9 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
 				end
 
 				local newText = DUFModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight")
@@ -353,9 +353,9 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
 				end
 
 				local newText = DUFModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft")
@@ -374,9 +374,9 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
 				end
 
 				local newText = DUFModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText")
@@ -395,9 +395,9 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
 				end
 
 				local newText = DUFModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft")
@@ -416,9 +416,9 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
 				end
 
 				local newText = DUFModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight")
@@ -437,9 +437,9 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontSize ~= DUFFontSize then
-					self:SetFont(fontFamily, DUFFontSize, fontFlags)
+				local fontFamily, fontSize, _ = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
+					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
 				end
 
 				local newText = DUFModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText")
@@ -461,9 +461,9 @@ function DUFPlayerFrameSetup()
 				function(self, text, ...)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, fontFlags = self:GetFont()
-					if fontSize ~= DUFGetConfig("namesize", 10) then
-						self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags) --, "OUTLINE")
+					local fontFamily, fontSize, _ = self:GetFont()
+					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) then
+						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10))
 						self:SetShadowOffset(1, -1)
 					end
 
@@ -471,6 +471,7 @@ function DUFPlayerFrameSetup()
 				end
 			)
 
+			PlayerName:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10))
 			PlayerName:SetText(PlayerName:GetText())
 		end
 	end

@@ -116,13 +116,13 @@ function DUFPartyMemberFramesSetup()
 
 					if PartyMemberFrame.hptc == nil then
 						PartyMemberFrame.hptc = _G["PartyMemberFrame" .. id .. "HealthBar"]:CreateFontString(nil, "OVERLAY")
-						PartyMemberFrame.hptc:SetFont(STANDARD_TEXT_FONT, 10, "THINOUTLINE")
+						PartyMemberFrame.hptc:SetFont(STANDARD_TEXT_FONT, 10)
 						PartyMemberFrame.hptc:SetPoint("CENTER", _G["PartyMemberFrame" .. id .. "HealthBar"], "CENTER", 0, 0)
 						PartyMemberFrame.hptl = _G["PartyMemberFrame" .. id .. "HealthBar"]:CreateFontString(nil, "OVERLAY")
-						PartyMemberFrame.hptl:SetFont(STANDARD_TEXT_FONT, 10, "THINOUTLINE")
+						PartyMemberFrame.hptl:SetFont(STANDARD_TEXT_FONT, 10)
 						PartyMemberFrame.hptl:SetPoint("LEFT", _G["PartyMemberFrame" .. id .. "HealthBar"], "LEFT", 0, 0)
 						PartyMemberFrame.hptr = _G["PartyMemberFrame" .. id .. "HealthBar"]:CreateFontString(nil, "OVERLAY")
-						PartyMemberFrame.hptr:SetFont(STANDARD_TEXT_FONT, 10, "THINOUTLINE")
+						PartyMemberFrame.hptr:SetFont(STANDARD_TEXT_FONT, 10)
 						PartyMemberFrame.hptr:SetPoint("RIGHT", _G["PartyMemberFrame" .. id .. "HealthBar"], "RIGHT", 0, 0)
 					end
 
@@ -153,13 +153,13 @@ function DUFPartyMemberFramesSetup()
 
 					if PartyMemberFrame.potc == nil then
 						PartyMemberFrame.potc = _G["PartyMemberFrame" .. id .. "ManaBar"]:CreateFontString(nil, "OVERLAY")
-						PartyMemberFrame.potc:SetFont(STANDARD_TEXT_FONT, 9, "THINOUTLINE")
+						PartyMemberFrame.potc:SetFont(STANDARD_TEXT_FONT, 9)
 						PartyMemberFrame.potc:SetPoint("CENTER", _G["PartyMemberFrame" .. id .. "ManaBar"], "CENTER", 0, 0)
 						PartyMemberFrame.potl = _G["PartyMemberFrame" .. id .. "ManaBar"]:CreateFontString(nil, "OVERLAY")
-						PartyMemberFrame.potl:SetFont(STANDARD_TEXT_FONT, 9, "THINOUTLINE")
+						PartyMemberFrame.potl:SetFont(STANDARD_TEXT_FONT, 9)
 						PartyMemberFrame.potl:SetPoint("LEFT", _G["PartyMemberFrame" .. id .. "ManaBar"], "LEFT", 0, 0)
 						PartyMemberFrame.potr = _G["PartyMemberFrame" .. id .. "ManaBar"]:CreateFontString(nil, "OVERLAY")
-						PartyMemberFrame.potr:SetFont(STANDARD_TEXT_FONT, 9, "THINOUTLINE")
+						PartyMemberFrame.potr:SetFont(STANDARD_TEXT_FONT, 9)
 						PartyMemberFrame.potr:SetPoint("RIGHT", _G["PartyMemberFrame" .. id .. "ManaBar"], "RIGHT", 0, 0)
 					end
 
@@ -199,9 +199,9 @@ function DUFPartyMemberFramesSetup()
 				function(self, text, ...)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, fontFlags = self:GetFont()
-					if fontSize ~= DUFGetConfig("namesize", 10) then
-						self:SetFont(fontFamily, DUFGetConfig("namesize", 10), fontFlags) --, "OUTLINE")
+					local fontFamily, fontSize, _ = self:GetFont()
+					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) then
+						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10)) --, "OUTLINE")
 						self:SetShadowOffset(1, -1)
 					end
 

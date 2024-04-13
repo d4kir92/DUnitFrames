@@ -149,7 +149,7 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.35)")
+		text:SetText("Settings (v1.3.36)")
 		DUFCreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
@@ -173,10 +173,31 @@ function DUFInitSettings()
 
 		DUFCreateComboBox(
 			DUFSettings.panel,
+			"portraitmodeself",
+			"Dark",
+			0,
+			-60,
+			"portraitmodeself",
+			{"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"},
+			function()
+				if PlayerFrame then
+					UnitFramePortrait_Update(PlayerFrame)
+				end
+
+				for id = 1, 4 do
+					if _G["PartyMemberFrame" .. id] then
+						UnitFramePortrait_Update(_G["PartyMemberFrame" .. id])
+					end
+				end
+			end
+		)
+
+		DUFCreateComboBox(
+			DUFSettings.panel,
 			"bordermode",
 			"Class+Status",
 			0,
-			-60,
+			-90,
 			"bordermode",
 			{"Class+Status", "Class", "Status", "Dark", "Black", "Default"},
 			function()
@@ -189,7 +210,7 @@ function DUFInitSettings()
 			"barmode",
 			"Class+Status",
 			0,
-			-90,
+			-120,
 			"barmode",
 			{"Class+Status", "Class", "Status", "Default"},
 			function()
@@ -202,7 +223,7 @@ function DUFInitSettings()
 			"numbermode",
 			"X.X Dynamic",
 			0,
-			-120,
+			-150,
 			"numbermode",
 			{"Default", "X Dynamic", "X.X Dynamic", "X.XX Dynamic", "X.XXX", "XK", "X.XK", "X.XXK"},
 			function()
@@ -225,7 +246,7 @@ function DUFInitSettings()
 			"percentmode",
 			"X.X%",
 			0,
-			-150,
+			-180,
 			"percentmode",
 			{"Default", "X.X%", "X.XX%"},
 			function()
@@ -248,7 +269,7 @@ function DUFInitSettings()
 			"namemode",
 			"Over Portrait",
 			0,
-			-180,
+			-210,
 			"namemode",
 			{"Over Portrait", "Over Health", "Inside Health", "Hide"},
 			function()
@@ -261,9 +282,9 @@ function DUFInitSettings()
 			"hpheight",
 			27,
 			10,
-			-240,
+			-270,
 			12,
-			28,
+			27,
 			1,
 			"hpheight",
 			function()
@@ -296,7 +317,7 @@ function DUFInitSettings()
 			"namesize",
 			10,
 			10,
-			-280,
+			-320,
 			6,
 			20,
 			1,
@@ -316,17 +337,17 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -320, "hidewhenfull")
+		DUFCreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -340, "hidewhenfull")
 		if ComboPointPlayerFrame then
-			DUFCreateCheckBox(DUFSettings.panel, "hidecombopoints", false, 10, -340, "hidecombopoints")
+			DUFCreateCheckBox(DUFSettings.panel, "hidecombopoints", false, 10, -360, "hidecombopoints")
 		end
 
 		if CanInspect and GetInspectSpecialization then
-			DUFCreateCheckBox(DUFSettings.panel, "showspecs", true, 10, -360, "showspecs")
+			DUFCreateCheckBox(DUFSettings.panel, "showspecs", true, 10, -380, "showspecs")
 		end
 
 		if DUFBUILD ~= "RETAIL" then
-			DUFCreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -400, "showthreat")
+			DUFCreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -420, "showthreat")
 		end
 
 		DUFCreateSlider(
@@ -334,7 +355,7 @@ function DUFInitSettings()
 			"bartexture",
 			0,
 			10,
-			-440,
+			-460,
 			0,
 			18,
 			1,
@@ -414,7 +435,7 @@ local once = true
 function f:OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" and once then
 		once = false
-		D4:SetVersion(AddonName, 134167, "1.3.35")
+		D4:SetVersion(AddonName, 134167, "1.3.36")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end

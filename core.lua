@@ -1,5 +1,5 @@
 -- By D4KiR
-local ADDON_NAME, DUnitFrames = ...
+local _, DUnitFrames = ...
 DUFHIDDEN = CreateFrame("FRAME", "DUFHIDDEN", UIParent)
 DUFHIDDEN:Hide()
 function DUFHPHeight()
@@ -50,18 +50,34 @@ hooksecurefunc(
 		if UnitIsPlayer(self.unit) then
 			local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
 			if t then
-				if DUFGetConfig("portraitmode") ~= "Default" then
-					if DUFGetConfig("portraitmode") ~= "Old" then
-						self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUFGetConfig("portraitmode", "New"))
-						self.portrait:SetTexCoord(unpack(t))
-					elseif DUFGetConfig("portraitmode") == "Old" then
-						self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
-						self.portrait:SetTexCoord(unpack(t))
+				if self.unit == "player" then
+					if DUFGetConfig("portraitmodeself") ~= "Default" then
+						if DUFGetConfig("portraitmodeself") ~= "Old" then
+							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUFGetConfig("portraitmodeself", "New"))
+							self.portrait:SetTexCoord(unpack(t))
+						elseif DUFGetConfig("portraitmodeself") == "Old" then
+							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
+							self.portrait:SetTexCoord(unpack(t))
+						else
+							self.portrait:SetTexCoord(0, 1, 0, 1)
+						end
 					else
 						self.portrait:SetTexCoord(0, 1, 0, 1)
 					end
 				else
-					self.portrait:SetTexCoord(0, 1, 0, 1)
+					if DUFGetConfig("portraitmode") ~= "Default" then
+						if DUFGetConfig("portraitmode") ~= "Old" then
+							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUFGetConfig("portraitmode", "New"))
+							self.portrait:SetTexCoord(unpack(t))
+						elseif DUFGetConfig("portraitmode") == "Old" then
+							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
+							self.portrait:SetTexCoord(unpack(t))
+						else
+							self.portrait:SetTexCoord(0, 1, 0, 1)
+						end
+					else
+						self.portrait:SetTexCoord(0, 1, 0, 1)
+					end
 				end
 			else
 				self.portrait:SetTexCoord(0, 1, 0, 1)
@@ -106,21 +122,22 @@ function f.Think()
 		end
 
 		if not powernotfull and UnitHealth("PLAYER") >= UnitHealthMax("PLAYER") and not UnitExists("TARGET") and not MouseIsOver(PlayerFrame) then
-			PlayerFrame.a = PlayerFrame.a - 0.05
+			PlayerFrame.duf_alpha = PlayerFrame.duf_alpha - 0.05
 		else
-			PlayerFrame.a = PlayerFrame.a + 0.05
+			PlayerFrame.duf_alpha = PlayerFrame.duf_alpha + 0.05
 		end
 
-		PlayerFrame.a = DUFClamp(PlayerFrame.a, 0, 1)
-		PlayerFrame:SetAlpha(PlayerFrame.a)
+		PlayerFrame.duf_alpha = DUFClamp(PlayerFrame.duf_alpha, 0, 1)
+		PlayerFrame.duf_alpha = DUFClamp(PlayerFrame.duf_alpha, 0, 1)
+		PlayerFrame:SetAlpha(PlayerFrame.duf_alpha)
 	else
-		if PlayerFrame.a ~= 1 then
-			PlayerFrame.a = 1
+		if PlayerFrame.duf_alpha ~= 1 then
+			PlayerFrame.duf_alpha = 1
 			PlayerFrame:SetAlpha(1)
 		end
 	end
 
-	C_Timer.After(0.02, f.Think)
+	C_Timer.After(0.01, f.Think)
 end
 
 f.Think()
