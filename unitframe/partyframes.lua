@@ -1,3 +1,4 @@
+local _, DUnitFrames = ...
 function DUFPartyMemberFramesSetup()
 	for id = 1, 4 do
 		local PartyMemberFrame = _G["PartyMemberFrame" .. id]

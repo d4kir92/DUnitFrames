@@ -1,6 +1,5 @@
 -- zhTW Traditional Chinese
 lang = lang or {}
-
 function DUFLang_zhTW()
 	lang.barmode = "Bar Mode"
 	lang.bartexture = "Bar Texture"
@@ -15,4 +14,5 @@ function DUFLang_zhTW()
 	lang.portraitmode = "頭像模式"
 	lang.showspecs = "Show Specs"
 	lang.showthreat = "Show Threat"
+	lang.outline = "Outline"
 end

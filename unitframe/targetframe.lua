@@ -1,3 +1,4 @@
+local _, DUnitFrames = ...
 local DUFFontSize = 12
 function DUFTargetFrameSetup()
 	if TargetFrameHealthBar then
@@ -83,7 +84,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
@@ -101,7 +102,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
@@ -119,7 +120,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
@@ -137,7 +138,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
@@ -155,7 +156,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
@@ -173,7 +174,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
@@ -195,7 +196,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
@@ -213,7 +214,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
@@ -231,7 +232,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
@@ -249,7 +250,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
@@ -267,7 +268,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
@@ -285,7 +286,7 @@ function DUFTargetFrameSetup()
 						self.dufsettext = true
 						local fontFamily, fontSize, _ = self:GetFont()
 						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 						end
 
 						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
@@ -630,7 +631,7 @@ function DUFTargetFrameSetup()
 				TargetFrame.DUFThreat = TargetFrame:CreateFontString(nil, "ARTWORK")
 			end
 
-			TargetFrame.DUFThreat:SetFont(STANDARD_TEXT_FONT, 12, "")
+			TargetFrame.DUFThreat:SetFont(STANDARD_TEXT_FONT, 12, DUnitFrames:GetFontFlags())
 			if DUFGetConfig("namemode") == "Over Health" then
 				TargetFrame.DUFThreat:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, 20)
 			else
@@ -660,9 +661,9 @@ function DUFTargetFrameSetup()
 			function(self, text, ...)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) then
-					self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10))
+				local fontFamily, fontSize, fontFlags = self:GetFont()
+				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) or fontFlags ~= DUnitFrames:GetFontFlags() then
+					self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10), DUnitFrames:GetFontFlags())
 					self:SetShadowOffset(1, -1)
 				end
 

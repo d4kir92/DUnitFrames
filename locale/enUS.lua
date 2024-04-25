@@ -1,6 +1,5 @@
 -- enUS English
 lang = lang or {}
-
 function DUFLang_enUS()
 	lang.barmode = "Bar Mode"
 	lang.bartexture = "Bar Texture"
@@ -15,4 +14,5 @@ function DUFLang_enUS()
 	lang.portraitmode = "Portrait Mode"
 	lang.showspecs = "Show Specs"
 	lang.showthreat = "Show Threat"
+	lang.outline = "Outline"
 end

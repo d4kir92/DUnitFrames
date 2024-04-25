@@ -1,3 +1,4 @@
+local _, DUnitFrames = ...
 -- #FocusFrame
 local DUFFontSize = 12
 if FocusFrame then
@@ -82,7 +83,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextRight")
@@ -100,7 +101,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextLeft")
@@ -118,7 +119,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarText")
@@ -136,7 +137,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextLeft")
@@ -154,7 +155,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextRight")
@@ -172,7 +173,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarText")
@@ -194,7 +195,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextLeft")
@@ -212,7 +213,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextRight")
@@ -230,7 +231,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarText")
@@ -248,7 +249,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextLeft")
@@ -266,7 +267,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextRight")
@@ -284,7 +285,7 @@ if FocusFrame then
 					self.dufsettext = true
 					local fontFamily, fontSize, _ = self:GetFont()
 					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize)
+						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
 					end
 
 					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarText")
@@ -616,9 +617,9 @@ if FocusFrame then
 				function(self, text, ...)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) then
-						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10)) --, "OUTLINE")
+					local fontFamily, fontSize, fontFlags = self:GetFont()
+					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) or fontFlags ~= DUnitFrames:GetFontFlags() then
+						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10), DUnitFrames:GetFontFlags())
 						self:SetShadowOffset(1, -1)
 					end
 

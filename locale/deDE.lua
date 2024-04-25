@@ -1,6 +1,5 @@
 -- deDE German Deutsch
 lang = lang or {}
-
 function DUFLang_deDE()
 	lang.barmode = "Leisten Modus"
 	lang.bartexture = "Leisten Texture"
@@ -15,4 +14,5 @@ function DUFLang_deDE()
 	lang.portraitmode = "Porträt Modus"
 	lang.showspecs = "Specs anzeigen"
 	lang.showthreat = "Bedrohung anzeigen"
+	lang.outline = "Umrandung"
 end

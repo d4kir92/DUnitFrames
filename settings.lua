@@ -1,5 +1,5 @@
 -- By D4KiR
-local AddonName, _ = ...
+local AddonName, DUnitFrames = ...
 local LibDD = LibStub:GetLibrary("LibUIDropDownMenu-4.0")
 DUFBUILD = "CLASSIC"
 if select(4, GetBuildInfo()) >= 100000 then
@@ -8,6 +8,12 @@ elseif select(4, GetBuildInfo()) > 29999 then
 	DUFBUILD = "WRATH"
 elseif select(4, GetBuildInfo()) > 19999 then
 	DUFBUILD = "TBC"
+end
+
+function DUnitFrames:GetFontFlags()
+	if DUFGetConfig("outline", true) then return "THINOUTLINE" end
+
+	return ""
 end
 
 local DUFLoaded = false
@@ -149,7 +155,7 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.37)")
+		text:SetText("Settings (v1.3.38)")
 		DUFCreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
@@ -277,6 +283,7 @@ function DUFInitSettings()
 			end
 		)
 
+		DUFCreateCheckBox(DUFSettings.panel, "outline", true, 400, -210, "outline")
 		DUFCreateSlider(
 			DUFSettings.panel,
 			"hpheight",
@@ -435,7 +442,7 @@ local once = true
 function f:OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" and once then
 		once = false
-		D4:SetVersion(AddonName, 134167, "1.3.37")
+		D4:SetVersion(AddonName, 134167, "1.3.38")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
