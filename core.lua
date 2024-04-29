@@ -1,5 +1,5 @@
 -- By D4KiR
-local _, DUnitFrames = ...
+local _, _ = ...
 DUFHIDDEN = CreateFrame("FRAME", "DUFHIDDEN", UIParent)
 DUFHIDDEN:Hide()
 function DUFHPHeight()
