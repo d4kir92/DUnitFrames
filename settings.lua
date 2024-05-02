@@ -1,25 +1,42 @@
 -- By D4KiR
 local AddonName, DUnitFrames = ...
 local LibDD = LibStub:GetLibrary("LibUIDropDownMenu-4.0")
-DUFBUILD = "CLASSIC"
-if select(4, GetBuildInfo()) >= 100000 then
-	DUFBUILD = "RETAIL"
-elseif select(4, GetBuildInfo()) > 29999 then
-	DUFBUILD = "WRATH"
-elseif select(4, GetBuildInfo()) > 19999 then
-	DUFBUILD = "TBC"
+function DUnitFrames:GetFontFlags()
+	if DUnitFrames:GetConfig("outline", true) then return "THINOUTLINE" end
+
+	return ""
 end
 
-function DUnitFrames:GetFontFlags()
-	if DUFGetConfig("outline", true) then return "THINOUTLINE, MONOCHROME" end
+local DefaultFontSize = 12
+local fontStrings = {}
+function DUnitFrames:SetFont(fontString, fs)
+	fs = fs or DefaultFontSize
+	local fontFamily, fontSize, fontFlags = fontString:GetFont()
+	if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= fs or fontFlags ~= DUnitFrames:GetFontFlags() then
+		fontString:SetFont(STANDARD_TEXT_FONT, fs, DUnitFrames:GetFontFlags())
+		if DUnitFrames:GetConfig("outline", true) then
+			fontString:SetShadowOffset(0, 0)
+		else
+			fontString:SetShadowOffset(1, -1)
+		end
+	end
 
-	return "MONOCHROME"
+	fontString:SetDrawLayer("ARTWORK", 7)
+	if not tContains(fontStrings, fontString) then
+		tinsert(fontStrings, fontString)
+	end
+end
+
+function DUnitFrames:UpdateTexts()
+	for i, v in pairs(fontStrings) do
+		v:SetText(v:GetText())
+	end
 end
 
 local DUFLoaded = false
 DUFTAB = DUFTAB or {}
 DUFTABPC = DUFTABPC or {}
-function DUFGetConfig(key, value, pc)
+function DUnitFrames:GetConfig(key, value, pc)
 	if DUFLoaded and DUFTAB ~= nil and DUFTABPC ~= nil then
 		if pc then
 			if DUFTABPC[key] ~= nil then
@@ -39,21 +56,21 @@ function DUFGetConfig(key, value, pc)
 	return value
 end
 
-function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
+function DUnitFrames:CreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 	local SL = CreateFrame("Slider", nil, parent, "OptionsSliderTemplate")
 	SL:SetWidth(600)
 	SL:SetPoint("TOPLEFT", x, y)
 	SL.Low:SetText(vmin)
 	SL.High:SetText(vmax)
-	SL.Text:SetText(DUFGT(lstr) .. ": " .. DUFGetConfig(key, vval))
+	SL.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. DUnitFrames:GetConfig(key, vval))
 	SL:SetMinMaxValues(vmin, vmax)
-	SL:SetValue(DUFGetConfig(key, vval))
+	SL:SetValue(DUnitFrames:GetConfig(key, vval))
 	SL:SetObeyStepOnDrag(steps)
 	SL:SetValueStep(steps)
 	SL.oldval = nil
 	SL:SetScript(
 		"OnValueChanged",
-		function(self, val)
+		function(sel, val)
 			val = tonumber(string.format("%.0f", val))
 			if vmin and val < vmin then
 				val = vmin
@@ -63,9 +80,9 @@ function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 				val = vmax
 			end
 
-			if val ~= self.oldval then
-				self.oldval = val
-				SL.Text:SetText(DUFGT(lstr) .. ": " .. val)
+			if val ~= sel.oldval then
+				sel.oldval = val
+				SL.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. val)
 				DUFTAB[key] = val
 				if func ~= nil then
 					func()
@@ -77,16 +94,16 @@ function DUFCreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
 	return SL
 end
 
-function DUFCreateCheckBox(parent, key, vval, x, y, lstr, pc)
+function DUnitFrames:CreateCheckBox(parent, key, vval, x, y, lstr, pc, func)
 	local CB = CreateFrame("CheckButton", nil, parent, "ChatConfigCheckButtonTemplate")
 	CB:SetSize(24, 24)
 	CB:SetPoint("TOPLEFT", x, y)
 	CB.Text:SetPoint("LEFT", CB, "RIGHT", 0, 0)
-	CB.Text:SetText(DUFGT(lstr))
-	CB:SetChecked(DUFGetConfig(key, vval))
+	CB.Text:SetText(DUnitFrames:GT(lstr))
+	CB:SetChecked(DUnitFrames:GetConfig(key, vval))
 	CB:SetScript(
 		"OnClick",
-		function(self, val)
+		function(sel, val)
 			val = CB:GetChecked()
 			if pc then
 				DUFTABPC[key] = val
@@ -94,30 +111,33 @@ function DUFCreateCheckBox(parent, key, vval, x, y, lstr, pc)
 				DUFTAB[key] = val
 			end
 
-			CB.Text:SetText(DUFGT(lstr))
+			CB.Text:SetText(DUnitFrames:GT(lstr))
+			if func then
+				func()
+			end
 		end
 	)
 
 	return CB
 end
 
-function DUFCreateComboBox(parent, key, vval, x, y, lstr, tab, func)
+function DUnitFrames:CreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 	local CB = LibDD:Create_UIDropDownMenu("Frame", parent)
 	CB:SetPoint("TOPLEFT", x, y)
 	CB.text = CB:CreateFontString(nil, "ARTWORK")
 	CB.text:SetFont(STANDARD_TEXT_FONT, 12, "")
-	CB.text:SetText(DUFGT(lstr))
+	CB.text:SetText(DUnitFrames:GT(lstr))
 	CB.text:SetPoint("LEFT", CB, "RIGHT", 0, 3)
-	CB.Text:SetText(DUFGT(lstr) .. ": " .. tostring(DUFGetConfig(key, vval)))
+	CB.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. tostring(DUnitFrames:GetConfig(key, vval)))
 	LibDD:UIDropDownMenu_SetWidth(CB, 120)
-	LibDD:UIDropDownMenu_SetText(CB, DUFGetConfig(key, vval))
+	LibDD:UIDropDownMenu_SetText(CB, DUnitFrames:GetConfig(key, vval))
 	-- Create and bind the initialization function to the dropdown menu
 	LibDD:UIDropDownMenu_Initialize(
 		CB,
-		function(self, level, menuList)
+		function(sel, level, menuList)
 			for i, v in pairs(tab) do
 				local info = LibDD:UIDropDownMenu_CreateInfo()
-				info.func = self.SetValue
+				info.func = sel.SetValue
 				info.text = v
 				info.arg1 = v
 				LibDD:UIDropDownMenu_AddButton(info)
@@ -140,7 +160,7 @@ end
 local Y = 0
 SORTTAB = {"Group", "Role"}
 local dufsetting = false
-function DUFInitSettings()
+function DUnitFrames:InitSettings()
 	if not dufsetting then
 		dufsetting = true
 		local DUFSettings = {}
@@ -155,8 +175,8 @@ function DUFInitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.41)")
-		DUFCreateComboBox(
+		text:SetText("Settings (v1.3.42)")
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
 			"Dark",
@@ -177,7 +197,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateComboBox(
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"portraitmodeself",
 			"Dark",
@@ -198,7 +218,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateComboBox(
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"bordermode",
 			"Class+Status",
@@ -211,7 +231,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateComboBox(
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"barmode",
 			"Class+Status",
@@ -224,7 +244,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateComboBox(
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"numbermode",
 			"X.X Dynamic",
@@ -247,7 +267,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateComboBox(
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"percentmode",
 			"X.X%",
@@ -270,7 +290,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateComboBox(
+		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"namemode",
 			"Over Portrait",
@@ -283,8 +303,20 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateCheckBox(DUFSettings.panel, "outline", true, 400, -210, "outline")
-		DUFCreateSlider(
+		DUnitFrames:CreateCheckBox(
+			DUFSettings.panel,
+			"outline",
+			true,
+			400,
+			-210,
+			"outline",
+			nil,
+			function()
+				DUnitFrames:UpdateTexts()
+			end
+		)
+
+		DUnitFrames:CreateSlider(
 			DUFSettings.panel,
 			"hpheight",
 			27,
@@ -319,7 +351,7 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateSlider(
+		DUnitFrames:CreateSlider(
 			DUFSettings.panel,
 			"namesize",
 			10,
@@ -344,20 +376,17 @@ function DUFInitSettings()
 			end
 		)
 
-		DUFCreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -340, "hidewhenfull")
+		DUnitFrames:CreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -340, "hidewhenfull")
 		if ComboPointPlayerFrame then
-			DUFCreateCheckBox(DUFSettings.panel, "hidecombopoints", false, 10, -360, "hidecombopoints")
+			DUnitFrames:CreateCheckBox(DUFSettings.panel, "hidecombopoints", false, 10, -360, "hidecombopoints")
 		end
 
 		if CanInspect and GetInspectSpecialization then
-			DUFCreateCheckBox(DUFSettings.panel, "showspecs", true, 10, -380, "showspecs")
+			DUnitFrames:CreateCheckBox(DUFSettings.panel, "showspecs", true, 10, -380, "showspecs")
 		end
 
-		if DUFBUILD ~= "RETAIL" then
-			DUFCreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -420, "showthreat")
-		end
-
-		DUFCreateSlider(
+		DUnitFrames:CreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -420, "showthreat")
+		DUnitFrames:CreateSlider(
 			DUFSettings.panel,
 			"bartexture",
 			0,
@@ -425,7 +454,7 @@ function DUFInitSettings()
 				s.close:SetText("X")
 				s.close:SetScript(
 					"OnClick",
-					function(self, btn, down)
+					function(sel, btn, down)
 						s:Hide()
 					end
 				)
@@ -442,7 +471,7 @@ local once = true
 function f:OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" and once then
 		once = false
-		D4:SetVersion(AddonName, 134167, "1.3.41")
+		D4:SetVersion(AddonName, 134167, "1.3.42")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
@@ -491,7 +520,7 @@ function f:OnEvent(event, ...)
 			)
 		end
 
-		DUFInitSettings()
+		DUnitFrames:InitSettings()
 	end
 end
 

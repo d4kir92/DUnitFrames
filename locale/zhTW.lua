@@ -1,6 +1,7 @@
+local _, DUnitFrames = ...
 -- zhTW Traditional Chinese
 lang = lang or {}
-function DUFLang_zhTW()
+function DUnitFrames:DUFLang_zhTW()
 	lang.barmode = "Bar Mode"
 	lang.bartexture = "Bar Texture"
 	lang.bordermode = "外框模式"

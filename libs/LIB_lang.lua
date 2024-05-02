@@ -1,8 +1,7 @@
+local _, DUnitFrames = ...
 -- LIB Design
-
 lang = lang or {}
-
-function DUFGT(str, tab)
+function DUnitFrames:GT(str, tab)
 	local strid = str
 	local result = lang[strid]
 	if result ~= nil then
@@ -15,22 +14,24 @@ function DUFGT(str, tab)
 				end
 			end
 		end
+
 		return result
 	else
 		return str
 	end
 end
 
-function DUFUpdateLanguage()
-	DUFLang_enUS()
+function DUnitFrames:UpdateLanguage()
+	DUnitFrames:DUFLang_enUS()
 	if GetLocale() == "enUS" then
-		DUFLang_enUS()
+		DUnitFrames:DUFLang_enUS()
 	elseif GetLocale() == "deDE" then
-		DUFLang_deDE()
+		DUnitFrames:DUFLang_deDE()
 	elseif GetLocale() == "ruRU" then
-		DUFLang_ruRU()
+		DUnitFrames:DUFLang_ruRU()
 	elseif GetLocale() == "zhTW" then
-		DUFLang_zhTW()
+		DUnitFrames:DUFLang_zhTW()
 	end
 end
-DUFUpdateLanguage()
+
+DUnitFrames:UpdateLanguage()

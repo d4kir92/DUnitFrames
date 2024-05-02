@@ -1,5 +1,4 @@
 local _, DUnitFrames = ...
-local DUFFontSize = 12
 function DUFTargetFrameSetup()
 	if TargetFrameHealthBar then
 		hooksecurefunc(
@@ -82,12 +81,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -100,12 +95,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -118,12 +109,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -136,12 +123,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -154,12 +137,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -172,12 +151,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -194,12 +169,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -212,12 +183,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -230,12 +197,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -248,12 +211,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -266,12 +225,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -284,12 +239,8 @@ function DUFTargetFrameSetup()
 					function(self, text)
 						if self.dufsettext then return end
 						self.dufsettext = true
-						local fontFamily, fontSize, _ = self:GetFont()
-						if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-							self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-						end
-
-						local newText = DUFModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
+						DUnitFrames:SetFont(self)
+						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
 						self:SetText(newText)
 						self.dufsettext = false
 					end
@@ -308,7 +259,7 @@ function DUFTargetFrameSetup()
 			function(self)
 				if self.dufsetheight then return end
 				self.dufsetheight = true
-				self:SetHeight(DUFHPHeight())
+				self:SetHeight(DUnitFrames:HPHeight())
 				self.dufsetheight = false
 			end
 		)
@@ -320,7 +271,7 @@ function DUFTargetFrameSetup()
 			function(self)
 				if self.dufsetsize then return end
 				self.dufsetsize = true
-				self:SetHeight(DUFHPHeight())
+				self:SetHeight(DUnitFrames:HPHeight())
 				self.dufsetsize = false
 			end
 		)
@@ -346,8 +297,8 @@ function DUFTargetFrameSetup()
 			function(self)
 				if self.dufsetheight then return end
 				self.dufsetheight = true
-				if 38 - DUFHPHeight() > 1 then
-					self:SetHeight(38 - DUFHPHeight())
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					self:SetHeight(38 - DUnitFrames:HPHeight())
 				else
 					self:SetHeight(1)
 				end
@@ -363,8 +314,8 @@ function DUFTargetFrameSetup()
 			function(self)
 				if self.dufsetsize then return end
 				self.dufsetsize = true
-				if 38 - DUFHPHeight() > 1 then
-					self:SetHeight(38 - DUFHPHeight())
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					self:SetHeight(38 - DUnitFrames:HPHeight())
 				else
 					self:SetHeight(1)
 				end
@@ -379,7 +330,7 @@ function DUFTargetFrameSetup()
 			function(self)
 				if self.dufsetpoint then return end
 				self.dufsetpoint = true
-				self:SetPoint("TOPLEFT", 6, -23 - DUFHPHeight() - 1)
+				self:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
 				self.dufsetpoint = false
 			end
 		)
@@ -430,25 +381,28 @@ function DUFTargetFrameSetup()
 			TargetFrameTextureFrameTexture.spacer:SetVertexColor(1, 1, 1)
 		end
 
-		TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
-		TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUFHPHeight())
-		TargetFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
-		if DUFHPHeight() >= 32 then
-			TargetFrameTextureFrameTexture.spacer:Hide()
-		else
-			TargetFrameTextureFrameTexture.spacer:Show()
+		if TargetFrameTextureFrameTexture.spacer then
+			TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
+			TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUnitFrames:HPHeight())
+			TargetFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
+			if DUnitFrames:HPHeight() >= 32 then
+				TargetFrameTextureFrameTexture.spacer:Hide()
+			else
+				TargetFrameTextureFrameTexture.spacer:Show()
+			end
 		end
 
 		TargetFrameTextureFrameTexture:SetVertexColor(TargetFrameTextureFrameTexture:GetVertexColor())
-		TargetFrameTextureFrameDeadText:ClearAllPoints()
-		TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
-		if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+		if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 			TargetFrameTextureFrameDeadText:ClearAllPoints()
 			TargetFrameTextureFrameDeadText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 0)
+		else
+			TargetFrameTextureFrameDeadText:ClearAllPoints()
+			TargetFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 		end
 
 		if TargetFrameHealthBarTextLeft ~= nil then
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameHealthBarTextLeft:ClearAllPoints()
 				TargetFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
 				TargetFrameHealthBarTextRight:ClearAllPoints()
@@ -470,7 +424,7 @@ function DUFTargetFrameSetup()
 					TargetFrameManaBarTextLeft,
 					"Show",
 					function(self, ...)
-						if DUFHPHeight() >= 32 then
+						if DUnitFrames:HPHeight() >= 32 then
 							self:Hide()
 						end
 					end
@@ -483,7 +437,7 @@ function DUFTargetFrameSetup()
 					TargetFrameManaBarTextRight,
 					"Show",
 					function(self, ...)
-						if DUFHPHeight() >= 32 then
+						if DUnitFrames:HPHeight() >= 32 then
 							self:Hide()
 						end
 					end
@@ -496,33 +450,43 @@ function DUFTargetFrameSetup()
 					TargetFrameManaBarText,
 					"Show",
 					function(self, ...)
-						if DUFHPHeight() >= 32 then
+						if DUnitFrames:HPHeight() >= 32 then
 							self:Hide()
 						end
 					end
 				)
 			end
 
-			TargetFrameManaBarTextLeft:ClearAllPoints()
-			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
-			TargetFrameManaBarTextRight:ClearAllPoints()
-			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, 0)
-			TargetFrameManaBarText:ClearAllPoints()
-			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
+				TargetFrameHealthBarTextLeft:ClearAllPoints()
+				TargetFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
+				TargetFrameHealthBarTextRight:ClearAllPoints()
+				TargetFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -3, 2)
+				TargetFrameHealthBarText:ClearAllPoints()
+				TargetFrameHealthBarText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 2)
+			else
+				TargetFrameHealthBarTextLeft:ClearAllPoints()
+				TargetFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
+				TargetFrameHealthBarTextRight:ClearAllPoints()
+				TargetFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -3, 0)
+				TargetFrameHealthBarText:ClearAllPoints()
+				TargetFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
+			end
 		elseif TargetFrameTextureFrameHealthBarTextLeft ~= nil then
-			TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
-			TargetFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
-			TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
-			TargetFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -3, 0)
-			TargetFrameTextureFrameHealthBarText:ClearAllPoints()
-			TargetFrameTextureFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
 				TargetFrameTextureFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameHealthBar, "BOTTOMLEFT", 2, 2)
 				TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
 				TargetFrameTextureFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameHealthBar, "BOTTOMRIGHT", -3, 2)
 				TargetFrameTextureFrameHealthBarText:ClearAllPoints()
 				TargetFrameTextureFrameHealthBarText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 2)
+			else
+				TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
+				TargetFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
+				TargetFrameTextureFrameHealthBarTextRight:ClearAllPoints()
+				TargetFrameTextureFrameHealthBarTextRight:SetPoint("RIGHT", TargetFrameHealthBar, "RIGHT", -3, 0)
+				TargetFrameTextureFrameHealthBarText:ClearAllPoints()
+				TargetFrameTextureFrameHealthBarText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 			end
 
 			if not TargetFrameTextureFrameManaBarTextLeft.hooked then
@@ -531,7 +495,7 @@ function DUFTargetFrameSetup()
 					TargetFrameTextureFrameManaBarTextLeft,
 					"Show",
 					function(self, ...)
-						if DUFHPHeight() >= 32 then
+						if DUnitFrames:HPHeight() >= 32 then
 							self:Hide()
 						end
 					end
@@ -544,7 +508,7 @@ function DUFTargetFrameSetup()
 					TargetFrameTextureFrameManaBarTextRight,
 					"Show",
 					function(self, ...)
-						if DUFHPHeight() >= 32 then
+						if DUnitFrames:HPHeight() >= 32 then
 							self:Hide()
 						end
 					end
@@ -557,26 +521,27 @@ function DUFTargetFrameSetup()
 					TargetFrameTextureFrameManaBarText,
 					"Show",
 					function(self, ...)
-						if DUFHPHeight() >= 32 then
+						if DUnitFrames:HPHeight() >= 32 then
 							self:Hide()
 						end
 					end
 				)
 			end
 
-			TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
-			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
-			TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
-			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, 0)
-			TargetFrameTextureFrameManaBarText:ClearAllPoints()
-			TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
-				TargetFrameTextureFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 0)
+				TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
 				TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
-				TargetFrameTextureFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -3, 0)
+				TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, 0)
 				TargetFrameTextureFrameManaBarText:ClearAllPoints()
-				TargetFrameTextureFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 0)
+				TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
+			else
+				TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
+				TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
+				TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
+				TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, 0)
+				TargetFrameTextureFrameManaBarText:ClearAllPoints()
+				TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
 			end
 		end
 
@@ -595,21 +560,21 @@ function DUFTargetFrameSetup()
 			TargetFrameTextureFrameName:ClearAllPoints()
 			if TargetFrame.buffsOnTop then
 				local y = -4
-				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Health" then
 					TargetFrameTextureFrameName:SetPoint("TOP", TargetFrameManaBar, "BOTTOM", 0, y)
 				end
 			else
 				local y = 6
-				if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Health" then
 					TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, y)
 				end
 			end
 
-			if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Portrait" then
 				TargetFrameTextureFrameName:SetPoint("BOTTOM", TargetFramePortrait, "TOP", 0, 12)
 			end
 
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameTextureFrameName:ClearAllPoints()
 				TargetFrameTextureFrameName:SetPoint("TOP", TargetFrameHealthBar, "TOP", 0, -1)
 			end
@@ -632,7 +597,7 @@ function DUFTargetFrameSetup()
 			end
 
 			TargetFrame.DUFThreat:SetFont(STANDARD_TEXT_FONT, 12, DUnitFrames:GetFontFlags())
-			if DUFGetConfig("namemode") == "Over Health" then
+			if DUnitFrames:GetConfig("namemode") == "Over Health" then
 				TargetFrame.DUFThreat:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, 20)
 			else
 				TargetFrame.DUFThreat:SetPoint("BOTTOM", TargetFrameHealthBar, "TOP", 0, 6)
@@ -642,7 +607,7 @@ function DUFTargetFrameSetup()
 				threatpct = 0
 			end
 
-			if threatpct > 0 and DUFGetConfig("showthreat", true) then
+			if threatpct > 0 and DUnitFrames:GetConfig("showthreat", true) then
 				threatpct = string.format("%.0f", threatpct)
 				TargetFrame.DUFThreat:SetText(threatpct .. "%")
 			else
@@ -661,13 +626,8 @@ function DUFTargetFrameSetup()
 			function(self, text, ...)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, fontFlags = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) or fontFlags ~= DUnitFrames:GetFontFlags() then
-					self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10), DUnitFrames:GetFontFlags())
-					self:SetShadowOffset(1, -1)
-				end
-
-				if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
+				DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
 					self:Hide()
 				else
 					self:Show()
@@ -749,7 +709,7 @@ function DUFTargetFrameSetup()
 					f:UnregisterEvent("INSPECT_READY")
 					ClearInspectPlayer()
 					local id, _, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
-					if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) and icon then
+					if id ~= nil and not InCombatLockdown() and DUnitFrames:GetConfig("showspecs", true) and icon then
 						TargetFramePortrait:SetTexture(icon)
 						TargetFramePortrait:SetTexCoord(0, 1, 0, 1)
 					end

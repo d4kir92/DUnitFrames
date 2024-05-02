@@ -1,6 +1,7 @@
+local _, DUnitFrames = ...
 -- ruRU Russian
 lang = lang or {}
-function DUFLang_ruRU()
+function DUnitFrames:DUFLang_ruRU()
 	lang.barmode = "Bar Mode"
 	lang.bartexture = "Bar Texture"
 	lang.bordermode = "Режим границ"

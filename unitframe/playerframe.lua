@@ -1,6 +1,5 @@
 local _, DUnitFrames = ...
 -- #PlayerFrame
-local DUFFontSize = 12
 local borderTab = {}
 function DUFGetBorderColor(unit, frame)
 	if frame and not tContains(borderTab, frame) then
@@ -14,7 +13,7 @@ function DUFGetBorderColor(unit, frame)
 		frame.brcr, frame.brcg, frame.brcb = frame:GetVertexColor()
 	end
 
-	local mode = DUFGetConfig("bordermode")
+	local mode = DUnitFrames:GetConfig("bordermode")
 	local _, PlayerClassEng, _ = UnitClass(unit)
 	if mode then
 		if mode == "Class+Status" then
@@ -58,7 +57,7 @@ function DUFGetBarColor(unit, frame)
 		frame.bacr, frame.bacg, frame.bacb = frame:GetStatusBarColor()
 	end
 
-	local mode = DUFGetConfig("barmode")
+	local mode = DUnitFrames:GetConfig("barmode")
 	--"Class+Status", "Class", "Status", "Default"
 	local _, PlayerClassEng, _ = UnitClass(unit)
 	if mode then
@@ -111,7 +110,7 @@ pff:SetScript(
 				if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
 					PlayerFrameHealthBar:SetHeight(12)
 				else
-					PlayerFrameHealthBar:SetHeight(DUFHPHeight())
+					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 				end
 			end
 		)
@@ -122,7 +121,7 @@ pff:SetScript(
 				if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
 					PlayerFrameHealthBar:SetHeight(12)
 				else
-					PlayerFrameHealthBar:SetHeight(DUFHPHeight())
+					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 				end
 			end
 		)
@@ -133,7 +132,7 @@ pff:SetScript(
 				if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
 					PlayerFrameHealthBar:SetHeight(12)
 				else
-					PlayerFrameHealthBar:SetHeight(DUFHPHeight())
+					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 				end
 			end
 		)
@@ -168,7 +167,7 @@ function DUFUpdatePlayerFrame()
 						PlayerFrameTexture.spacer:Hide()
 					end
 				else
-					PlayerFrameHealthBar:SetHeight(DUFHPHeight())
+					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 					if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
 						PlayerFrameTexture.spacer:Show()
 					end
@@ -178,7 +177,7 @@ function DUFUpdatePlayerFrame()
 			end
 		)
 
-		PlayerFrameHealthBar:SetHeight(DUFHPHeight())
+		PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 		PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
 	end
 
@@ -199,12 +198,12 @@ function DUFUpdatePlayerFrame()
 		PlayerFrameTexture.spacer:SetVertexColor(1, 1, 1)
 	end
 
-	if PlayerFrameTexture then
+	if PlayerFrameTexture and PlayerFrameTexture.spacer then
 		PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0)
 		PlayerFrameTexture.spacer:SetSize(128, 16)
-		PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUFHPHeight())
+		PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUnitFrames:HPHeight())
 		PlayerFrameTexture.spacer:SetTexture(texture .. "_Spacer")
-		if DUFHPHeight() >= 32 then
+		if DUnitFrames:HPHeight() >= 32 then
 			PlayerFrameTexture.spacer:Hide()
 		else
 			PlayerFrameTexture.spacer:Show()
@@ -214,12 +213,12 @@ function DUFUpdatePlayerFrame()
 	end
 
 	if PlayerFrameManaBar then
-		PlayerFrameManaBar:SetHeight(38 - DUFHPHeight())
-		PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 - DUFHPHeight() - 1)
+		PlayerFrameManaBar:SetHeight(38 - DUnitFrames:HPHeight())
+		PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 - DUnitFrames:HPHeight() - 1)
 	end
 
 	if PlayerFrameHealthBarTextLeft then
-		if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+		if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 			PlayerFrameHealthBarTextLeft:ClearAllPoints()
 			PlayerFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", PlayerFrameHealthBar, "BOTTOMLEFT", 2, 2)
 			PlayerFrameHealthBarTextRight:ClearAllPoints()
@@ -237,7 +236,7 @@ function DUFUpdatePlayerFrame()
 	end
 
 	if PlayerFrameManaBarTextLeft then
-		if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+		if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 			PlayerFrameManaBarTextLeft:ClearAllPoints()
 			PlayerFrameManaBarTextLeft:SetPoint("LEFT", PlayerFrameManaBar, "LEFT", 2, 0)
 			PlayerFrameManaBarTextRight:ClearAllPoints()
@@ -333,12 +332,8 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight")
+				DUnitFrames:SetFont(self)
+				local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight")
 				self:SetText(newText)
 				self.dufsettext = false
 			end
@@ -354,12 +349,8 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft")
+				DUnitFrames:SetFont(self)
+				local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft")
 				self:SetText(newText)
 				self.dufsettext = false
 			end
@@ -375,12 +366,8 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-				end
-
-				local newText = DUFModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText")
+				DUnitFrames:SetFont(self)
+				local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText")
 				self:SetText(newText)
 				self.dufsettext = false
 			end
@@ -396,12 +383,8 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-				end
-
-				local newText = DUFModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft")
+				DUnitFrames:SetFont(self)
+				local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft")
 				self:SetText(newText)
 				self.dufsettext = false
 			end
@@ -417,12 +400,8 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-				end
-
-				local newText = DUFModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight")
+				DUnitFrames:SetFont(self)
+				local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight")
 				self:SetText(newText)
 				self.dufsettext = false
 			end
@@ -438,12 +417,8 @@ function DUFPlayerFrameSetup()
 			function(self, text)
 				if self.dufsettext then return end
 				self.dufsettext = true
-				local fontFamily, fontSize, _ = self:GetFont()
-				if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-					self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-				end
-
-				local newText = DUFModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText")
+				DUnitFrames:SetFont(self)
+				local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText")
 				self:SetText(newText)
 				self.dufsettext = false
 			end
@@ -453,7 +428,7 @@ function DUFPlayerFrameSetup()
 	end
 
 	if PlayerName then
-		if DUFGetConfig("namemode", "Over Portrait") ~= "Inside Health" then
+		if DUnitFrames:GetConfig("namemode", "Over Portrait") ~= "Inside Health" then
 			PlayerName:SetParent(DUFHIDDEN)
 		else
 			hooksecurefunc(
@@ -462,17 +437,12 @@ function DUFPlayerFrameSetup()
 				function(self, text, ...)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, fontFlags = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) or fontFlags ~= DUnitFrames:GetFontFlags() then
-						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10), DUnitFrames:GetFontFlags())
-						self:SetShadowOffset(1, -1)
-					end
-
+					DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
 					self.dufsettext = false
 				end
 			)
 
-			PlayerName:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10), DUnitFrames:GetFontFlags())
+			PlayerName:SetFont(STANDARD_TEXT_FONT, DUnitFrames:GetConfig("namesize", 10), DUnitFrames:GetFontFlags())
 			PlayerName:SetText(PlayerName:GetText())
 		end
 	end
@@ -508,7 +478,7 @@ function DUFPlayerFrameSetup()
 			PlayerFrameManaBarTextLeft,
 			"Show",
 			function(self, ...)
-				if DUFHPHeight() >= 32 then
+				if DUnitFrames:HPHeight() >= 32 then
 					self:Hide()
 				end
 			end
@@ -521,7 +491,7 @@ function DUFPlayerFrameSetup()
 			PlayerFrameManaBarTextRight,
 			"Show",
 			function(self, ...)
-				if DUFHPHeight() >= 32 then
+				if DUnitFrames:HPHeight() >= 32 then
 					self:Hide()
 				end
 			end
@@ -534,7 +504,7 @@ function DUFPlayerFrameSetup()
 			PlayerFrameManaBarText,
 			"Show",
 			function(self, ...)
-				if DUFHPHeight() >= 32 then
+				if DUnitFrames:HPHeight() >= 32 then
 					self:Hide()
 				end
 			end
@@ -548,8 +518,8 @@ function DUFPlayerFrameSetup()
 			function(self)
 				if self.dufsetheight then return end
 				self.dufsetheight = true
-				if 38 - DUFHPHeight() > 1 then
-					self:SetHeight(38 - DUFHPHeight())
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					self:SetHeight(38 - DUnitFrames:HPHeight())
 				else
 					self:SetHeight(1)
 				end
@@ -565,8 +535,8 @@ function DUFPlayerFrameSetup()
 			function(self)
 				if self.dufsetsize then return end
 				self.dufsetsize = true
-				if 38 - DUFHPHeight() > 1 then
-					self:SetHeight(38 - DUFHPHeight())
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					self:SetHeight(38 - DUnitFrames:HPHeight())
 				else
 					self:SetHeight(1)
 				end
@@ -624,11 +594,11 @@ function DUFPlayerFrameSetup()
 				PlayerFrameAlternateManaBar:Show()
 				local per = UnitPower("PLAYER", Enum.PowerType.Mana) / UnitPowerMax("PLAYER", Enum.PowerType.Mana)
 				PlayerFrameAlternateManaBar.texture:SetWidth(per * PlayerFrameAlternateManaBar:GetWidth() - 4)
-				PlayerFrameAlternateManaBar.textl:SetText(DUFPN(UnitPower("PLAYER", Enum.PowerType.Mana), UnitPowerMax("PLAYER", Enum.PowerType.Mana)))
-				PlayerFrameAlternateManaBar.textr:SetText(DUFNN(UnitPower("PLAYER", Enum.PowerType.Mana)))
+				PlayerFrameAlternateManaBar.textl:SetText(DUnitFrames:PN(UnitPower("PLAYER", Enum.PowerType.Mana), UnitPowerMax("PLAYER", Enum.PowerType.Mana)))
+				PlayerFrameAlternateManaBar.textr:SetText(DUnitFrames:NN(UnitPower("PLAYER", Enum.PowerType.Mana)))
 			end
 
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 				PlayerName:ClearAllPoints()
 				PlayerName:SetPoint("TOP", PlayerFrameHealthBar, "TOP", 0, -1)
 			end

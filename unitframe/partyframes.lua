@@ -1,4 +1,4 @@
-local _, _ = ...
+local _, DUnitFrames = ...
 function DUFPartyMemberFramesSetup()
 	for id = 1, 4 do
 		local PartyMemberFrame = _G["PartyMemberFrame" .. id]
@@ -107,11 +107,11 @@ function DUFPartyMemberFramesSetup()
 				if UnitExists("PARTY" .. id) then
 					_G["PartyMemberFrame" .. id .. "Name"]:ClearAllPoints()
 					local y = 3
-					if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Health" then
 						_G["PartyMemberFrame" .. id .. "Name"]:SetPoint("BOTTOM", _G["PartyMemberFrame" .. id .. "HealthBar"], "TOP", 0, y)
 					end
 
-					if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
+					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Portrait" then
 						_G["PartyMemberFrame" .. id .. "Name"]:SetPoint("BOTTOM", _G["PartyMemberFrame" .. id .. "Portrait"], "TOP", 0, 3)
 					end
 
@@ -139,13 +139,13 @@ function DUFPartyMemberFramesSetup()
 						PartyMemberFrame.hptl:SetText("")
 						PartyMemberFrame.hptr:SetText("")
 					elseif GetCVar("statusTextDisplay") == "NUMERIC" then
-						PartyMemberFrame.hptc:SetText(string.format("%s/%s", DUFNN(cur), DUFNN(max)))
+						PartyMemberFrame.hptc:SetText(string.format("%s/%s", DUnitFrames:NN(cur), DUnitFrames:NN(max)))
 						PartyMemberFrame.hptl:SetText("")
 						PartyMemberFrame.hptr:SetText("")
 					elseif GetCVar("statusTextDisplay") == "BOTH" then
 						PartyMemberFrame.hptc:SetText("")
 						PartyMemberFrame.hptl:SetText(string.format("%.0f", cur / max * 100) .. "%")
-						PartyMemberFrame.hptr:SetText(string.format("%s", DUFNN(cur)))
+						PartyMemberFrame.hptr:SetText(string.format("%s", DUnitFrames:NN(cur)))
 					else
 						PartyMemberFrame.hptc:SetText("")
 						PartyMemberFrame.hptl:SetText("")
@@ -176,13 +176,13 @@ function DUFPartyMemberFramesSetup()
 						PartyMemberFrame.potl:SetText("")
 						PartyMemberFrame.potr:SetText("")
 					elseif GetCVar("statusTextDisplay") == "NUMERIC" then
-						PartyMemberFrame.potc:SetText(string.format("%s/%s", DUFNN(curP), DUFNN(maxP)))
+						PartyMemberFrame.potc:SetText(string.format("%s/%s", DUnitFrames:NN(curP), DUnitFrames:NN(maxP)))
 						PartyMemberFrame.potl:SetText("")
 						PartyMemberFrame.potr:SetText("")
 					elseif GetCVar("statusTextDisplay") == "BOTH" then
 						PartyMemberFrame.potc:SetText("")
 						PartyMemberFrame.potl:SetText(string.format("%.0f", curP / maxP * 100) .. "%")
-						PartyMemberFrame.potr:SetText(string.format("%s", DUFNN(curP)))
+						PartyMemberFrame.potr:SetText(string.format("%s", DUnitFrames:NN(curP)))
 					else
 						PartyMemberFrame.potc:SetText("")
 						PartyMemberFrame.potl:SetText("")
@@ -200,14 +200,9 @@ function DUFPartyMemberFramesSetup()
 				function(self, text, ...)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) then
-						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10)) --, "OUTLINE")
-						self:SetShadowOffset(1, -1)
-					end
-
+					DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
 					if not InCombatLockdown() then
-						if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
+						if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
 							self:Hide()
 						else
 							self:Show()

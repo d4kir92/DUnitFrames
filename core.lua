@@ -1,9 +1,9 @@
 -- By D4KiR
-local _, _ = ...
+local _, DUnitFrames = ...
 DUFHIDDEN = CreateFrame("FRAME", "DUFHIDDEN", UIParent)
 DUFHIDDEN:Hide()
-function DUFHPHeight()
-	local height = DUFGetConfig("hpheight", 27)
+function DUnitFrames:HPHeight()
+	local height = DUnitFrames:GetConfig("hpheight", 27)
 	if height >= 28 then
 		height = 38
 	end
@@ -11,7 +11,7 @@ function DUFHPHeight()
 	return height
 end
 
-function DUFDottedNumber(num)
+function DUnitFrames:DottedNumber(num)
 	local revnum = tostring(num):reverse()
 	local ret = ""
 	for i = 0, strlen(revnum), 4 do
@@ -28,7 +28,7 @@ function DUFDottedNumber(num)
 	return ret:reverse()
 end
 
-function DUFGetDisplayMode()
+function DUnitFrames:GetDisplayMode()
 	return GetCVar("statusTextDisplay")
 end
 
@@ -51,11 +51,11 @@ hooksecurefunc(
 			local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
 			if t then
 				if self.unit == "player" then
-					if DUFGetConfig("portraitmodeself") ~= "Default" then
-						if DUFGetConfig("portraitmodeself") ~= "Old" then
-							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUFGetConfig("portraitmodeself", "New"))
+					if DUnitFrames:GetConfig("portraitmodeself") ~= "Default" then
+						if DUnitFrames:GetConfig("portraitmodeself") ~= "Old" then
+							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUnitFrames:GetConfig("portraitmodeself", "New"))
 							self.portrait:SetTexCoord(unpack(t))
-						elseif DUFGetConfig("portraitmodeself") == "Old" then
+						elseif DUnitFrames:GetConfig("portraitmodeself") == "Old" then
 							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
 							self.portrait:SetTexCoord(unpack(t))
 						else
@@ -65,11 +65,11 @@ hooksecurefunc(
 						self.portrait:SetTexCoord(0, 1, 0, 1)
 					end
 				else
-					if DUFGetConfig("portraitmode") ~= "Default" then
-						if DUFGetConfig("portraitmode") ~= "Old" then
-							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUFGetConfig("portraitmode", "New"))
+					if DUnitFrames:GetConfig("portraitmode") ~= "Default" then
+						if DUnitFrames:GetConfig("portraitmode") ~= "Old" then
+							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-" .. DUnitFrames:GetConfig("portraitmode", "New"))
 							self.portrait:SetTexCoord(unpack(t))
-						elseif DUFGetConfig("portraitmode") == "Old" then
+						elseif DUnitFrames:GetConfig("portraitmode") == "Old" then
 							self.portrait:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-CLASSES-CIRCLES-OLD")
 							self.portrait:SetTexCoord(unpack(t))
 						else
@@ -86,7 +86,7 @@ hooksecurefunc(
 			self.portrait:SetTexCoord(0, 1, 0, 1)
 		end
 
-		if self.unit == "player" and ComboPointPlayerFrame and DUFGetConfig("hidecombopoints", false) then
+		if self.unit == "player" and ComboPointPlayerFrame and DUnitFrames:GetConfig("hidecombopoints", false) then
 			ComboPointPlayerFrame:SetParent(DUFHIDDEN)
 		end
 
@@ -94,7 +94,7 @@ hooksecurefunc(
 	end
 )
 
-function DUFClamp(va, mi, ma)
+function DUnitFrames:Clamp(va, mi, ma)
 	if va < mi then
 		va = mi
 	elseif va > ma then
@@ -107,7 +107,7 @@ end
 local f = CreateFrame("Frame")
 PlayerFrame.a = 0
 function f.Think()
-	if DUFGetConfig("hidewhenfull", false) then
+	if DUnitFrames:GetConfig("hidewhenfull", false) then
 		local powernotfull = false
 		local manacur = UnitPower("PLAYER", Enum.PowerType.Mana)
 		local manamax = UnitPowerMax("PLAYER", Enum.PowerType.Mana)
@@ -127,8 +127,8 @@ function f.Think()
 			PlayerFrame.duf_alpha = PlayerFrame.duf_alpha + 0.05
 		end
 
-		PlayerFrame.duf_alpha = DUFClamp(PlayerFrame.duf_alpha, 0, 1)
-		PlayerFrame.duf_alpha = DUFClamp(PlayerFrame.duf_alpha, 0, 1)
+		PlayerFrame.duf_alpha = DUnitFrames:Clamp(PlayerFrame.duf_alpha, 0, 1)
+		PlayerFrame.duf_alpha = DUnitFrames:Clamp(PlayerFrame.duf_alpha, 0, 1)
 		PlayerFrame:SetAlpha(PlayerFrame.duf_alpha)
 	else
 		if PlayerFrame.duf_alpha ~= 1 then

@@ -1,6 +1,5 @@
 local _, DUnitFrames = ...
 -- #FocusFrame
-local DUFFontSize = 12
 if FocusFrame then
 	function DUFFocusFrameSetup()
 		if FocusFrameHealthBar then
@@ -81,12 +80,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextRight")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextRight")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -99,12 +94,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextLeft")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextLeft")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -117,12 +108,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarText")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarText")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -135,12 +122,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextLeft")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextLeft")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -153,12 +136,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextRight")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextRight")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -171,12 +150,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarText")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarText")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -193,12 +168,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextLeft")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextLeft")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -211,12 +182,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextRight")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextRight")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -229,12 +196,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarText")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarText")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -247,12 +210,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextLeft")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextLeft")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -265,12 +224,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextRight")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextRight")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -283,12 +238,8 @@ if FocusFrame then
 				function(self, text)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, _ = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFFontSize then
-						self:SetFont(STANDARD_TEXT_FONT, DUFFontSize, DUnitFrames:GetFontFlags())
-					end
-
-					local newText = DUFModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarText")
+					DUnitFrames:SetFont(self)
+					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarText")
 					self:SetText(newText)
 					self.dufsettext = false
 				end
@@ -305,7 +256,7 @@ if FocusFrame then
 				function(self)
 					if self.dufsetheight then return end
 					self.dufsetheight = true
-					self:SetHeight(DUFHPHeight())
+					self:SetHeight(DUnitFrames:HPHeight())
 					self.dufsetheight = false
 				end
 			)
@@ -317,7 +268,7 @@ if FocusFrame then
 				function(self)
 					if self.dufsetsize then return end
 					self.dufsetsize = true
-					self:SetHeight(DUFHPHeight())
+					self:SetHeight(DUnitFrames:HPHeight())
 					self.dufsetsize = false
 				end
 			)
@@ -343,8 +294,8 @@ if FocusFrame then
 				function(self)
 					if self.dufsetheight then return end
 					self.dufsetheight = true
-					if 38 - DUFHPHeight() > 1 then
-						self:SetHeight(38 - DUFHPHeight())
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						self:SetHeight(38 - DUnitFrames:HPHeight())
 					else
 						self:SetHeight(1)
 					end
@@ -360,8 +311,8 @@ if FocusFrame then
 				function(self)
 					if self.dufsetsize then return end
 					self.dufsetsize = true
-					if 38 - DUFHPHeight() > 1 then
-						self:SetHeight(38 - DUFHPHeight())
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						self:SetHeight(38 - DUnitFrames:HPHeight())
 					else
 						self:SetHeight(1)
 					end
@@ -376,7 +327,7 @@ if FocusFrame then
 				function(self)
 					if self.dufsetpoint then return end
 					self.dufsetpoint = true
-					self:SetPoint("TOPLEFT", 6, -23 - DUFHPHeight() - 1)
+					self:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
 					self.dufsetpoint = false
 				end
 			)
@@ -427,37 +378,41 @@ if FocusFrame then
 				FocusFrameTextureFrameTexture.spacer:SetVertexColor(1, 1, 1)
 			end
 
-			FocusFrameTextureFrameTexture.spacer:SetSize(128, 16)
-			FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 5, 21 - DUFHPHeight())
-			FocusFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
-			if DUFHPHeight() >= 32 then
-				FocusFrameTextureFrameTexture.spacer:Hide()
-			else
-				FocusFrameTextureFrameTexture.spacer:Show()
+			if FocusFrameTextureFrameTexture.spacer then
+				FocusFrameTextureFrameTexture.spacer:SetSize(128, 16)
+				FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 5, 21 - DUnitFrames:HPHeight())
+				FocusFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
+				if DUnitFrames:HPHeight() >= 32 then
+					FocusFrameTextureFrameTexture.spacer:Hide()
+				else
+					FocusFrameTextureFrameTexture.spacer:Show()
+				end
 			end
 
 			FocusFrameTextureFrameTexture:SetVertexColor(0, 0, 0)
-			FocusFrameTextureFrameDeadText:ClearAllPoints()
-			FocusFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
-			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 				FocusFrameTextureFrameDeadText:ClearAllPoints()
 				FocusFrameTextureFrameDeadText:SetPoint("BOTTOM", TargetFrameHealthBar, "BOTTOM", 0, 0)
+			else
+				FocusFrameTextureFrameDeadText:ClearAllPoints()
+				FocusFrameTextureFrameDeadText:SetPoint("CENTER", TargetFrameHealthBar, "CENTER", 0, 0)
 			end
 
 			if FocusFrameHealthBarTextLeft ~= nil then
-				FocusFrameHealthBarTextLeft:ClearAllPoints()
-				FocusFrameHealthBarTextLeft:SetPoint("LEFT", FocusFrameHealthBar, "LEFT", 2, 0)
-				FocusFrameHealthBarTextRight:ClearAllPoints()
-				FocusFrameHealthBarTextRight:SetPoint("RIGHT", FocusFrameHealthBar, "RIGHT", -2, 0)
-				FocusFrameHealthBarText:ClearAllPoints()
-				FocusFrameHealthBarText:SetPoint("CENTER", FocusFrameHealthBar, "CENTER", 0, 0)
-				if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 					FocusFrameHealthBarTextLeft:ClearAllPoints()
 					FocusFrameHealthBarTextLeft:SetPoint("BOTTOMLEFT", FocusFrameHealthBar, "BOTTOMLEFT", 2, 2)
 					FocusFrameHealthBarTextRight:ClearAllPoints()
 					FocusFrameHealthBarTextRight:SetPoint("BOTTOMRIGHT", FocusFrameHealthBar, "BOTTOMRIGHT", -2, 2)
 					FocusFrameHealthBarText:ClearAllPoints()
 					FocusFrameHealthBarText:SetPoint("BOTTOM", FocusFrameHealthBar, "BOTTOM", 0, 2)
+				else
+					FocusFrameHealthBarTextLeft:ClearAllPoints()
+					FocusFrameHealthBarTextLeft:SetPoint("LEFT", FocusFrameHealthBar, "LEFT", 2, 0)
+					FocusFrameHealthBarTextRight:ClearAllPoints()
+					FocusFrameHealthBarTextRight:SetPoint("RIGHT", FocusFrameHealthBar, "RIGHT", -2, 0)
+					FocusFrameHealthBarText:ClearAllPoints()
+					FocusFrameHealthBarText:SetPoint("CENTER", FocusFrameHealthBar, "CENTER", 0, 0)
 				end
 
 				if not FocusFrameManaBarTextLeft.hooked then
@@ -466,7 +421,7 @@ if FocusFrame then
 						FocusFrameManaBarTextLeft,
 						"Show",
 						function(self, ...)
-							if DUFHPHeight() >= 32 then
+							if DUnitFrames:HPHeight() >= 32 then
 								self:Hide()
 							end
 						end
@@ -479,7 +434,7 @@ if FocusFrame then
 						FocusFrameManaBarTextRight,
 						"Show",
 						function(self, ...)
-							if DUFHPHeight() >= 32 then
+							if DUnitFrames:HPHeight() >= 32 then
 								self:Hide()
 							end
 						end
@@ -492,26 +447,27 @@ if FocusFrame then
 						FocusFrameManaBarText,
 						"Show",
 						function(self, ...)
-							if DUFHPHeight() >= 32 then
+							if DUnitFrames:HPHeight() >= 32 then
 								self:Hide()
 							end
 						end
 					)
 				end
 
-				FocusFrameManaBarTextLeft:ClearAllPoints()
-				FocusFrameManaBarTextLeft:SetPoint("LEFT", FocusFrameManaBar, "LEFT", 2, 0)
-				FocusFrameManaBarTextRight:ClearAllPoints()
-				FocusFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, -1)
-				FocusFrameManaBarText:ClearAllPoints()
-				FocusFrameManaBarText:SetPoint("CENTER", FocusFrameManaBar, "CENTER", 0, 0)
-				if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 					FocusFrameManaBarTextLeft:ClearAllPoints()
-					FocusFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", FocusFrameManaBar, "BOTTOMLEFT", 2, 0)
+					FocusFrameManaBarTextLeft:SetPoint("LEFT", FocusFrameManaBar, "LEFT", 2, 0)
 					FocusFrameManaBarTextRight:ClearAllPoints()
-					FocusFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", FocusFrameManaBar, "BOTTOMRIGHT", -2, -1)
+					FocusFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, 0)
 					FocusFrameManaBarText:ClearAllPoints()
-					FocusFrameManaBarText:SetPoint("BOTTOM", FocusFrameManaBar, "BOTTOM", 0, 0)
+					FocusFrameManaBarText:SetPoint("CENTER", FocusFrameManaBar, "CENTER", 0, 0)
+				else
+					FocusFrameManaBarTextLeft:ClearAllPoints()
+					FocusFrameManaBarTextLeft:SetPoint("LEFT", FocusFrameManaBar, "LEFT", 2, 0)
+					FocusFrameManaBarTextRight:ClearAllPoints()
+					FocusFrameManaBarTextRight:SetPoint("RIGHT", FocusFrameManaBar, "RIGHT", -2, 0)
+					FocusFrameManaBarText:ClearAllPoints()
+					FocusFrameManaBarText:SetPoint("CENTER", FocusFrameManaBar, "CENTER", 0, 0)
 				end
 			elseif FocusFrameTextureFrameHealthBarTextLeft ~= nil then
 				FocusFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", FocusFrameHealthBar, "LEFT", 2, 0)
@@ -523,7 +479,7 @@ if FocusFrame then
 						FocusFrameTextureFrameManaBarTextLeft,
 						"Show",
 						function(self, ...)
-							if DUFHPHeight() >= 32 then
+							if DUnitFrames:HPHeight() >= 32 then
 								self:Hide()
 							end
 						end
@@ -536,7 +492,7 @@ if FocusFrame then
 						FocusFrameTextureFrameManaBarTextRight,
 						"Show",
 						function(self, ...)
-							if DUFHPHeight() >= 32 then
+							if DUnitFrames:HPHeight() >= 32 then
 								self:Hide()
 							end
 						end
@@ -549,7 +505,7 @@ if FocusFrame then
 						FocusFrameTextureFrameManaBarText,
 						"Show",
 						function(self, ...)
-							if DUFHPHeight() >= 32 then
+							if DUnitFrames:HPHeight() >= 32 then
 								self:Hide()
 							end
 						end
@@ -576,21 +532,21 @@ if FocusFrame then
 				FocusFrameTextureFrameName:ClearAllPoints()
 				if FocusFrame.buffsOnTop then
 					local y = -4
-					if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Health" then
 						FocusFrameTextureFrameName:SetPoint("TOP", FocusFrameManaBar, "BOTTOM", 0, y)
 					end
 				else
 					local y = 6
-					if DUFGetConfig("namemode", "Over Portrait") == "Over Health" then
+					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Health" then
 						FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFrameHealthBar, "TOP", 0, y)
 					end
 				end
 
-				if DUFGetConfig("namemode", "Over Portrait") == "Over Portrait" then
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Over Portrait" then
 					FocusFrameTextureFrameName:SetPoint("BOTTOM", FocusFramePortrait, "TOP", 0, 12)
 				end
 
-				if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
+				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then
 					FocusFrameTextureFrameName:ClearAllPoints()
 					FocusFrameTextureFrameName:SetPoint("TOP", FocusFrameHealthBar, "TOP", 0, -1)
 				end
@@ -617,13 +573,8 @@ if FocusFrame then
 				function(self, text, ...)
 					if self.dufsettext then return end
 					self.dufsettext = true
-					local fontFamily, fontSize, fontFlags = self:GetFont()
-					if fontFamily ~= STANDARD_TEXT_FONT or fontSize ~= DUFGetConfig("namesize", 10) or fontFlags ~= DUnitFrames:GetFontFlags() then
-						self:SetFont(STANDARD_TEXT_FONT, DUFGetConfig("namesize", 10), DUnitFrames:GetFontFlags())
-						self:SetShadowOffset(1, -1)
-					end
-
-					if DUFGetConfig("namemode", "Over Portrait") == "Hide" then
+					DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
+					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
 						self:Hide()
 					else
 						self:Show()
@@ -678,7 +629,7 @@ if FocusFrame then
 						f:UnregisterEvent("INSPECT_READY")
 						ClearInspectPlayer()
 						local id, _, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)
-						if id ~= nil and not InCombatLockdown() and DUFGetConfig("showspecs", true) and icon then
+						if id ~= nil and not InCombatLockdown() and DUnitFrames:GetConfig("showspecs", true) and icon then
 							FocusFramePortrait:SetTexture(icon)
 							FocusFramePortrait:SetTexCoord(0, 1, 0, 1)
 						end
