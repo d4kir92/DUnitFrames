@@ -504,11 +504,11 @@ function DUFTargetFrameSetup()
 			end
 
 			TargetFrameManaBarTextLeft:ClearAllPoints()
-			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -2)
+			TargetFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
 			TargetFrameManaBarTextRight:ClearAllPoints()
-			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, -2)
+			TargetFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, 0)
 			TargetFrameManaBarText:ClearAllPoints()
-			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, -2)
+			TargetFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
 		elseif TargetFrameTextureFrameHealthBarTextLeft ~= nil then
 			TargetFrameTextureFrameHealthBarTextLeft:ClearAllPoints()
 			TargetFrameTextureFrameHealthBarTextLeft:SetPoint("LEFT", TargetFrameHealthBar, "LEFT", 2, 0)
@@ -565,18 +565,18 @@ function DUFTargetFrameSetup()
 			end
 
 			TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
-			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, -1)
+			TargetFrameTextureFrameManaBarTextLeft:SetPoint("LEFT", TargetFrameManaBar, "LEFT", 2, 0)
 			TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
-			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, -1)
+			TargetFrameTextureFrameManaBarTextRight:SetPoint("RIGHT", TargetFrameManaBar, "RIGHT", -3, 0)
 			TargetFrameTextureFrameManaBarText:ClearAllPoints()
 			TargetFrameTextureFrameManaBarText:SetPoint("CENTER", TargetFrameManaBar, "CENTER", 0, 0)
 			if DUFGetConfig("namemode", "Over Portrait") == "Inside Health" then
 				TargetFrameTextureFrameManaBarTextLeft:ClearAllPoints()
-				TargetFrameTextureFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 2)
+				TargetFrameTextureFrameManaBarTextLeft:SetPoint("BOTTOMLEFT", TargetFrameManaBar, "BOTTOMLEFT", 2, 0)
 				TargetFrameTextureFrameManaBarTextRight:ClearAllPoints()
-				TargetFrameTextureFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -3, 2)
+				TargetFrameTextureFrameManaBarTextRight:SetPoint("BOTTOMRIGHT", TargetFrameManaBar, "BOTTOMRIGHT", -3, 0)
 				TargetFrameTextureFrameManaBarText:ClearAllPoints()
-				TargetFrameTextureFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 2)
+				TargetFrameTextureFrameManaBarText:SetPoint("BOTTOM", TargetFrameManaBar, "BOTTOM", 0, 0)
 			end
 		end
 
