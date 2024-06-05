@@ -609,6 +609,8 @@ function DUFPlayerFrameSetup()
 		PlayerFrameAlternateManaBar.think()
 	end
 
+	UnitFrameHealthBar_Initialize("player", PlayerFrameHealthBar, PlayerFrameHealthBarText, true)
+	UnitFrameManaBar_Initialize("player", PlayerFrameManaBar, PlayerFrameManaBarText, true)
 	if ComboPointPlayerFrame ~= nil then
 		hooksecurefunc(
 			ComboPointPlayerFrame,
