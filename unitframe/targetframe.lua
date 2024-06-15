@@ -628,9 +628,9 @@ function DUFTargetFrameSetup()
 				self.dufsettext = true
 				DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
 				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
-					self:Hide()
+					self:SetAlpha(0)
 				else
-					self:Show()
+					self:SetAlpha(1)
 				end
 
 				self.dufsettext = false
@@ -684,12 +684,6 @@ function DUFTargetFrameSetup()
 		)
 
 		TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
-		function TargetFrameToT.Think()
-			TargetFrameToTTextureFrameTexture:SetVertexColor(1, 1, 1)
-			C_Timer.After(0.1, TargetFrameToT.Think)
-		end
-
-		TargetFrameToT.Think()
 	end
 
 	if CanInspect and GetInspectSpecialization then

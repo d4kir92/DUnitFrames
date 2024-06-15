@@ -36,7 +36,7 @@ hooksecurefunc(
 	"UnitFramePortrait_Update",
 	function(self, ...)
 		if self.unit == nil or self.portrait == nil then return end
-		--if self:GetName() == "TargetFrameToT" then return end -- IMPORTANT
+		if self:GetName() == "TargetFrameToT" then return end -- IMPORTANT
 		if self.dufsetportrai then return end
 		self.dufsetportrai = true
 		--self.portrait:SetMask( nil )

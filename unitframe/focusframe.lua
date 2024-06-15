@@ -575,9 +575,9 @@ if FocusFrame then
 					self.dufsettext = true
 					DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
 					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
-						self:Hide()
+						self:SetAlpha(0)
 					else
-						self:Show()
+						self:SetAlpha(1)
 					end
 
 					self.dufsettext = false
