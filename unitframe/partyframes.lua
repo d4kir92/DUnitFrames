@@ -1,5 +1,5 @@
 local _, DUnitFrames = ...
-function DUFPartyMemberFramesSetup()
+function DUnitFrames:PartyMemberFramesSetup()
 	for id = 1, 4 do
 		local PartyMemberFrame = _G["PartyMemberFrame" .. id]
 		if PartyMemberFrame then
@@ -15,16 +15,16 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "HealthBar"],
 				"SetStatusBarTexture",
-				function(self, texture)
-					if self.settexture then return end
-					self.settexture = true
+				function(sel, texture)
+					if sel.settexture then return end
+					sel.settexture = true
 					if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-						self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+						sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 					else
-						self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+						sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 					end
 
-					self.settexture = false
+					sel.settexture = false
 				end
 			)
 
@@ -32,16 +32,16 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "ManaBar"],
 				"SetStatusBarTexture",
-				function(self, texture)
-					if self.settexture then return end
-					self.settexture = true
+				function(sel, texture)
+					if sel.settexture then return end
+					sel.settexture = true
 					if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-						self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+						sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 					else
-						self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+						sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 					end
 
-					self.settexture = false
+					sel.settexture = false
 				end
 			)
 
@@ -49,17 +49,17 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "HealthBar"],
 				"SetStatusBarColor",
-				function(self, oR, oG, oB)
-					if self.dufsetvertexcolor then return end
-					self.dufsetvertexcolor = true
-					local r, g, b = DUFGetBarColor("PARTY" .. id, self)
+				function(sel, oR, oG, oB)
+					if sel.dufsetvertexcolor then return end
+					sel.dufsetvertexcolor = true
+					local r, g, b = DUnitFrames:GetBarColor("PARTY" .. id, sel)
 					if r and g and b then
-						self:SetStatusBarColor(r, g, b)
+						sel:SetStatusBarColor(r, g, b)
 					else
-						self:SetStatusBarColor(oR, oG, oB)
+						sel:SetStatusBarColor(oR, oG, oB)
 					end
 
-					self.dufsetvertexcolor = false
+					sel.dufsetvertexcolor = false
 				end
 			)
 
@@ -68,11 +68,11 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "HealthBar"],
 				"SetHeight",
-				function(self)
-					if self.dufsetheight then return end
-					self.dufsetheight = true
-					self:SetHeight(13)
-					self.dufsetheight = false
+				function(sel)
+					if sel.dufsetheight then return end
+					sel.dufsetheight = true
+					sel:SetHeight(13)
+					sel.dufsetheight = false
 				end
 			)
 
@@ -80,11 +80,11 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "HealthBar"],
 				"SetPoint",
-				function(self)
-					if self.dufsetpoint then return end
-					self.dufsetpoint = true
-					self:SetPoint("TOPLEFT", 45, -16)
-					self.dufsetpoint = false
+				function(sel)
+					if sel.dufsetpoint then return end
+					sel.dufsetpoint = true
+					sel:SetPoint("TOPLEFT", 45, -16)
+					sel.dufsetpoint = false
 				end
 			)
 
@@ -92,12 +92,12 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "ManaBar"],
 				"SetPoint",
-				function(self)
-					if self.dufsetpoint then return end
-					self.dufsetpoint = true
-					self:ClearAllPoints()
-					self:SetPoint("TOP", _G["PartyMemberFrame" .. id .. "HealthBar"], "BOTTOM", 0, -1)
-					self.dufsetpoint = false
+				function(sel)
+					if sel.dufsetpoint then return end
+					sel.dufsetpoint = true
+					sel:ClearAllPoints()
+					sel:SetPoint("TOP", _G["PartyMemberFrame" .. id .. "HealthBar"], "BOTTOM", 0, -1)
+					sel.dufsetpoint = false
 				end
 			)
 
@@ -197,19 +197,19 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "Name"],
 				"SetText",
-				function(self, text, ...)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
+				function(sel, text, ...)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel, DUnitFrames:GetConfig("namesize", 10))
 					if not InCombatLockdown() then
 						if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
-							self:SetAlpha(0)
+							sel:SetAlpha(0)
 						else
-							self:SetAlpha(1)
+							sel:SetAlpha(1)
 						end
 					end
 
-					self.dufsettext = false
+					sel.dufsettext = false
 				end
 			)
 
@@ -217,17 +217,17 @@ function DUFPartyMemberFramesSetup()
 			hooksecurefunc(
 				_G["PartyMemberFrame" .. id .. "Texture"],
 				"SetVertexColor",
-				function(self, oR, oG, oB)
-					if self.dufsetvertexcolor then return end
-					self.dufsetvertexcolor = true
-					local r, g, b, isDefault = DUFGetBorderColor("PARTY" .. id, self)
+				function(sel, oR, oG, oB)
+					if sel.dufsetvertexcolor then return end
+					sel.dufsetvertexcolor = true
+					local r, g, b, isDefault = DUnitFrames:GetBorderColor("PARTY" .. id, sel)
 					if r and g and b and not isDefault then
-						self:SetVertexColor(r, g, b, 1)
+						sel:SetVertexColor(r, g, b, 1)
 					else
-						self:SetVertexColor(oR, oG, oB, 1)
+						sel:SetVertexColor(oR, oG, oB, 1)
 					end
 
-					self.dufsetvertexcolor = false
+					sel.dufsetvertexcolor = false
 				end
 			)
 
@@ -239,17 +239,17 @@ function DUFPartyMemberFramesSetup()
 						hooksecurefunc(
 							_G["PartyFrameXPBar" .. id].textureLvlBg,
 							"SetVertexColor",
-							function(self, oR, oG, oB)
-								if self.dufsetvertexcolor then return end
-								self.dufsetvertexcolor = true
-								local r, g, b, isDefault = DUFGetBorderColor("PARTY" .. id, self)
+							function(sel, oR, oG, oB)
+								if sel.dufsetvertexcolor then return end
+								sel.dufsetvertexcolor = true
+								local r, g, b, isDefault = DUnitFrames:GetBorderColor("PARTY" .. id, sel)
 								if r and g and b and not isDefault then
-									self:SetVertexColor(r, g, b, 1)
+									sel:SetVertexColor(r, g, b, 1)
 								else
-									self:SetVertexColor(oR, oG, oB, 1)
+									sel:SetVertexColor(oR, oG, oB, 1)
 								end
 
-								self.dufsetvertexcolor = false
+								sel.dufsetvertexcolor = false
 							end
 						)
 
@@ -272,18 +272,18 @@ function DUFPartyMemberFramesSetup()
 				hooksecurefunc(
 					debuff,
 					"SetPoint",
-					function(self)
-						if self.dufsetpoint then return end
-						self.dufsetpoint = true
-						self:ClearAllPoints()
+					function(sel)
+						if sel.dufsetpoint then return end
+						sel.dufsetpoint = true
+						sel:ClearAllPoints()
 						if parent == _G["PartyMemberFrame" .. i] then
 							local py = -6
-							self:SetPoint("BOTTOMLEFT", parent, "BOTTOMRIGHT", -80, py)
+							sel:SetPoint("BOTTOMLEFT", parent, "BOTTOMRIGHT", -80, py)
 						else
-							self:SetPoint("LEFT", parent, "RIGHT", 4, 0)
+							sel:SetPoint("LEFT", parent, "RIGHT", 4, 0)
 						end
 
-						self.dufsetpoint = false
+						sel.dufsetpoint = false
 					end
 				)
 
@@ -294,7 +294,7 @@ function DUFPartyMemberFramesSetup()
 	end
 end
 
-function DUFUpdatePartyMemberFrames()
+function DUnitFrames:UpdatePartyMemberFrames()
 	for id = 1, 4 do
 		local PartyMemberFrame = _G["PartyMemberFrame" .. id]
 		if PartyMemberFrame then

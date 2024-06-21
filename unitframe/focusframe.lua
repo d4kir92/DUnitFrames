@@ -1,21 +1,21 @@
 local _, DUnitFrames = ...
 -- #FocusFrame
 if FocusFrame then
-	function DUFFocusFrameSetup()
+	function DUnitFrames:FocusFrameSetup()
 		if FocusFrameHealthBar then
 			hooksecurefunc(
 				FocusFrameHealthBar,
 				"SetStatusBarTexture",
-				function(self, texture)
-					if self.settexture then return end
-					self.settexture = true
+				function(sel, texture)
+					if sel.settexture then return end
+					sel.settexture = true
 					if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-						self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+						sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 					else
-						self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+						sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 					end
 
-					self.settexture = false
+					sel.settexture = false
 				end
 			)
 
@@ -26,16 +26,16 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameManaBar,
 				"SetStatusBarTexture",
-				function(self, texture)
-					if self.settexture then return end
-					self.settexture = true
+				function(sel, texture)
+					if sel.settexture then return end
+					sel.settexture = true
 					if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-						self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+						sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 					else
-						self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+						sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 					end
 
-					self.settexture = false
+					sel.settexture = false
 				end
 			)
 
@@ -55,17 +55,17 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameHealthBar,
 				"SetStatusBarColor",
-				function(self, oR, oG, oB)
-					if self.dufsetvertexcolor then return end
-					self.dufsetvertexcolor = true
-					local r, g, b = DUFGetBarColor("FOCUS", self)
+				function(sel, oR, oG, oB)
+					if sel.dufsetvertexcolor then return end
+					sel.dufsetvertexcolor = true
+					local r, g, b = DUnitFrames:GetBarColor("FOCUS", sel)
 					if r and g and b then
-						self:SetStatusBarColor(r, g, b)
+						sel:SetStatusBarColor(r, g, b)
 					else
-						self:SetStatusBarColor(oR, oG, oB)
+						sel:SetStatusBarColor(oR, oG, oB)
 					end
 
-					self.dufsetvertexcolor = false
+					sel.dufsetvertexcolor = false
 				end
 			)
 
@@ -77,13 +77,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameHealthBarTextRight,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextRight")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -91,13 +91,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameHealthBarTextLeft,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarTextLeft")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -105,13 +105,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameHealthBarText,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameHealthBarText")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -119,13 +119,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameManaBarTextLeft,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextLeft")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -133,13 +133,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameManaBarTextRight,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarTextRight")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -147,13 +147,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameManaBarText,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameManaBarText")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -165,13 +165,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameHealthBarTextLeft,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextLeft")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -179,13 +179,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameHealthBarTextRight,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarTextRight")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -193,13 +193,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameHealthBarText,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitHealth("FOCUS"), UnitHealthMax("FOCUS"), "FocusFrameTextureFrameHealthBarText")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -207,13 +207,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameManaBarTextLeft,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextLeft")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -221,13 +221,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameManaBarTextRight,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarTextRight")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -235,13 +235,13 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameManaBarText,
 				"SetText",
-				function(self, text)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self)
+				function(sel, text)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel)
 					local newText = DUnitFrames:ModifyText(text, UnitPower("FOCUS"), UnitPowerMax("FOCUS"), "FocusFrameTextureFrameManaBarText")
-					self:SetText(newText)
-					self.dufsettext = false
+					sel:SetText(newText)
+					sel.dufsettext = false
 				end
 			)
 
@@ -253,11 +253,11 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameHealthBar,
 				"SetHeight",
-				function(self)
-					if self.dufsetheight then return end
-					self.dufsetheight = true
-					self:SetHeight(DUnitFrames:HPHeight())
-					self.dufsetheight = false
+				function(sel)
+					if sel.dufsetheight then return end
+					sel.dufsetheight = true
+					sel:SetHeight(DUnitFrames:HPHeight())
+					sel.dufsetheight = false
 				end
 			)
 
@@ -265,22 +265,22 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameHealthBar,
 				"SetSize",
-				function(self)
-					if self.dufsetsize then return end
-					self.dufsetsize = true
-					self:SetHeight(DUnitFrames:HPHeight())
-					self.dufsetsize = false
+				function(sel)
+					if sel.dufsetsize then return end
+					sel.dufsetsize = true
+					sel:SetHeight(DUnitFrames:HPHeight())
+					sel.dufsetsize = false
 				end
 			)
 
 			hooksecurefunc(
 				FocusFrameHealthBar,
 				"SetPoint",
-				function(self)
-					if self.dufsetpoint then return end
-					self.dufsetpoint = true
-					self:SetPoint("TOPLEFT", 6, -24)
-					self.dufsetpoint = false
+				function(sel)
+					if sel.dufsetpoint then return end
+					sel.dufsetpoint = true
+					sel:SetPoint("TOPLEFT", 6, -24)
+					sel.dufsetpoint = false
 				end
 			)
 
@@ -291,16 +291,16 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameManaBar,
 				"SetHeight",
-				function(self)
-					if self.dufsetheight then return end
-					self.dufsetheight = true
+				function(sel)
+					if sel.dufsetheight then return end
+					sel.dufsetheight = true
 					if 38 - DUnitFrames:HPHeight() > 1 then
-						self:SetHeight(38 - DUnitFrames:HPHeight())
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
-						self:SetHeight(1)
+						sel:SetHeight(1)
 					end
 
-					self.dufsetheight = false
+					sel.dufsetheight = false
 				end
 			)
 
@@ -308,27 +308,27 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameManaBar,
 				"SetSize",
-				function(self)
-					if self.dufsetsize then return end
-					self.dufsetsize = true
+				function(sel)
+					if sel.dufsetsize then return end
+					sel.dufsetsize = true
 					if 38 - DUnitFrames:HPHeight() > 1 then
-						self:SetHeight(38 - DUnitFrames:HPHeight())
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
-						self:SetHeight(1)
+						sel:SetHeight(1)
 					end
 
-					self.dufsetsize = false
+					sel.dufsetsize = false
 				end
 			)
 
 			hooksecurefunc(
 				FocusFrameManaBar,
 				"SetPoint",
-				function(self)
-					if self.dufsetpoint then return end
-					self.dufsetpoint = true
-					self:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
-					self.dufsetpoint = false
+				function(sel)
+					if sel.dufsetpoint then return end
+					sel.dufsetpoint = true
+					sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
+					sel.dufsetpoint = false
 				end
 			)
 
@@ -345,7 +345,7 @@ if FocusFrame then
 			FocusFrameNameBackground:SetParent(DUFHIDDEN)
 		end
 
-		function DUFUpdateFocusTexture()
+		function DUnitFrames:UpdateFocusTexture()
 			local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 			local class = UnitClassification("FOCUS")
 			if class == "worldboss" or class == "elite" then
@@ -367,11 +367,11 @@ if FocusFrame then
 				hooksecurefunc(
 					FocusFrameTextureFrameTexture.spacer,
 					"SetVertexColor",
-					function(self, r, g, b, a)
-						if self.dufsetvertexcolor then return end
-						self.dufsetvertexcolor = true
-						self:SetVertexColor(r, g, b, a)
-						self.dufsetvertexcolor = false
+					function(sel, r, g, b, a)
+						if sel.dufsetvertexcolor then return end
+						sel.dufsetvertexcolor = true
+						sel:SetVertexColor(r, g, b, a)
+						sel.dufsetvertexcolor = false
 					end
 				)
 
@@ -420,9 +420,9 @@ if FocusFrame then
 					hooksecurefunc(
 						FocusFrameManaBarTextLeft,
 						"Show",
-						function(self, ...)
+						function(sel, ...)
 							if DUnitFrames:HPHeight() >= 32 then
-								self:Hide()
+								sel:Hide()
 							end
 						end
 					)
@@ -433,9 +433,9 @@ if FocusFrame then
 					hooksecurefunc(
 						FocusFrameManaBarTextRight,
 						"Show",
-						function(self, ...)
+						function(sel, ...)
 							if DUnitFrames:HPHeight() >= 32 then
-								self:Hide()
+								sel:Hide()
 							end
 						end
 					)
@@ -446,9 +446,9 @@ if FocusFrame then
 					hooksecurefunc(
 						FocusFrameManaBarText,
 						"Show",
-						function(self, ...)
+						function(sel, ...)
 							if DUnitFrames:HPHeight() >= 32 then
-								self:Hide()
+								sel:Hide()
 							end
 						end
 					)
@@ -478,9 +478,9 @@ if FocusFrame then
 					hooksecurefunc(
 						FocusFrameTextureFrameManaBarTextLeft,
 						"Show",
-						function(self, ...)
+						function(sel, ...)
 							if DUnitFrames:HPHeight() >= 32 then
-								self:Hide()
+								sel:Hide()
 							end
 						end
 					)
@@ -491,9 +491,9 @@ if FocusFrame then
 					hooksecurefunc(
 						FocusFrameTextureFrameManaBarTextRight,
 						"Show",
-						function(self, ...)
+						function(sel, ...)
 							if DUnitFrames:HPHeight() >= 32 then
-								self:Hide()
+								sel:Hide()
 							end
 						end
 					)
@@ -504,9 +504,9 @@ if FocusFrame then
 					hooksecurefunc(
 						FocusFrameTextureFrameManaBarText,
 						"Show",
-						function(self, ...)
+						function(sel, ...)
 							if DUnitFrames:HPHeight() >= 32 then
-								self:Hide()
+								sel:Hide()
 							end
 						end
 					)
@@ -554,7 +554,7 @@ if FocusFrame then
 
 			if ThreatBorder and ThreatBorder:IsShown() then
 				y = 24
-				local r, g, b, isDefault = DUFGetBorderColor("FOCUS", ThreatBorder)
+				local r, g, b, isDefault = DUnitFrames:GetBorderColor("FOCUS", ThreatBorder)
 				if r and g and b and not isDefault then
 					ThreatBorder:SetVertexColor(r, g, b, 1)
 				else
@@ -570,17 +570,17 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameName,
 				"SetText",
-				function(self, text, ...)
-					if self.dufsettext then return end
-					self.dufsettext = true
-					DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
+				function(sel, text, ...)
+					if sel.dufsettext then return end
+					sel.dufsettext = true
+					DUnitFrames:SetFont(sel, DUnitFrames:GetConfig("namesize", 10))
 					if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
-						self:SetAlpha(0)
+						sel:SetAlpha(0)
 					else
-						self:SetAlpha(1)
+						sel:SetAlpha(1)
 					end
 
-					self.dufsettext = false
+					sel.dufsettext = false
 				end
 			)
 
@@ -591,21 +591,21 @@ if FocusFrame then
 			hooksecurefunc(
 				FocusFrameTextureFrameTexture,
 				"SetVertexColor",
-				function(self, oR, oG, oB)
-					if self.dufsetvertexcolor then return end
-					self.dufsetvertexcolor = true
-					local r, g, b, isDefault = DUFGetBorderColor("FOCUS", self)
+				function(sel, oR, oG, oB)
+					if sel.dufsetvertexcolor then return end
+					sel.dufsetvertexcolor = true
+					local r, g, b, isDefault = DUnitFrames:GetBorderColor("FOCUS", sel)
 					if r and g and b and not isDefault then
-						self:SetVertexColor(r, g, b, 1)
+						sel:SetVertexColor(r, g, b, 1)
 					else
-						self:SetVertexColor(oR, oG, oB, 1)
+						sel:SetVertexColor(oR, oG, oB, 1)
 					end
 
-					if self.spacer then
-						self.spacer:SetVertexColor(self:GetVertexColor())
+					if sel.spacer then
+						sel.spacer:SetVertexColor(sel:GetVertexColor())
 					end
 
-					self.dufsetvertexcolor = false
+					sel.dufsetvertexcolor = false
 				end
 			)
 
@@ -623,7 +623,7 @@ if FocusFrame then
 
 			f:SetScript(
 				"OnEvent",
-				function(self, event, ...)
+				function(sel, event, ...)
 					if GetInspectSpecialization ~= nil then
 						local currentSpec = GetInspectSpecialization("FOCUS")
 						f:UnregisterEvent("INSPECT_READY")
@@ -639,7 +639,7 @@ if FocusFrame then
 		end
 	end
 
-	function DUFUpdateFocusFrame()
+	function DUnitFrames:UpdateFocusFrame()
 		if FocusFrame then
 			FocusFrameHealthBar:SetHeight(1)
 			FocusFrameManaBar:SetHeight(1)

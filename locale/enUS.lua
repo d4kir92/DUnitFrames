@@ -1,7 +1,7 @@
 local _, DUnitFrames = ...
 -- enUS English
-lang = lang or {}
 function DUnitFrames:DUFLang_enUS()
+	local lang = DUnitFrames:GetLang()
 	lang.barmode = "Bar Mode"
 	lang.bartexture = "Bar Texture"
 	lang.bordermode = "Border Mode"

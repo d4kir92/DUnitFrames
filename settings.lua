@@ -34,8 +34,6 @@ function DUnitFrames:UpdateTexts()
 end
 
 local DUFLoaded = false
-DUFTAB = DUFTAB or {}
-DUFTABPC = DUFTABPC or {}
 function DUnitFrames:GetConfig(key, value, pc)
 	if DUFLoaded and DUFTAB ~= nil and DUFTABPC ~= nil then
 		if pc then
@@ -158,7 +156,6 @@ function DUnitFrames:CreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 end
 
 local Y = 0
-SORTTAB = {"Group", "Role"}
 local dufsetting = false
 function DUnitFrames:InitSettings()
 	if not dufsetting then
@@ -169,13 +166,11 @@ function DUnitFrames:InitSettings()
 		DUFSettings.panel = CreateFrame("FRAME")
 		DUFSettings.panel.name = settingname
 		Y = 0
-		H = 16
-		BR = 30
 		Y = Y - 10
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.48)")
+		text:SetText("Settings (v1.3.49)")
 		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
@@ -227,7 +222,7 @@ function DUnitFrames:InitSettings()
 			"bordermode",
 			{"Class+Status", "Class", "Status", "Dark", "Black", "Default"},
 			function()
-				DUFUpdateBorderColors()
+				DUnitFrames:UpdateBorderColors()
 			end
 		)
 
@@ -240,7 +235,7 @@ function DUnitFrames:InitSettings()
 			"barmode",
 			{"Class+Status", "Class", "Status", "Default"},
 			function()
-				DUFUpdateBarColors()
+				DUnitFrames:UpdateBarColors()
 			end
 		)
 
@@ -327,19 +322,19 @@ function DUnitFrames:InitSettings()
 			1,
 			"hpheight",
 			function()
-				DUFUpdatePlayerFrame()
-				DUFUpdateTargetFrame()
-				DUFUpdateTargetTexture()
-				if DUFUpdateFocusFrame then
-					DUFUpdateFocusFrame()
+				DUnitFrames:UpdatePlayerFrame()
+				DUnitFrames:UpdateTargetFrame()
+				DUnitFrames:UpdateTargetTexture()
+				if DUnitFrames.UpdateFocusFrame then
+					DUnitFrames:UpdateFocusFrame()
 				end
 
-				if DUFUpdateFocusTexture then
-					DUFUpdateFocusTexture()
+				if DUnitFrames.UpdateFocusTexture then
+					DUnitFrames:UpdateFocusTexture()
 				end
 
-				if DUFUpdatePartyMemberFrames then
-					DUFUpdatePartyMemberFrames()
+				if DUnitFrames.UpdatePartyMemberFrames then
+					DUnitFrames:UpdatePartyMemberFrames()
 				end
 
 				for id = 1, 4 do
@@ -475,7 +470,9 @@ local once = true
 function f:OnEvent(event, ...)
 	if event == "PLAYER_ENTERING_WORLD" and once then
 		once = false
-		D4:SetVersion(AddonName, 134167, "1.3.48")
+		DUFTAB = DUFTAB or {}
+		DUFTABPC = DUFTABPC or {}
+		DUnitFrames:SetVersion(AddonName, 134167, "1.3.49")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
@@ -489,14 +486,14 @@ function f:OnEvent(event, ...)
 			PlayerFrameTexture:SetVertexColor(1, 1, 1)
 		end
 
-		DUFPlayerFrameSetup()
-		DUFTargetFrameSetup()
-		if DUFFocusFrameSetup then
-			DUFFocusFrameSetup()
+		DUnitFrames:PlayerFrameSetup()
+		DUnitFrames:TargetFrameSetup()
+		if DUnitFrames.FocusFrameSetup then
+			DUnitFrames:FocusFrameSetup()
 		end
 
-		if DUFPartyMemberFramesSetup then
-			DUFPartyMemberFramesSetup()
+		if DUnitFrames.PartyMemberFramesSetup then
+			DUnitFrames:PartyMemberFramesSetup()
 		end
 
 		if PlayerFrame then
@@ -510,15 +507,15 @@ function f:OnEvent(event, ...)
 		end
 
 		-- PlayerFrame
-		hooksecurefunc("PlayerFrame_ToPlayerArt", DUFUpdatePlayerFrame)
+		hooksecurefunc("PlayerFrame_ToPlayerArt", DUnitFrames.UpdatePlayerFrame)
 		-- TargetFrame
 		if TargetFrame_CheckClassification then
 			hooksecurefunc(
 				"TargetFrame_CheckClassification",
 				function()
-					DUFUpdateTargetTexture()
-					if DUFUpdateFocusTexture then
-						DUFUpdateFocusTexture()
+					DUnitFrames:UpdateTargetTexture()
+					if DUnitFrames.UpdateFocusTexture then
+						DUnitFrames:UpdateFocusTexture()
 					end
 				end
 			)

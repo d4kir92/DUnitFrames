@@ -1,6 +1,10 @@
 local _, DUnitFrames = ...
 -- LIB Design
-lang = lang or {}
+local lang = {}
+function DUnitFrames:GetLang()
+	return lang
+end
+
 function DUnitFrames:GT(str, tab)
 	local strid = str
 	local result = lang[strid]

@@ -1,19 +1,19 @@
 local _, DUnitFrames = ...
-function DUFTargetFrameSetup()
+function DUnitFrames:TargetFrameSetup()
 	if TargetFrameHealthBar then
 		hooksecurefunc(
 			TargetFrameHealthBar,
 			"SetStatusBarTexture",
-			function(self, texture)
-				if self.settexture then return end
-				self.settexture = true
+			function(sel, texture)
+				if sel.settexture then return end
+				sel.settexture = true
 				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-					self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 				else
-					self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+					sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 				end
 
-				self.settexture = false
+				sel.settexture = false
 			end
 		)
 
@@ -24,16 +24,16 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameManaBar,
 			"SetStatusBarTexture",
-			function(self, texture)
-				if self.settexture then return end
-				self.settexture = true
+			function(sel, texture)
+				if sel.settexture then return end
+				sel.settexture = true
 				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-					self:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
+					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 				else
-					self:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+					sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 				end
 
-				self.settexture = false
+				sel.settexture = false
 			end
 		)
 
@@ -53,17 +53,17 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameHealthBar,
 			"SetStatusBarColor",
-			function(self, oR, oG, oB)
-				if self.dufsetvertexcolor then return end
-				self.dufsetvertexcolor = true
-				local r, g, b = DUFGetBarColor("TARGET", self)
+			function(sel, oR, oG, oB)
+				if sel.dufsetvertexcolor then return end
+				sel.dufsetvertexcolor = true
+				local r, g, b = DUnitFrames:GetBarColor("TARGET", sel)
 				if r and g and b then
-					self:SetStatusBarColor(r, g, b)
+					sel:SetStatusBarColor(r, g, b)
 				else
-					self:SetStatusBarColor(oR, oG, oB)
+					sel:SetStatusBarColor(oR, oG, oB)
 				end
 
-				self.dufsetvertexcolor = false
+				sel.dufsetvertexcolor = false
 			end
 		)
 
@@ -78,13 +78,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameHealthBarTextRight,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextRight")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -92,13 +92,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameHealthBarTextLeft,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarTextLeft")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -106,13 +106,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameHealthBarText,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameHealthBarText")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -120,13 +120,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameManaBarTextLeft,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextLeft")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -134,13 +134,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameManaBarTextRight,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarTextRight")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -148,13 +148,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameManaBarText,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameManaBarText")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -166,13 +166,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameHealthBarTextLeft,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextLeft")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -180,13 +180,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameHealthBarTextRight,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarTextRight")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -194,13 +194,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameHealthBarText,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitHealth("TARGET"), UnitHealthMax("TARGET"), "TargetFrameTextureFrameHealthBarText")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -208,13 +208,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameManaBarTextLeft,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextLeft")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -222,13 +222,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameManaBarTextRight,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarTextRight")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -236,13 +236,13 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameManaBarText,
 					"SetText",
-					function(self, text)
-						if self.dufsettext then return end
-						self.dufsettext = true
-						DUnitFrames:SetFont(self)
+					function(sel, text)
+						if sel.dufsettext then return end
+						sel.dufsettext = true
+						DUnitFrames:SetFont(sel)
 						local newText = DUnitFrames:ModifyText(text, UnitPower("TARGET"), UnitPowerMax("TARGET"), "TargetFrameTextureFrameManaBarText")
-						self:SetText(newText)
-						self.dufsettext = false
+						sel:SetText(newText)
+						sel.dufsettext = false
 					end
 				)
 
@@ -256,11 +256,11 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameHealthBar,
 			"SetHeight",
-			function(self)
-				if self.dufsetheight then return end
-				self.dufsetheight = true
-				self:SetHeight(DUnitFrames:HPHeight())
-				self.dufsetheight = false
+			function(sel)
+				if sel.dufsetheight then return end
+				sel.dufsetheight = true
+				sel:SetHeight(DUnitFrames:HPHeight())
+				sel.dufsetheight = false
 			end
 		)
 
@@ -268,22 +268,22 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameHealthBar,
 			"SetSize",
-			function(self)
-				if self.dufsetsize then return end
-				self.dufsetsize = true
-				self:SetHeight(DUnitFrames:HPHeight())
-				self.dufsetsize = false
+			function(sel)
+				if sel.dufsetsize then return end
+				sel.dufsetsize = true
+				sel:SetHeight(DUnitFrames:HPHeight())
+				sel.dufsetsize = false
 			end
 		)
 
 		hooksecurefunc(
 			TargetFrameHealthBar,
 			"SetPoint",
-			function(self)
-				if self.dufsetpoint then return end
-				self.dufsetpoint = true
-				self:SetPoint("TOPLEFT", 6, -24)
-				self.dufsetpoint = false
+			function(sel)
+				if sel.dufsetpoint then return end
+				sel.dufsetpoint = true
+				sel:SetPoint("TOPLEFT", 6, -24)
+				sel.dufsetpoint = false
 			end
 		)
 
@@ -294,16 +294,16 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameManaBar,
 			"SetHeight",
-			function(self)
-				if self.dufsetheight then return end
-				self.dufsetheight = true
+			function(sel)
+				if sel.dufsetheight then return end
+				sel.dufsetheight = true
 				if 38 - DUnitFrames:HPHeight() > 1 then
-					self:SetHeight(38 - DUnitFrames:HPHeight())
+					sel:SetHeight(38 - DUnitFrames:HPHeight())
 				else
-					self:SetHeight(1)
+					sel:SetHeight(1)
 				end
 
-				self.dufsetheight = false
+				sel.dufsetheight = false
 			end
 		)
 
@@ -311,27 +311,27 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameManaBar,
 			"SetSize",
-			function(self)
-				if self.dufsetsize then return end
-				self.dufsetsize = true
+			function(sel)
+				if sel.dufsetsize then return end
+				sel.dufsetsize = true
 				if 38 - DUnitFrames:HPHeight() > 1 then
-					self:SetHeight(38 - DUnitFrames:HPHeight())
+					sel:SetHeight(38 - DUnitFrames:HPHeight())
 				else
-					self:SetHeight(1)
+					sel:SetHeight(1)
 				end
 
-				self.dufsetsize = false
+				sel.dufsetsize = false
 			end
 		)
 
 		hooksecurefunc(
 			TargetFrameManaBar,
 			"SetPoint",
-			function(self)
-				if self.dufsetpoint then return end
-				self.dufsetpoint = true
-				self:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
-				self.dufsetpoint = false
+			function(sel)
+				if sel.dufsetpoint then return end
+				sel.dufsetpoint = true
+				sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
+				sel.dufsetpoint = false
 			end
 		)
 
@@ -348,7 +348,7 @@ function DUFTargetFrameSetup()
 		TargetFrameNameBackground:SetParent(DUFHIDDEN)
 	end
 
-	function DUFUpdateTargetTexture()
+	function DUnitFrames:UpdateTargetTexture()
 		local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
 		local class = UnitClassification("TARGET")
 		if class == "worldboss" or class == "elite" then
@@ -370,11 +370,11 @@ function DUFTargetFrameSetup()
 			hooksecurefunc(
 				TargetFrameTextureFrameTexture.spacer,
 				"SetVertexColor",
-				function(self, r, g, b, a)
-					if self.dufsetvertexcolor then return end
-					self.dufsetvertexcolor = true
-					self:SetVertexColor(r, g, b, a)
-					self.dufsetvertexcolor = false
+				function(sel, r, g, b, a)
+					if sel.dufsetvertexcolor then return end
+					sel.dufsetvertexcolor = true
+					sel:SetVertexColor(r, g, b, a)
+					sel.dufsetvertexcolor = false
 				end
 			)
 
@@ -423,9 +423,9 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameManaBarTextLeft,
 					"Show",
-					function(self, ...)
+					function(sel, ...)
 						if DUnitFrames:HPHeight() >= 32 then
-							self:Hide()
+							sel:Hide()
 						end
 					end
 				)
@@ -436,9 +436,9 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameManaBarTextRight,
 					"Show",
-					function(self, ...)
+					function(sel, ...)
 						if DUnitFrames:HPHeight() >= 32 then
-							self:Hide()
+							sel:Hide()
 						end
 					end
 				)
@@ -449,9 +449,9 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameManaBarText,
 					"Show",
-					function(self, ...)
+					function(sel, ...)
 						if DUnitFrames:HPHeight() >= 32 then
-							self:Hide()
+							sel:Hide()
 						end
 					end
 				)
@@ -494,9 +494,9 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameManaBarTextLeft,
 					"Show",
-					function(self, ...)
+					function(sel, ...)
 						if DUnitFrames:HPHeight() >= 32 then
-							self:Hide()
+							sel:Hide()
 						end
 					end
 				)
@@ -507,9 +507,9 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameManaBarTextRight,
 					"Show",
-					function(self, ...)
+					function(sel, ...)
 						if DUnitFrames:HPHeight() >= 32 then
-							self:Hide()
+							sel:Hide()
 						end
 					end
 				)
@@ -520,9 +520,9 @@ function DUFTargetFrameSetup()
 				hooksecurefunc(
 					TargetFrameTextureFrameManaBarText,
 					"Show",
-					function(self, ...)
+					function(sel, ...)
 						if DUnitFrames:HPHeight() >= 32 then
-							self:Hide()
+							sel:Hide()
 						end
 					end
 				)
@@ -582,7 +582,7 @@ function DUFTargetFrameSetup()
 
 		if ThreatBorder and ThreatBorder:IsShown() then
 			y = 24
-			local r, g, b, isDefault = DUFGetBorderColor("TARGET", TargetFrame)
+			local r, g, b, isDefault = DUnitFrames:GetBorderColor("TARGET", TargetFrame)
 			if ThreatBorder then
 				if r and g and b and not isDefault then
 					ThreatBorder:SetVertexColor(r, g, b, 1)
@@ -623,17 +623,17 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameTextureFrameName,
 			"SetText",
-			function(self, text, ...)
-				if self.dufsettext then return end
-				self.dufsettext = true
-				DUnitFrames:SetFont(self, DUnitFrames:GetConfig("namesize", 10))
+			function(sel, text, ...)
+				if sel.dufsettext then return end
+				sel.dufsettext = true
+				DUnitFrames:SetFont(sel, DUnitFrames:GetConfig("namesize", 10))
 				if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Hide" then
-					self:SetAlpha(0)
+					sel:SetAlpha(0)
 				else
-					self:SetAlpha(1)
+					sel:SetAlpha(1)
 				end
 
-				self.dufsettext = false
+				sel.dufsettext = false
 			end
 		)
 
@@ -644,21 +644,21 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameTextureFrameTexture,
 			"SetVertexColor",
-			function(self, oR, oG, oB)
-				if self.dufsetvertexcolor then return end
-				self.dufsetvertexcolor = true
-				local r, g, b, isDefault = DUFGetBorderColor("TARGET", self)
+			function(sel, oR, oG, oB)
+				if sel.dufsetvertexcolor then return end
+				sel.dufsetvertexcolor = true
+				local r, g, b, isDefault = DUnitFrames:GetBorderColor("TARGET", sel)
 				if r and g and b and not isDefault then
-					self:SetVertexColor(r, g, b, 1)
+					sel:SetVertexColor(r, g, b, 1)
 				else
-					self:SetVertexColor(oR, oG, oB, 1)
+					sel:SetVertexColor(oR, oG, oB, 1)
 				end
 
-				if self.spacer then
-					self.spacer:SetVertexColor(self:GetVertexColor())
+				if sel.spacer then
+					sel.spacer:SetVertexColor(sel:GetVertexColor())
 				end
 
-				self.dufsetvertexcolor = false
+				sel.dufsetvertexcolor = false
 			end
 		)
 
@@ -669,17 +669,17 @@ function DUFTargetFrameSetup()
 		hooksecurefunc(
 			TargetFrameToTTextureFrameTexture,
 			"SetVertexColor",
-			function(self, oR, oG, oB)
-				if self.dufsetvertexcolor then return end
-				self.dufsetvertexcolor = true
-				local r, g, b, isDefault = DUFGetBorderColor("TARGETTARGET", self)
+			function(sel, oR, oG, oB)
+				if sel.dufsetvertexcolor then return end
+				sel.dufsetvertexcolor = true
+				local r, g, b, isDefault = DUnitFrames:GetBorderColor("TARGETTARGET", sel)
 				if r and g and b and not isDefault then
-					self:SetVertexColor(r, g, b, 1)
+					sel:SetVertexColor(r, g, b, 1)
 				else
-					self:SetVertexColor(oR, oG, oB, 1)
+					sel:SetVertexColor(oR, oG, oB, 1)
 				end
 
-				self.dufsetvertexcolor = false
+				sel.dufsetvertexcolor = false
 			end
 		)
 
@@ -697,7 +697,7 @@ function DUFTargetFrameSetup()
 
 		f:SetScript(
 			"OnEvent",
-			function(self, event, ...)
+			function(sel, event, ...)
 				if GetInspectSpecialization ~= nil then
 					local currentSpec = GetInspectSpecialization("TARGET")
 					f:UnregisterEvent("INSPECT_READY")
@@ -713,7 +713,7 @@ function DUFTargetFrameSetup()
 	end
 end
 
-function DUFUpdateTargetFrame()
+function DUnitFrames:UpdateTargetFrame()
 	TargetFrameManaBar:ClearAllPoints()
 	TargetFrameManaBar:SetPoint("CENTER", TargetFrame, "CENTER", 0, 0)
 	TargetFrameHealthBar:SetHeight(1)

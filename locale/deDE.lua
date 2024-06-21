@@ -1,7 +1,7 @@
 local _, DUnitFrames = ...
 -- deDE German Deutsch
-lang = lang or {}
 function DUnitFrames:DUFLang_deDE()
+	local lang = DUnitFrames:GetLang()
 	lang.barmode = "Leisten Modus"
 	lang.bartexture = "Leisten Texture"
 	lang.bordermode = "Rand Modus"
