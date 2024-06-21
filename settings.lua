@@ -170,7 +170,7 @@ function DUnitFrames:InitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.49)")
+		text:SetText("Settings (v1.3.50)")
 		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
@@ -472,7 +472,7 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
-		DUnitFrames:SetVersion(AddonName, 134167, "1.3.49")
+		DUnitFrames:SetVersion(AddonName, 134167, "1.3.50")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end

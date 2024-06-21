@@ -1,4 +1,5 @@
 local _, DUnitFrames = ...
+DUnitFrames:SetAddonOutput("DUnitFrames", 134167)
 -- LIB Design
 local lang = {}
 function DUnitFrames:GetLang()
