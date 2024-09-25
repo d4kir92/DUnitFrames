@@ -55,9 +55,30 @@ function DUnitFrames:GetConfig(key, value, pc)
 end
 
 function DUnitFrames:CreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
-	local SL = CreateFrame("Slider", nil, parent, "OptionsSliderTemplate")
-	SL:SetWidth(600)
+	local SL = CreateFrame("Slider", nil, parent, "UISliderTemplate")
+	SL:SetSize(600, 16)
 	SL:SetPoint("TOPLEFT", x, y)
+	if SL.Low == nil then
+		SL.Low = SL:CreateFontString(nil, nil, "GameFontNormal")
+		SL.Low:SetPoint("BOTTOMLEFT", SL, "BOTTOMLEFT", 0, -12)
+		SL.Low:SetFont(STANDARD_TEXT_FONT, 10, "THINOUTLINE")
+		SL.Low:SetTextColor(1, 1, 1)
+	end
+
+	if SL.High == nil then
+		SL.High = SL:CreateFontString(nil, nil, "GameFontNormal")
+		SL.High:SetPoint("BOTTOMRIGHT", SL, "BOTTOMRIGHT", 0, -12)
+		SL.High:SetFont(STANDARD_TEXT_FONT, 10, "THINOUTLINE")
+		SL.High:SetTextColor(1, 1, 1)
+	end
+
+	if SL.Text == nil then
+		SL.Text = SL:CreateFontString(nil, nil, "GameFontNormal")
+		SL.Text:SetPoint("TOP", SL, "TOP", 0, 16)
+		SL.Text:SetFont(STANDARD_TEXT_FONT, 12, "THINOUTLINE")
+		SL.Text:SetTextColor(1, 1, 1)
+	end
+
 	SL.Low:SetText(vmin)
 	SL.High:SetText(vmax)
 	SL.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. DUnitFrames:GetConfig(key, vval))
@@ -170,7 +191,7 @@ function DUnitFrames:InitSettings()
 		local text = DUFSettings.panel:CreateFontString(nil, "ARTWORK")
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
-		text:SetText("Settings (v1.3.54)")
+		text:SetText("Settings (v1.3.55)")
 		DUnitFrames:CreateComboBox(
 			DUFSettings.panel,
 			"portraitmode",
@@ -472,7 +493,7 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
-		DUnitFrames:SetVersion(AddonName, 134167, "1.3.54")
+		DUnitFrames:SetVersion(AddonName, 134167, "1.3.55")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
