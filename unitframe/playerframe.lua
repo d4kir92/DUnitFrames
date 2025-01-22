@@ -575,12 +575,14 @@ function DUnitFrames:PlayerFrameSetup()
 			-- when current power is mana or the maxmana is <= 0
 			if UnitPowerType("PLAYER") == Enum.PowerType.Mana or UnitPowerMax("PLAYER", Enum.PowerType.Mana) <= 0 then
 				PlayerFrameAlternateManaBar:Hide() -- hide when warrior, rogue, ... or when current power is mana
-			else
+			elseif DUnitFrames:GetConfig("alternatemanabar", true) then
 				PlayerFrameAlternateManaBar:Show()
 				local per = UnitPower("PLAYER", Enum.PowerType.Mana) / UnitPowerMax("PLAYER", Enum.PowerType.Mana)
 				PlayerFrameAlternateManaBar.texture:SetWidth(per * PlayerFrameAlternateManaBar:GetWidth() - 4)
 				PlayerFrameAlternateManaBar.textl:SetText(DUnitFrames:PN(UnitPower("PLAYER", Enum.PowerType.Mana), UnitPowerMax("PLAYER", Enum.PowerType.Mana)))
 				PlayerFrameAlternateManaBar.textr:SetText(DUnitFrames:NN(UnitPower("PLAYER", Enum.PowerType.Mana)))
+			else
+				PlayerFrameAlternateManaBar:Hide()
 			end
 
 			if DUnitFrames:GetConfig("namemode", "Over Portrait") == "Inside Health" then

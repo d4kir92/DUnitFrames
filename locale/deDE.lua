@@ -16,4 +16,5 @@ function DUnitFrames:DUFLang_deDE()
 	lang.showspecs = "Specs anzeigen"
 	lang.showthreat = "Bedrohung anzeigen"
 	lang.outline = "Umrandung"
+	lang.alternatemanabar = "Alternative Mana Leiste (Druide)"
 end

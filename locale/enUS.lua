@@ -16,4 +16,5 @@ function DUnitFrames:DUFLang_enUS()
 	lang.showspecs = "Show Specs"
 	lang.showthreat = "Show Threat"
 	lang.outline = "Outline"
+	lang.alternatemanabar = "Alternate Mana Bar (Druid)"
 end
