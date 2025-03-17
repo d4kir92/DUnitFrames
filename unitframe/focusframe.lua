@@ -524,7 +524,7 @@ if FocusFrame then
 
 		local ThreatBorder = nil
 		if FocusFrameNumericalThreat ~= nil then
-			ThreatBorder = select(3, {FocusFrameNumericalThreat:GetRegions()})
+			ThreatBorder = select(3, FocusFrameNumericalThreat:GetRegions())
 		end
 
 		function FocusFrame.Think()

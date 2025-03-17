@@ -9,7 +9,7 @@ function DUnitFrames:GetBorderColor(unit, frame)
 	local r = nil
 	local g = nil
 	local b = nil
-	if frame and frame.brcr == nil and frame.brcg == nil and frame.brcb == nil then
+	if frame and frame.brcr == nil and frame.brcg == nil and frame.brcb == nil and frame.GetVertexColor then
 		frame.brcr, frame.brcg, frame.brcb = frame:GetVertexColor()
 	end
 

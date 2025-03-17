@@ -552,7 +552,7 @@ function DUnitFrames:TargetFrameSetup()
 
 	local ThreatBorder = nil
 	if TargetFrameNumericalThreat ~= nil then
-		ThreatBorder = select(3, {TargetFrameNumericalThreat:GetRegions()})
+		ThreatBorder = select(3, TargetFrameNumericalThreat:GetRegions())
 	end
 
 	function TargetFrame.Think()
