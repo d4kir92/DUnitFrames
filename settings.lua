@@ -1,5 +1,5 @@
 -- By D4KiR
-local AddonName, DUnitFrames = ...
+local _, DUnitFrames = ...
 local LibDD = LibStub:GetLibrary("LibUIDropDownMenu-4.0")
 function DUnitFrames:GetFontFlags()
 	if DUnitFrames:GetConfig("outline", true) then return "THINOUTLINE" end
@@ -495,7 +495,7 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
-		DUnitFrames:SetVersion(134167, "1.3.74")
+		DUnitFrames:SetVersion(134167, "1.3.75")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end

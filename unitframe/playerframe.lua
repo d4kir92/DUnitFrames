@@ -182,7 +182,7 @@ function DUnitFrames:UpdatePlayerFrame()
 	end
 
 	if PlayerFrameTexture and PlayerFrameTexture.spacer == nil then
-		PlayerFrameTexture.spacer = PlayerFrameTexture:GetParent():CreateTexture(nil, "ARTWORK")
+		PlayerFrameTexture.spacer = DUnitFrames:GetParent(PlayerFrameTexture):CreateTexture(nil, "ARTWORK")
 		PlayerFrameTexture.spacer:SetDrawLayer("ARTWORK", 7)
 		hooksecurefunc(
 			PlayerFrameTexture.spacer,
