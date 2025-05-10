@@ -18,13 +18,13 @@ function DUnitFrames:GetBorderColor(unit, frame)
 	if mode then
 		if mode == "Class+Status" then
 			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then
-				r, g, b = GetClassColor(PlayerClassEng)
+				r, g, b = DUnitFrames:GetClassColor(PlayerClassEng)
 			else
 				r, g, b = GameTooltip_UnitColor(unit)
 			end
 		elseif mode == "Class" then
 			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then
-				r, g, b = GetClassColor(PlayerClassEng)
+				r, g, b = DUnitFrames:GetClassColor(PlayerClassEng)
 			end
 		elseif mode == "Status" then
 			r, g, b = GameTooltip_UnitColor(unit)
@@ -63,13 +63,13 @@ function DUnitFrames:GetBarColor(unit, frame)
 	if mode then
 		if mode == "Class+Status" then
 			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then
-				r, g, b = GetClassColor(PlayerClassEng)
+				r, g, b = DUnitFrames:GetClassColor(PlayerClassEng)
 			else
 				r, g, b = GameTooltip_UnitColor(unit)
 			end
 		elseif mode == "Class" then
 			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then
-				r, g, b = GetClassColor(PlayerClassEng)
+				r, g, b = DUnitFrames:GetClassColor(PlayerClassEng)
 			end
 		elseif mode == "Status" then
 			r, g, b = GameTooltip_UnitColor(unit)
