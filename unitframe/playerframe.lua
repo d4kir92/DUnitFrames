@@ -73,8 +73,6 @@ function DUnitFrames:GetBarColor(unit, frame)
 			end
 		elseif mode == "Status" then
 			r, g, b = GameTooltip_UnitColor(unit)
-		else
-			r, g, b = frame.bacr, frame.bacg, frame.bacb
 		end
 	end
 
