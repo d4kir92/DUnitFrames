@@ -1,0 +1,53 @@
+{
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.builtin": {
+        "basic": "disable",
+        "debug": "disable",
+        "io": "disable",
+        "math": "disable",
+        "os": "disable",
+        "package": "disable",
+        "string": "disable",
+        "table": "disable",
+        "utf8": "disable"
+    },
+    "Lua.workspace.library": [
+        "~\\.vscode\\extensions\\ketho.wow-api-0.21.0\\Annotations\\Core"
+    ],
+    "Lua.diagnostics.globals": [
+        "PlayerFrame",
+        "CLASS_ICON_TCOORDS",
+        "MouseIsOver",
+        "UIDROPDOWNMENU_MAXLEVELS",
+        "ExecuteFrameScript",
+        "DropDownMenuButtonMixin",
+        "ColorPickerFrame",
+        "VIDEO_QUALITY_LABEL6",
+        "Clamp",
+        "SOUNDKIT",
+        "TooltipBackdropTemplateMixin",
+        "SharedTooltip_SetBackdropStyle",
+        "GameTooltip_Hide",
+        "GameTooltip_AddErrorLine",
+        "UIDropDownMenu_SetWidth",
+        "UIDropDownMenu_Initialize",
+        "UIDropDownMenu_SetText",
+        "CloseDropDownMenus",
+        "UIDropDownMenu_CreateInfo",
+        "UIDropDownMenu_AddButton",
+        "ICON_LIST",
+        "ChatFrame_AddMessageEventFilter",
+        "UnitFrameHealthBar_Initialize",
+        "UnitFrameManaBar_Initialize",
+        "FocusFrame",
+        "AbbreviateLargeNumbers",
+        "AddonCompartmentFrame",
+        "ChatEdit_ParseText",
+        "ChatEdit_SendText",
+        "STANDARD_TEXT_FONT",
+        "UnitFramePortrait_Update",
+        "PlayerName",
+        "GameTooltip_UnitColor",
+        "TargetFrame"
+    ]
+}
