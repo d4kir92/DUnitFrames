@@ -176,7 +176,11 @@ function DUnitFrames:UpdatePlayerFrame()
 		)
 
 		PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
-		PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
+		if DUnitFrames:GetWoWBuild() == "TBC" then
+			PlayerFrameHealthBar:SetPoint("TOPLEFT", 89, -26)
+		else
+			PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
+		end
 	end
 
 	if PlayerFrameTexture and PlayerFrameTexture.spacer == nil then
@@ -199,7 +203,12 @@ function DUnitFrames:UpdatePlayerFrame()
 	if PlayerFrameTexture and PlayerFrameTexture.spacer then
 		PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0)
 		PlayerFrameTexture.spacer:SetSize(128, 16)
-		PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUnitFrames:HPHeight())
+		if DUnitFrames:GetWoWBuild() == "TBC" then
+			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 3, 30 - DUnitFrames:HPHeight())
+		else
+			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUnitFrames:HPHeight())
+		end
+
 		PlayerFrameTexture.spacer:SetTexture(texture .. "_Spacer")
 		if DUnitFrames:HPHeight() >= 32 then
 			PlayerFrameTexture.spacer:Hide()
@@ -211,8 +220,13 @@ function DUnitFrames:UpdatePlayerFrame()
 	end
 
 	if PlayerFrameManaBar then
-		PlayerFrameManaBar:SetHeight(38 - DUnitFrames:HPHeight())
-		PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 - DUnitFrames:HPHeight() - 1)
+		if DUnitFrames:GetWoWBuild() == "TBC" then
+			PlayerFrameManaBar:SetHeight(42 - DUnitFrames:HPHeight())
+			PlayerFrameManaBar:SetPoint("TOPLEFT", 90, -24 - DUnitFrames:HPHeight() - 1)
+		else
+			PlayerFrameManaBar:SetHeight(38 - DUnitFrames:HPHeight())
+			PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 - DUnitFrames:HPHeight() - 1)
+		end
 	end
 
 	if PlayerFrameHealthBarTextLeft then
@@ -516,10 +530,18 @@ function DUnitFrames:PlayerFrameSetup()
 			function(sel)
 				if sel.dufsetheight then return end
 				sel.dufsetheight = true
-				if 38 - DUnitFrames:HPHeight() > 1 then
-					sel:SetHeight(38 - DUnitFrames:HPHeight())
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					if 42 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(42 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				else
-					sel:SetHeight(1)
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				end
 
 				sel.dufsetheight = false
@@ -533,10 +555,18 @@ function DUnitFrames:PlayerFrameSetup()
 			function(sel)
 				if sel.dufsetsize then return end
 				sel.dufsetsize = true
-				if 38 - DUnitFrames:HPHeight() > 1 then
-					sel:SetHeight(38 - DUnitFrames:HPHeight())
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					if 42 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(42 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				else
-					sel:SetHeight(1)
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				end
 
 				sel.dufsetsize = false

@@ -279,12 +279,21 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetpoint then return end
 					sel.dufsetpoint = true
-					sel:SetPoint("TOPLEFT", 6, -24)
+					if DUnitFrames:GetWoWBuild() == "TBC" then
+						sel:SetPoint("TOPLEFT", 24, -26)
+					else
+						sel:SetPoint("TOPLEFT", 6, -24)
+					end
+
 					sel.dufsetpoint = false
 				end
 			)
 
-			FocusFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+			if DUnitFrames:GetWoWBuild() == "TBC" then
+				FocusFrameHealthBar:SetPoint("TOPLEFT", 24, -26)
+			else
+				FocusFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+			end
 		end
 
 		if FocusFrameManaBar then
@@ -294,10 +303,18 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetheight then return end
 					sel.dufsetheight = true
-					if 38 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(38 - DUnitFrames:HPHeight())
+					if DUnitFrames:GetWoWBuild() == "TBC" then
+						if 40 - DUnitFrames:HPHeight() > 1 then
+							sel:SetHeight(40 - DUnitFrames:HPHeight())
+						else
+							sel:SetHeight(1)
+						end
 					else
-						sel:SetHeight(1)
+						if 38 - DUnitFrames:HPHeight() > 1 then
+							sel:SetHeight(38 - DUnitFrames:HPHeight())
+						else
+							sel:SetHeight(1)
+						end
 					end
 
 					sel.dufsetheight = false
@@ -311,10 +328,18 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetsize then return end
 					sel.dufsetsize = true
-					if 38 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(38 - DUnitFrames:HPHeight())
+					if DUnitFrames:GetWoWBuild() == "TBC" then
+						if 40 - DUnitFrames:HPHeight() > 1 then
+							sel:SetHeight(40 - DUnitFrames:HPHeight())
+						else
+							sel:SetHeight(1)
+						end
 					else
-						sel:SetHeight(1)
+						if 38 - DUnitFrames:HPHeight() > 1 then
+							sel:SetHeight(38 - DUnitFrames:HPHeight())
+						else
+							sel:SetHeight(1)
+						end
 					end
 
 					sel.dufsetsize = false
@@ -327,23 +352,48 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetpoint then return end
 					sel.dufsetpoint = true
-					sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
+					if DUnitFrames:GetWoWBuild() == "TBC" then
+						sel:SetPoint("TOPLEFT", 24, -25 - DUnitFrames:HPHeight() - 1)
+					else
+						sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
+					end
+
 					sel.dufsetpoint = false
 				end
 			)
 
-			FocusFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+			if DUnitFrames:GetWoWBuild() == "TBC" then
+				FocusFrameManaBar:SetPoint("TOPLEFT", 24, -26)
+			else
+				FocusFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+			end
 		end
 
 		if FocusFrameBackground then
 			FocusFrameBackground:SetHeight(40)
 			FocusFrameBackground:ClearAllPoints()
-			FocusFrameBackground:SetPoint("TOPLEFT", 6, -24)
+			if DUnitFrames:GetWoWBuild() == "TBC" then
+				FocusFrameBackground:SetPoint("TOPLEFT", 24, -26)
+			else
+				FocusFrameBackground:SetPoint("TOPLEFT", 6, -24)
+			end
 		end
 
 		if FocusFrameNameBackground then
 			FocusFrameNameBackground:SetParent(DUFHIDDEN)
 		end
+
+		local updateTexture = false
+		hooksecurefunc(
+			FocusFrameTextureFrameTexture,
+			"SetTexture",
+			function()
+				if updateTexture then return end
+				updateTexture = true
+				DUnitFrames:UpdateFocusTexture()
+				updateTexture = false
+			end
+		)
 
 		function DUnitFrames:UpdateFocusTexture()
 			local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
@@ -380,7 +430,12 @@ if FocusFrame then
 
 			if FocusFrameTextureFrameTexture.spacer then
 				FocusFrameTextureFrameTexture.spacer:SetSize(128, 16)
-				FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 5, 21 - DUnitFrames:HPHeight())
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 2, 25 - DUnitFrames:HPHeight())
+				else
+					FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 5, 21 - DUnitFrames:HPHeight())
+				end
+
 				FocusFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
 				if DUnitFrames:HPHeight() >= 32 then
 					FocusFrameTextureFrameTexture.spacer:Hide()

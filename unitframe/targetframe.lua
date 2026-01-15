@@ -282,12 +282,21 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetpoint then return end
 				sel.dufsetpoint = true
-				sel:SetPoint("TOPLEFT", 6, -24)
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					sel:SetPoint("TOPLEFT", 24, -26)
+				else
+					sel:SetPoint("TOPLEFT", 6, -24)
+				end
+
 				sel.dufsetpoint = false
 			end
 		)
 
-		TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+		if DUnitFrames:GetWoWBuild() == "TBC" then
+			TargetFrameHealthBar:SetPoint("TOPLEFT", 24, -26)
+		else
+			TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
+		end
 	end
 
 	if TargetFrameManaBar then
@@ -297,10 +306,18 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetheight then return end
 				sel.dufsetheight = true
-				if 38 - DUnitFrames:HPHeight() > 1 then
-					sel:SetHeight(38 - DUnitFrames:HPHeight())
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					if 40 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(40 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				else
-					sel:SetHeight(1)
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				end
 
 				sel.dufsetheight = false
@@ -314,10 +331,18 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetsize then return end
 				sel.dufsetsize = true
-				if 38 - DUnitFrames:HPHeight() > 1 then
-					sel:SetHeight(38 - DUnitFrames:HPHeight())
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					if 40 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(40 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				else
-					sel:SetHeight(1)
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
+					else
+						sel:SetHeight(1)
+					end
 				end
 
 				sel.dufsetsize = false
@@ -330,23 +355,48 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetpoint then return end
 				sel.dufsetpoint = true
-				sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
+				if DUnitFrames:GetWoWBuild() == "TBC" then
+					sel:SetPoint("TOPLEFT", 24, -25 - DUnitFrames:HPHeight() - 1)
+				else
+					sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
+				end
+
 				sel.dufsetpoint = false
 			end
 		)
 
-		TargetFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+		if DUnitFrames:GetWoWBuild() == "TBC" then
+			TargetFrameManaBar:SetPoint("TOPLEFT", 24, -26)
+		else
+			TargetFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+		end
 	end
 
 	if TargetFrameBackground then
 		TargetFrameBackground:SetHeight(40)
 		TargetFrameBackground:ClearAllPoints()
-		TargetFrameBackground:SetPoint("TOPLEFT", 6, -24)
+		if DUnitFrames:GetWoWBuild() == "TBC" then
+			TargetFrameBackground:SetPoint("TOPLEFT", 24, -26)
+		else
+			TargetFrameBackground:SetPoint("TOPLEFT", 6, -24)
+		end
 	end
 
 	if TargetFrameNameBackground then
 		TargetFrameNameBackground:SetParent(DUFHIDDEN)
 	end
+
+	local updateTexture = false
+	hooksecurefunc(
+		TargetFrameTextureFrameTexture,
+		"SetTexture",
+		function()
+			if updateTexture then return end
+			updateTexture = true
+			DUnitFrames:UpdateTargetTexture()
+			updateTexture = false
+		end
+	)
 
 	function DUnitFrames:UpdateTargetTexture()
 		local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
@@ -383,7 +433,12 @@ function DUnitFrames:TargetFrameSetup()
 
 		if TargetFrameTextureFrameTexture.spacer then
 			TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
-			TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUnitFrames:HPHeight())
+			if DUnitFrames:GetWoWBuild() == "TBC" then
+				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 2, 25 - DUnitFrames:HPHeight())
+			else
+				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUnitFrames:HPHeight())
+			end
+
 			TargetFrameTextureFrameTexture.spacer:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame" .. "_Spacer")
 			if DUnitFrames:HPHeight() >= 32 then
 				TargetFrameTextureFrameTexture.spacer:Hide()
