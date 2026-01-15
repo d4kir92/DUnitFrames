@@ -84,13 +84,17 @@ end
 
 function DUnitFrames:UpdateBorderColors()
 	for i, v in pairs(borderTab) do
-		v:SetVertexColor(v:GetVertexColor())
+		if v.GetVertexColor then
+			v:SetVertexColor(v:GetVertexColor())
+		end
 	end
 end
 
 function DUnitFrames:UpdateBarColors()
 	for i, v in pairs(barTab) do
-		v:SetStatusBarColor(v:GetStatusBarColor())
+		if v.GetStatusBarColor then
+			v:SetStatusBarColor(v:GetStatusBarColor())
+		end
 	end
 end
 

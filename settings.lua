@@ -55,7 +55,13 @@ function DUnitFrames:GetConfig(key, value, pc)
 end
 
 function DUnitFrames:CreateSlider(parent, key, vval, x, y, vmin, vmax, steps, lstr, func)
-	local SL = CreateFrame("Slider", nil, parent, "UISliderTemplate")
+	local SL = nil
+	if DoesTemplateExist and DoesTemplateExist("MinimalSliderTemplate") then
+		SL = CreateFrame("Slider", nil, parent, "MinimalSliderTemplate")
+	else
+		SL = CreateFrame("Slider", nil, parent, "UISliderTemplate")
+	end
+
 	SL:SetSize(600, 16)
 	SL:SetPoint("TOPLEFT", x, y)
 	if SL.Low == nil then
@@ -87,6 +93,7 @@ function DUnitFrames:CreateSlider(parent, key, vval, x, y, vmin, vmax, steps, ls
 	SL:SetObeyStepOnDrag(steps)
 	SL:SetValueStep(steps)
 	SL.oldval = nil
+	-- Save your setting here
 	SL:SetScript(
 		"OnValueChanged",
 		function(sel, val)
@@ -495,7 +502,7 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
-		DUnitFrames:SetVersion(134167, "1.3.88")
+		DUnitFrames:SetVersion(134167, "1.3.89")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
