@@ -283,7 +283,7 @@ function DUnitFrames:TargetFrameSetup()
 				if sel.dufsetpoint then return end
 				sel.dufsetpoint = true
 				if DUnitFrames:GetWoWBuild() == "TBC" then
-					sel:SetPoint("TOPLEFT", 24, -26)
+					sel:SetPoint("TOPLEFT", 24, -27)
 				else
 					sel:SetPoint("TOPLEFT", 6, -24)
 				end
@@ -293,7 +293,7 @@ function DUnitFrames:TargetFrameSetup()
 		)
 
 		if DUnitFrames:GetWoWBuild() == "TBC" then
-			TargetFrameHealthBar:SetPoint("TOPLEFT", 24, -26)
+			TargetFrameHealthBar:SetPoint("TOPLEFT", 24, -27)
 		else
 			TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
 		end
@@ -307,8 +307,8 @@ function DUnitFrames:TargetFrameSetup()
 				if sel.dufsetheight then return end
 				sel.dufsetheight = true
 				if DUnitFrames:GetWoWBuild() == "TBC" then
-					if 40 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(40 - DUnitFrames:HPHeight())
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
 						sel:SetHeight(1)
 					end
@@ -332,8 +332,8 @@ function DUnitFrames:TargetFrameSetup()
 				if sel.dufsetsize then return end
 				sel.dufsetsize = true
 				if DUnitFrames:GetWoWBuild() == "TBC" then
-					if 40 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(40 - DUnitFrames:HPHeight())
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
 						sel:SetHeight(1)
 					end
@@ -356,7 +356,7 @@ function DUnitFrames:TargetFrameSetup()
 				if sel.dufsetpoint then return end
 				sel.dufsetpoint = true
 				if DUnitFrames:GetWoWBuild() == "TBC" then
-					sel:SetPoint("TOPLEFT", 24, -25 - DUnitFrames:HPHeight() - 1)
+					sel:SetPoint("TOPLEFT", 24, -27 - DUnitFrames:HPHeight() - 1)
 				else
 					sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
 				end
@@ -366,15 +366,16 @@ function DUnitFrames:TargetFrameSetup()
 		)
 
 		if DUnitFrames:GetWoWBuild() == "TBC" then
-			TargetFrameManaBar:SetPoint("TOPLEFT", 24, -26)
+			TargetFrameManaBar:SetPoint("TOPLEFT", 24, -29)
 		else
-			TargetFrameManaBar:SetPoint("TOPLEFT", 6, -24)
+			TargetFrameManaBar:SetPoint("TOPLEFT", 6, -23)
 		end
 	end
 
 	if TargetFrameBackground then
 		TargetFrameBackground:SetHeight(40)
 		TargetFrameBackground:ClearAllPoints()
+		TargetFrameBackground:Hide()
 		if DUnitFrames:GetWoWBuild() == "TBC" then
 			TargetFrameBackground:SetPoint("TOPLEFT", 24, -26)
 		else
@@ -434,7 +435,7 @@ function DUnitFrames:TargetFrameSetup()
 		if TargetFrameTextureFrameTexture.spacer then
 			TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
 			if DUnitFrames:GetWoWBuild() == "TBC" then
-				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 2, 25 - DUnitFrames:HPHeight())
+				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 2, 22 - DUnitFrames:HPHeight())
 			else
 				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUnitFrames:HPHeight())
 			end

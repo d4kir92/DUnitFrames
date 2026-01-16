@@ -181,7 +181,7 @@ function DUnitFrames:UpdatePlayerFrame()
 
 		PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 		if DUnitFrames:GetWoWBuild() == "TBC" then
-			PlayerFrameHealthBar:SetPoint("TOPLEFT", 89, -26)
+			PlayerFrameHealthBar:SetPoint("TOPLEFT", 91, -27)
 		else
 			PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
 		end
@@ -208,7 +208,7 @@ function DUnitFrames:UpdatePlayerFrame()
 		PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0)
 		PlayerFrameTexture.spacer:SetSize(128, 16)
 		if DUnitFrames:GetWoWBuild() == "TBC" then
-			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 3, 30 - DUnitFrames:HPHeight())
+			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUnitFrames:HPHeight())
 		else
 			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUnitFrames:HPHeight())
 		end
@@ -225,8 +225,8 @@ function DUnitFrames:UpdatePlayerFrame()
 
 	if PlayerFrameManaBar then
 		if DUnitFrames:GetWoWBuild() == "TBC" then
-			PlayerFrameManaBar:SetHeight(42 - DUnitFrames:HPHeight())
-			PlayerFrameManaBar:SetPoint("TOPLEFT", 90, -24 - DUnitFrames:HPHeight() - 1)
+			PlayerFrameManaBar:SetHeight(38 - DUnitFrames:HPHeight())
+			PlayerFrameManaBar:SetPoint("TOPLEFT", 90, -27 - DUnitFrames:HPHeight() - 1)
 		else
 			PlayerFrameManaBar:SetHeight(38 - DUnitFrames:HPHeight())
 			PlayerFrameManaBar:SetPoint("TOPLEFT", 107, -24 - DUnitFrames:HPHeight() - 1)
@@ -535,8 +535,8 @@ function DUnitFrames:PlayerFrameSetup()
 				if sel.dufsetheight then return end
 				sel.dufsetheight = true
 				if DUnitFrames:GetWoWBuild() == "TBC" then
-					if 42 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(42 - DUnitFrames:HPHeight())
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
 						sel:SetHeight(1)
 					end
@@ -560,8 +560,8 @@ function DUnitFrames:PlayerFrameSetup()
 				if sel.dufsetsize then return end
 				sel.dufsetsize = true
 				if DUnitFrames:GetWoWBuild() == "TBC" then
-					if 42 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(42 - DUnitFrames:HPHeight())
+					if 38 - DUnitFrames:HPHeight() > 1 then
+						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
 						sel:SetHeight(1)
 					end
