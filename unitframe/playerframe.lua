@@ -206,6 +206,7 @@ function DUnitFrames:UpdatePlayerFrame()
 
 	if PlayerFrameTexture and PlayerFrameTexture.spacer then
 		PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0)
+		PlayerFrameTexture.spacer:ClearAllPoints()
 		PlayerFrameTexture.spacer:SetSize(128, 16)
 		if DUnitFrames:GetWoWBuild() == "TBC" then
 			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 3, 28 - DUnitFrames:HPHeight())
