@@ -189,7 +189,7 @@ function DUnitFrames:InitSettings()
 	if not dufsetting then
 		dufsetting = true
 		local DUFSettings = {}
-		local DUFname = "DUnitFrames |T134167:16:16:0:0|t by |cff3FC7EBD4KiR |T132115:16:16:0:0|t"
+		local DUFname = "DUnitFrames |T134167:16:16:0:0|t by |cff55d2ffD4KiR |T132115:16:16:0:0|t"
 		local settingname = DUFname
 		DUFSettings.panel = CreateFrame("FRAME")
 		DUFSettings.panel.name = settingname
@@ -502,7 +502,7 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
-		DUnitFrames:SetVersion(134167, "1.3.95")
+		DUnitFrames:SetVersion(134167, "1.3.96")
 		if DUFTAB["bartexture"] == nil then
 			DUFTAB["bartexture"] = 0
 		end
