@@ -180,7 +180,7 @@ function DUnitFrames:UpdatePlayerFrame()
 		)
 
 		PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
-		if DUnitFrames:GetWoWBuild() == "TBC" then
+		if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 			PlayerFrameHealthBar:SetPoint("TOPLEFT", 91, -27)
 		else
 			PlayerFrameHealthBar:SetPoint("TOPLEFT", 107, -24)
@@ -208,7 +208,7 @@ function DUnitFrames:UpdatePlayerFrame()
 		PlayerFrameTexture.spacer:SetTexCoord(0, 1, 1, 0)
 		PlayerFrameTexture.spacer:ClearAllPoints()
 		PlayerFrameTexture.spacer:SetSize(128, 16)
-		if DUnitFrames:GetWoWBuild() == "TBC" then
+		if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 3, 28 - DUnitFrames:HPHeight())
 		else
 			PlayerFrameTexture.spacer:SetPoint("RIGHT", PlayerFrameTexture, "RIGHT", 1, 30 - DUnitFrames:HPHeight())
@@ -225,7 +225,7 @@ function DUnitFrames:UpdatePlayerFrame()
 	end
 
 	if PlayerFrameManaBar then
-		if DUnitFrames:GetWoWBuild() == "TBC" then
+		if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 			PlayerFrameManaBar:SetHeight(38 - DUnitFrames:HPHeight())
 			PlayerFrameManaBar:SetPoint("TOPLEFT", 90, -27 - DUnitFrames:HPHeight() - 1)
 		else
@@ -535,7 +535,7 @@ function DUnitFrames:PlayerFrameSetup()
 			function(sel)
 				if sel.dufsetheight then return end
 				sel.dufsetheight = true
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					if 38 - DUnitFrames:HPHeight() > 1 then
 						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
@@ -560,7 +560,7 @@ function DUnitFrames:PlayerFrameSetup()
 			function(sel)
 				if sel.dufsetsize then return end
 				sel.dufsetsize = true
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					if 38 - DUnitFrames:HPHeight() > 1 then
 						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else

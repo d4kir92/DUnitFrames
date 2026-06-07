@@ -282,7 +282,7 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetpoint then return end
 				sel.dufsetpoint = true
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					sel:SetPoint("TOPLEFT", 24, -27)
 				else
 					sel:SetPoint("TOPLEFT", 6, -24)
@@ -292,7 +292,7 @@ function DUnitFrames:TargetFrameSetup()
 			end
 		)
 
-		if DUnitFrames:GetWoWBuild() == "TBC" then
+		if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 			TargetFrameHealthBar:SetPoint("TOPLEFT", 24, -27)
 		else
 			TargetFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
@@ -306,7 +306,7 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetheight then return end
 				sel.dufsetheight = true
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					if 38 - DUnitFrames:HPHeight() > 1 then
 						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
@@ -331,7 +331,7 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetsize then return end
 				sel.dufsetsize = true
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					if 38 - DUnitFrames:HPHeight() > 1 then
 						sel:SetHeight(38 - DUnitFrames:HPHeight())
 					else
@@ -355,7 +355,7 @@ function DUnitFrames:TargetFrameSetup()
 			function(sel)
 				if sel.dufsetpoint then return end
 				sel.dufsetpoint = true
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					sel:SetPoint("TOPLEFT", 24, -27 - DUnitFrames:HPHeight() - 1)
 				else
 					sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
@@ -365,7 +365,7 @@ function DUnitFrames:TargetFrameSetup()
 			end
 		)
 
-		if DUnitFrames:GetWoWBuild() == "TBC" then
+		if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 			TargetFrameManaBar:SetPoint("TOPLEFT", 24, -29)
 		else
 			TargetFrameManaBar:SetPoint("TOPLEFT", 6, -23)
@@ -376,7 +376,7 @@ function DUnitFrames:TargetFrameSetup()
 		TargetFrameBackground:SetHeight(40)
 		TargetFrameBackground:ClearAllPoints()
 		TargetFrameBackground:Hide()
-		if DUnitFrames:GetWoWBuild() == "TBC" then
+		if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 			TargetFrameBackground:SetPoint("TOPLEFT", 24, -26)
 		else
 			TargetFrameBackground:SetPoint("TOPLEFT", 6, -24)
@@ -434,7 +434,7 @@ function DUnitFrames:TargetFrameSetup()
 
 		if TargetFrameTextureFrameTexture.spacer then
 			TargetFrameTextureFrameTexture.spacer:SetSize(128, 16)
-			if DUnitFrames:GetWoWBuild() == "TBC" then
+			if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 2, 22 - DUnitFrames:HPHeight())
 			else
 				TargetFrameTextureFrameTexture.spacer:SetPoint("LEFT", TargetFrameTextureFrameTexture, "LEFT", 4, 21 - DUnitFrames:HPHeight())

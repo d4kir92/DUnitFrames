@@ -279,7 +279,7 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetpoint then return end
 					sel.dufsetpoint = true
-					if DUnitFrames:GetWoWBuild() == "TBC" then
+					if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 						sel:SetPoint("TOPLEFT", 24, -27)
 					else
 						sel:SetPoint("TOPLEFT", 6, -24)
@@ -289,7 +289,7 @@ if FocusFrame then
 				end
 			)
 
-			if DUnitFrames:GetWoWBuild() == "TBC" then
+			if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 				FocusFrameHealthBar:SetPoint("TOPLEFT", 24, -27)
 			else
 				FocusFrameHealthBar:SetPoint("TOPLEFT", 6, -24)
@@ -303,7 +303,7 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetheight then return end
 					sel.dufsetheight = true
-					if DUnitFrames:GetWoWBuild() == "TBC" then
+					if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 						if 38 - DUnitFrames:HPHeight() > 1 then
 							sel:SetHeight(38 - DUnitFrames:HPHeight())
 						else
@@ -328,7 +328,7 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetsize then return end
 					sel.dufsetsize = true
-					if DUnitFrames:GetWoWBuild() == "TBC" then
+					if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 						if 38 - DUnitFrames:HPHeight() > 1 then
 							sel:SetHeight(38 - DUnitFrames:HPHeight())
 						else
@@ -352,7 +352,7 @@ if FocusFrame then
 				function(sel)
 					if sel.dufsetpoint then return end
 					sel.dufsetpoint = true
-					if DUnitFrames:GetWoWBuild() == "TBC" then
+					if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 						sel:SetPoint("TOPLEFT", 24, -27 - DUnitFrames:HPHeight() - 1)
 					else
 						sel:SetPoint("TOPLEFT", 6, -23 - DUnitFrames:HPHeight() - 1)
@@ -362,7 +362,7 @@ if FocusFrame then
 				end
 			)
 
-			if DUnitFrames:GetWoWBuild() == "TBC" then
+			if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 				FocusFrameManaBar:SetPoint("TOPLEFT", 24, -29)
 			else
 				FocusFrameManaBar:SetPoint("TOPLEFT", 6, -23)
@@ -372,7 +372,7 @@ if FocusFrame then
 		if FocusFrameBackground then
 			FocusFrameBackground:SetHeight(40)
 			FocusFrameBackground:ClearAllPoints()
-			if DUnitFrames:GetWoWBuild() == "TBC" then
+			if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 				FocusFrameBackground:SetPoint("TOPLEFT", 24, -26)
 			else
 				FocusFrameBackground:SetPoint("TOPLEFT", 6, -24)
@@ -430,7 +430,7 @@ if FocusFrame then
 
 			if FocusFrameTextureFrameTexture.spacer then
 				FocusFrameTextureFrameTexture.spacer:SetSize(128, 16)
-				if DUnitFrames:GetWoWBuild() == "TBC" then
+				if DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
 					FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 2, 21 - DUnitFrames:HPHeight())
 				else
 					FocusFrameTextureFrameTexture.spacer:SetPoint("LEFT", FocusFrameTextureFrameTexture, "LEFT", 5, 21 - DUnitFrames:HPHeight())
