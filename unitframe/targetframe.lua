@@ -4,8 +4,8 @@ function DUnitFrames:TargetFrameSetup()
 		hooksecurefunc(TargetFrameHealthBar, "SetStatusBarTexture", function(sel, texture)
 			if sel.settexture then return end
 			sel.settexture = true
-			if DUFTAB["LID_BARTEXTURE"] and DUFTAB["LID_BARTEXTURE"] > 0 then
-				sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["LID_BARTEXTURE"])
+			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+				sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 			else
 				sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 			end
@@ -20,8 +20,8 @@ function DUnitFrames:TargetFrameSetup()
 		hooksecurefunc(TargetFrameManaBar, "SetStatusBarTexture", function(sel, texture)
 			if sel.settexture then return end
 			sel.settexture = true
-			if DUFTAB["LID_BARTEXTURE"] and DUFTAB["LID_BARTEXTURE"] > 0 then
-				sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["LID_BARTEXTURE"])
+			if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+				sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 			else
 				sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 			end
@@ -569,9 +569,9 @@ function DUnitFrames:TargetFrameSetup()
 			end
 		end
 
-		f:SetScript("OnEvent", function(sel, event, ...)
-			if GetInspectSpecialization ~= nil then
-				local currentSpec = GetInspectSpecialization("TARGET")
+		f:SetScript("OnEvent", function(sel, event, guid)
+			if GetInspectSpecialization then
+				local currentSpec = GetInspectSpecialization("target")
 				f:UnregisterEvent("INSPECT_READY")
 				ClearInspectPlayer()
 				local id, _, _, icon, _, _ = GetSpecializationInfoByID(currentSpec)

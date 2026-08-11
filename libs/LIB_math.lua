@@ -90,13 +90,17 @@ function DUnitFrames:ModifyText(text, cur, max, from)
 		if tex then
 			if type(tex) == "number" then return DUnitFrames:NN(cur) end
 		else
-			local c, m = strsplit("/", text)
-			c = tonumber(c)
-			m = tonumber(m)
-			if c and m then
-				return DUnitFrames:NN(c) .. "/" .. DUnitFrames:NN(m)
+			if string.find(text, "%", 1, true) then
+				return DUnitFrames:PN(cur, max)
 			else
-				return text
+				local c, m = strsplit("/", text)
+				c = tonumber(c)
+				m = tonumber(m)
+				if c and m then
+					return DUnitFrames:NN(c) .. "/" .. DUnitFrames:NN(m)
+				else
+					return text
+				end
 			end
 		end
 	else

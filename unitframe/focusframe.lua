@@ -6,8 +6,8 @@ if FocusFrame then
 			hooksecurefunc(FocusFrameHealthBar, "SetStatusBarTexture", function(sel, texture)
 				if sel.settexture then return end
 				sel.settexture = true
-				if DUFTAB["LID_BARTEXTURE"] and DUFTAB["LID_BARTEXTURE"] > 0 then
-					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["LID_BARTEXTURE"])
+				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 				else
 					sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 				end
@@ -22,8 +22,8 @@ if FocusFrame then
 			hooksecurefunc(FocusFrameManaBar, "SetStatusBarTexture", function(sel, texture)
 				if sel.settexture then return end
 				sel.settexture = true
-				if DUFTAB["LID_BARTEXTURE"] and DUFTAB["LID_BARTEXTURE"] > 0 then
-					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["LID_BARTEXTURE"])
+				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
+					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
 				else
 					sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 				end

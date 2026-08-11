@@ -222,7 +222,7 @@ function DUnitFrames:InitSettings()
 
 		DUnitFrames:CreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -340, "LID_HIDEWHENFULL")
 		if ComboPointPlayerFrame then DUnitFrames:CreateCheckBox(DUFSettings.panel, "LID_HIDECOMBOPOINTS", false, 10, -360, "LID_HIDECOMBOPOINTS") end
-		if CanInspect and GetInspectSpecialization then DUnitFrames:CreateCheckBox(DUFSettings.panel, "LID_SHOWSPECS", true, 10, -380, "LID_SHOWSPECS") end
+		if CanInspect and GetInspectSpecialization then DUnitFrames:CreateCheckBox(DUFSettings.panel, "showspecs", true, 10, -380, "LID_SHOWSPECS") end
 		DUnitFrames:CreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -420, "LID_SHOWTHREAT")
 		DUnitFrames:CreateSlider(DUFSettings.panel, "bartexture", 0, 10, -460, 0, 18, 1, "LID_BARTEXTURE", function()
 			if PlayerFrameHealthBar then PlayerFrameHealthBar:SetStatusBarTexture("") end
@@ -283,7 +283,7 @@ function f:OnEvent(event, ...)
 		DUFTABPC = DUFTABPC or {}
 		DUnitFrames:SetAddonOutput("DUnitFrames", 134167)
 		DUnitFrames:SetVersion(134167, "1.3.104")
-		if DUFTAB["LID_BARTEXTURE"] == nil then DUFTAB["LID_BARTEXTURE"] = 0 end
+		if DUFTAB["bartexture"] == nil then DUFTAB["bartexture"] = 0 end
 		DUFLoaded = true
 		if PlayerPortrait then UnitFramePortrait_Update(PlayerPortrait) end
 		if PlayerFrameTexture then PlayerFrameTexture:SetVertexColor(1, 1, 1) end
