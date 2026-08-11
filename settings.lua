@@ -83,7 +83,7 @@ function DUnitFrames:CreateSlider(parent, key, vval, x, y, vmin, vmax, steps, ls
 
 	SL.Low:SetText(vmin)
 	SL.High:SetText(vmax)
-	SL.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. DUnitFrames:GetConfig(key, vval))
+	SL.Text:SetText(DUnitFrames:Trans(lstr) .. ": " .. DUnitFrames:GetConfig(key, vval))
 	SL:SetMinMaxValues(vmin, vmax)
 	SL:SetValue(DUnitFrames:GetConfig(key, vval))
 	SL:SetObeyStepOnDrag(steps)
@@ -96,7 +96,7 @@ function DUnitFrames:CreateSlider(parent, key, vval, x, y, vmin, vmax, steps, ls
 		if vmax and val > vmax then val = vmax end
 		if val ~= sel.oldval then
 			sel.oldval = val
-			SL.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. val)
+			SL.Text:SetText(DUnitFrames:Trans(lstr) .. ": " .. val)
 			DUFTAB[key] = val
 			if func ~= nil then func() end
 		end
@@ -109,7 +109,7 @@ function DUnitFrames:CreateCheckBox(parent, key, vval, x, y, lstr, pc, func)
 	CB:SetSize(24, 24)
 	CB:SetPoint("TOPLEFT", x, y)
 	CB.Text:SetPoint("LEFT", CB, "RIGHT", 0, 0)
-	CB.Text:SetText(DUnitFrames:GT(lstr))
+	CB.Text:SetText(DUnitFrames:Trans(lstr))
 	CB:SetChecked(DUnitFrames:GetConfig(key, vval))
 	CB:SetScript("OnClick", function(sel, val)
 		val = CB:GetChecked()
@@ -119,7 +119,7 @@ function DUnitFrames:CreateCheckBox(parent, key, vval, x, y, lstr, pc, func)
 			DUFTAB[key] = val
 		end
 
-		CB.Text:SetText(DUnitFrames:GT(lstr))
+		CB.Text:SetText(DUnitFrames:Trans(lstr))
 		if func then func() end
 	end)
 	return CB
@@ -130,9 +130,9 @@ function DUnitFrames:CreateComboBox(parent, key, vval, x, y, lstr, tab, func)
 	CB:SetPoint("TOPLEFT", x, y)
 	CB.text = CB:CreateFontString(nil, "ARTWORK")
 	CB.text:SetFont(STANDARD_TEXT_FONT, 12, "")
-	CB.text:SetText(DUnitFrames:GT(lstr))
+	CB.text:SetText(DUnitFrames:Trans(lstr))
 	CB.text:SetPoint("LEFT", CB, "RIGHT", 0, 3)
-	CB.Text:SetText(DUnitFrames:GT(lstr) .. ": " .. tostring(DUnitFrames:GetConfig(key, vval)))
+	CB.Text:SetText(DUnitFrames:Trans(lstr) .. ": " .. tostring(DUnitFrames:GetConfig(key, vval)))
 	LibDD:UIDropDownMenu_SetWidth(CB, 120)
 	LibDD:UIDropDownMenu_SetText(CB, DUnitFrames:GetConfig(key, vval))
 	-- Create and bind the initialization function to the dropdown menu
@@ -171,37 +171,37 @@ function DUnitFrames:InitSettings()
 		text:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
 		text:SetPoint("TOPLEFT", DUFSettings.panel, "TOPLEFT", 10, Y)
 		text:SetText("Settings (v" .. DUnitFrames:GetVersion() .. ")")
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "portraitmode", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "portraitmode", "Dark", 0, -30, "LID_PORTRAITMODE", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then UnitFramePortrait_Update(PlayerFrame) end
 			for id = 1, 4 do
 				if _G["PartyMemberFrame" .. id] then UnitFramePortrait_Update(_G["PartyMemberFrame" .. id]) end
 			end
 		end)
 
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "portraitmodeself", "Dark", 0, -60, "portraitmodeself", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "portraitmodeself", "Dark", 0, -60, "LID_PORTRAITMODESELF", {"Dark", "Bright", "Dark-Grey", "DarkV2", "DarkV2Small", "Light", "MediumGrey", "Muted", "Old", "White", "New", "Default"}, function()
 			if PlayerFrame then UnitFramePortrait_Update(PlayerFrame) end
 			for id = 1, 4 do
 				if _G["PartyMemberFrame" .. id] then UnitFramePortrait_Update(_G["PartyMemberFrame" .. id]) end
 			end
 		end)
 
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "bordermode", "Class+Status", 0, -90, "bordermode", {"Class+Status", "Class", "Status", "Dark", "Black", "Default"}, function() DUnitFrames:UpdateBorderColors() end)
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "barmode", "Class+Status", 0, -120, "barmode", {"Class+Status", "Class", "Status", "Default"}, function() DUnitFrames:UpdateBarColors() end)
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "numbermode", "X.X Dynamic", 0, -150, "numbermode", {"Default", "X Dynamic", "X.X Dynamic", "X.XX Dynamic", "X.XXX", "XK", "X.XK", "X.XXK"}, function()
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "bordermode", "Class+Status", 0, -90, "LID_BORDERMODE", {"Class+Status", "Class", "Status", "Dark", "Black", "Default"}, function() DUnitFrames:UpdateBorderColors() end)
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "barmode", "Class+Status", 0, -120, "LID_BARMODE", {"Class+Status", "Class", "Status", "Default"}, function() DUnitFrames:UpdateBarColors() end)
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "numbermode", "X.X Dynamic", 0, -150, "LID_NUMBERMODE", {"Default", "X Dynamic", "X.X Dynamic", "X.XX Dynamic", "X.XXX", "XK", "X.XK", "X.XXK"}, function()
 			if PlayerFrameHealthBarTextRight then PlayerFrameHealthBarTextRight:SetText(PlayerFrameHealthBarTextRight:GetText()) end
 			if TargetFrameHealthBarTextRight then TargetFrameHealthBarTextRight:SetText(TargetFrameHealthBarTextRight:GetText()) end
 			if FocusFrameTextureFrameHealthBarTextRight then FocusFrameTextureFrameHealthBarTextRight:SetText(FocusFrameTextureFrameHealthBarTextRight:GetText()) end
 		end)
 
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "percentmode", "X.X%", 0, -180, "percentmode", {"Default", "X.X%", "X.XX%"}, function()
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "percentmode", "X.X%", 0, -180, "LID_PERCENTMODE", {"Default", "X.X%", "X.XX%"}, function()
 			if PlayerFrameHealthBarTextLeft then PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextLeft:GetText()) end
 			if TargetFrameHealthBarTextLeft then TargetFrameHealthBarTextLeft:SetText(TargetFrameHealthBarTextLeft:GetText()) end
 			if FocusFrameTextureFrameHealthBarTextLeft then FocusFrameTextureFrameHealthBarTextLeft:SetText(FocusFrameTextureFrameHealthBarTextLeft:GetText()) end
 		end)
 
-		DUnitFrames:CreateComboBox(DUFSettings.panel, "namemode", "Over Portrait", 0, -210, "namemode", {"Over Portrait", "Over Health", "Inside Health", "Hide"}, function() TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText()) end)
-		DUnitFrames:CreateCheckBox(DUFSettings.panel, "outline", true, 400, -210, "outline", nil, function() DUnitFrames:UpdateTexts() end)
-		DUnitFrames:CreateSlider(DUFSettings.panel, "hpheight", 27, 10, -270, 12, 27, 1, "hpheight", function()
+		DUnitFrames:CreateComboBox(DUFSettings.panel, "namemode", "Over Portrait", 0, -210, "LID_NAMEMODE", {"Over Portrait", "Over Health", "Inside Health", "Hide"}, function() TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText()) end)
+		DUnitFrames:CreateCheckBox(DUFSettings.panel, "outline", true, 400, -210, "LID_OUTLINE", nil, function() DUnitFrames:UpdateTexts() end)
+		DUnitFrames:CreateSlider(DUFSettings.panel, "hpheight", 27, 10, -270, 12, 27, 1, "LID_HPHEIGHT", function()
 			DUnitFrames:UpdatePlayerFrame()
 			DUnitFrames:UpdateTargetFrame()
 			DUnitFrames:UpdateTargetTexture()
@@ -214,17 +214,17 @@ function DUnitFrames:InitSettings()
 			end
 		end)
 
-		DUnitFrames:CreateSlider(DUFSettings.panel, "namesize", 10, 10, -320, 6, 20, 1, "namesize", function()
+		DUnitFrames:CreateSlider(DUFSettings.panel, "namesize", 10, 10, -320, 6, 20, 1, "LID_NAMESIZE", function()
 			if PlayerName then PlayerName:SetText(PlayerName:GetText()) end
 			if TargetFrameTextureFrameName then TargetFrameTextureFrameName:SetText(TargetFrameTextureFrameName:GetText()) end
 			if FocusFrameTextureFrameName then FocusFrameTextureFrameName:SetText(FocusFrameTextureFrameName:GetText()) end
 		end)
 
-		DUnitFrames:CreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -340, "hidewhenfull")
-		if ComboPointPlayerFrame then DUnitFrames:CreateCheckBox(DUFSettings.panel, "hidecombopoints", false, 10, -360, "hidecombopoints") end
-		if CanInspect and GetInspectSpecialization then DUnitFrames:CreateCheckBox(DUFSettings.panel, "showspecs", true, 10, -380, "showspecs") end
-		DUnitFrames:CreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -420, "showthreat")
-		DUnitFrames:CreateSlider(DUFSettings.panel, "bartexture", 0, 10, -460, 0, 18, 1, "bartexture", function()
+		DUnitFrames:CreateCheckBox(DUFSettings.panel, "hidewhenfull", false, 10, -340, "LID_HIDEWHENFULL")
+		if ComboPointPlayerFrame then DUnitFrames:CreateCheckBox(DUFSettings.panel, "LID_HIDECOMBOPOINTS", false, 10, -360, "LID_HIDECOMBOPOINTS") end
+		if CanInspect and GetInspectSpecialization then DUnitFrames:CreateCheckBox(DUFSettings.panel, "LID_SHOWSPECS", true, 10, -380, "LID_SHOWSPECS") end
+		DUnitFrames:CreateCheckBox(DUFSettings.panel, "showthreat", true, 10, -420, "LID_SHOWTHREAT")
+		DUnitFrames:CreateSlider(DUFSettings.panel, "bartexture", 0, 10, -460, 0, 18, 1, "LID_BARTEXTURE", function()
 			if PlayerFrameHealthBar then PlayerFrameHealthBar:SetStatusBarTexture("") end
 			if PlayerFrameManaBar then PlayerFrameManaBar:SetStatusBarTexture("") end
 			if TargetFrameHealthBar then TargetFrameHealthBar:SetStatusBarTexture("") end
@@ -263,7 +263,7 @@ function DUnitFrames:InitSettings()
 			s.close:SetScript("OnClick", function(sel, btn, down) s:Hide() end)
 		end)
 
-		DUnitFrames:CreateCheckBox(DUFSettings.panel, "alternatemanabar", true, 400, -230, "alternatemanabar")
+		DUnitFrames:CreateCheckBox(DUFSettings.panel, "LID_ALTERNATEMANABAR", true, 400, -230, "LID_ALTERNATEMANABAR")
 		if InterfaceOptions_AddCategory then
 			InterfaceOptions_AddCategory(DUFSettings.panel)
 		else
@@ -282,7 +282,7 @@ function f:OnEvent(event, ...)
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
 		DUnitFrames:SetVersion(134167, "1.3.104")
-		if DUFTAB["bartexture"] == nil then DUFTAB["bartexture"] = 0 end
+		if DUFTAB["LID_BARTEXTURE"] == nil then DUFTAB["LID_BARTEXTURE"] = 0 end
 		DUFLoaded = true
 		if PlayerPortrait then UnitFramePortrait_Update(PlayerPortrait) end
 		if PlayerFrameTexture then PlayerFrameTexture:SetVertexColor(1, 1, 1) end

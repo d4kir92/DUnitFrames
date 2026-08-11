@@ -6,7 +6,7 @@ function DUnitFrames:GetLang()
 	return lang
 end
 
-function DUnitFrames:GT(str, tab)
+function DUnitFrames:Trans(str, tab)
 	local strid = str
 	local result = lang[strid]
 	if result ~= nil then
@@ -14,12 +14,9 @@ function DUnitFrames:GT(str, tab)
 			for i, v in pairs(tab) do
 				local find = i -- "[" .. i .. "]"
 				local replace = v
-				if find ~= nil and replace ~= nil then
-					result = string.gsub(result, find, replace)
-				end
+				if find ~= nil and replace ~= nil then result = string.gsub(result, find, replace) end
 			end
 		end
-
 		return result
 	else
 		return str

@@ -2,17 +2,11 @@ local _, DUnitFrames = ...
 -- #PlayerFrame
 local borderTab = {}
 function DUnitFrames:GetBorderColor(unit, frame)
-	if frame and not tContains(borderTab, frame) then
-		tinsert(borderTab, frame)
-	end
-
+	if frame and not tContains(borderTab, frame) then tinsert(borderTab, frame) end
 	local r = nil
 	local g = nil
 	local b = nil
-	if frame and frame.brcr == nil and frame.brcg == nil and frame.brcb == nil and frame.GetVertexColor then
-		frame.brcr, frame.brcg, frame.brcb = frame:GetVertexColor()
-	end
-
+	if frame and frame.brcr == nil and frame.brcg == nil and frame.brcb == nil and frame.GetVertexColor then frame.brcr, frame.brcg, frame.brcb = frame:GetVertexColor() end
 	local mode = DUnitFrames:GetConfig("bordermode")
 	local _, PlayerClassEng, _ = UnitClass(unit)
 	if mode then
@@ -23,9 +17,7 @@ function DUnitFrames:GetBorderColor(unit, frame)
 				r, g, b = GameTooltip_UnitColor(unit)
 			end
 		elseif mode == "Class" then
-			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then
-				r, g, b = DUnitFrames:GetClassColor(PlayerClassEng)
-			end
+			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then r, g, b = DUnitFrames:GetClassColor(PlayerClassEng) end
 		elseif mode == "Status" then
 			r, g, b = GameTooltip_UnitColor(unit)
 		elseif mode == "Dark" then
@@ -40,23 +32,16 @@ function DUnitFrames:GetBorderColor(unit, frame)
 			r, g, b = frame.brcr, frame.brcg, frame.brcb
 		end
 	end
-
 	return r, g, b, mode == "Default"
 end
 
 local barTab = {}
 function DUnitFrames:GetBarColor(unit, frame)
-	if frame and not tContains(barTab, frame) then
-		tinsert(barTab, frame)
-	end
-
+	if frame and not tContains(barTab, frame) then tinsert(barTab, frame) end
 	local r = nil
 	local g = nil
 	local b = nil
-	if frame and frame.bacr == nil and frame.bacg == nil and frame.bacb == nil then
-		frame.bacr, frame.bacg, frame.bacb = frame:GetStatusBarColor()
-	end
-
+	if frame and frame.bacr == nil and frame.bacg == nil and frame.bacb == nil then frame.bacr, frame.bacg, frame.bacb = frame:GetStatusBarColor() end
 	local mode = DUnitFrames:GetConfig("barmode")
 	--"Class+Status", "Class", "Status", "Default"
 	local _, PlayerClassEng, _ = UnitClass(unit)
@@ -68,9 +53,7 @@ function DUnitFrames:GetBarColor(unit, frame)
 				r, g, b = GameTooltip_UnitColor(unit)
 			end
 		elseif mode == "Class" then
-			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then
-				r, g, b = DUnitFrames:GetClassColor(PlayerClassEng)
-			end
+			if PlayerClassEng ~= nil and UnitIsPlayer(unit) then r, g, b = DUnitFrames:GetClassColor(PlayerClassEng) end
 		elseif mode == "Status" then
 			r, g, b = GameTooltip_UnitColor(unit)
 		end
@@ -78,23 +61,18 @@ function DUnitFrames:GetBarColor(unit, frame)
 
 	if UnitPlayerControlled and UnitIsTapDenied and not UnitPlayerControlled(unit) and UnitIsTapDenied(unit) then return 0.75, 0.75, 0.75 end
 	if not UnitIsConnected(unit) then return 0.5, 0.5, 0.5 end
-
 	return r, g, b
 end
 
 function DUnitFrames:UpdateBorderColors()
 	for i, v in pairs(borderTab) do
-		if v.GetVertexColor then
-			v:SetVertexColor(v:GetVertexColor())
-		end
+		if v.GetVertexColor then v:SetVertexColor(v:GetVertexColor()) end
 	end
 end
 
 function DUnitFrames:UpdateBarColors()
 	for i, v in pairs(barTab) do
-		if v.GetStatusBarColor then
-			v:SetStatusBarColor(v:GetStatusBarColor())
-		end
+		if v.GetStatusBarColor then v:SetStatusBarColor(v:GetStatusBarColor()) end
 	end
 end
 
@@ -102,82 +80,53 @@ local pff = CreateFrame("FRAME")
 pff:RegisterEvent("UNIT_ENTERING_VEHICLE")
 pff:RegisterEvent("UNIT_EXITED_VEHICLE")
 pff.currentEvent = "UNIT_EXITED_VEHICLE"
-pff:SetScript(
-	"OnEvent",
-	function(event)
-		pff.currentEvent = event
-		C_Timer.After(
-			0.3,
-			function()
-				if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
-					PlayerFrameHealthBar:SetHeight(12)
-				else
-					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
-				end
-			end
-		)
+pff:SetScript("OnEvent", function(event)
+	pff.currentEvent = event
+	C_Timer.After(0.3, function()
+		if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
+			PlayerFrameHealthBar:SetHeight(12)
+		else
+			PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
+		end
+	end)
 
-		C_Timer.After(
-			1,
-			function()
-				if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
-					PlayerFrameHealthBar:SetHeight(12)
-				else
-					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
-				end
-			end
-		)
+	C_Timer.After(1, function()
+		if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
+			PlayerFrameHealthBar:SetHeight(12)
+		else
+			PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
+		end
+	end)
 
-		C_Timer.After(
-			1,
-			function()
-				if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
-					PlayerFrameHealthBar:SetHeight(12)
-				else
-					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
-				end
-			end
-		)
-	end
-)
+	C_Timer.After(1, function()
+		if pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
+			PlayerFrameHealthBar:SetHeight(12)
+		else
+			PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
+		end
+	end)
+end)
 
 function DUnitFrames:UpdatePlayerFrame()
 	local texture = "Interface\\Addons\\DUnitFrames\\media\\UI-TargetingFrame"
-	if PlayerFrameTexture then
-		PlayerFrameTexture:SetTexture(texture)
-	end
-
-	if PlayerStatusTexture then
-		PlayerStatusTexture:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-Player-Status")
-	end
-
+	if PlayerFrameTexture then PlayerFrameTexture:SetTexture(texture) end
+	if PlayerStatusTexture then PlayerStatusTexture:SetTexture("Interface\\Addons\\DUnitFrames\\media\\UI-Player-Status") end
 	if PlayerFrameHealthBar then
-		hooksecurefunc(
-			PlayerFrameHealthBar,
-			"SetHeight",
-			function(sel, height)
-				if sel.dufsetheight then return end
-				sel.dufsetheight = true
-				local inVehicle = false
-				if UnitInVehicle or pff.currentEvent == "UNIT_ENTERING_VEHICLE" then
-					inVehicle = UnitInVehicle("PLAYER")
-				end
-
-				if inVehicle then
-					PlayerFrameHealthBar:SetHeight(12)
-					if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
-						PlayerFrameTexture.spacer:Hide()
-					end
-				else
-					PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
-					if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then
-						PlayerFrameTexture.spacer:Show()
-					end
-				end
-
-				sel.dufsetheight = false
+		hooksecurefunc(PlayerFrameHealthBar, "SetHeight", function(sel, height)
+			if sel.dufsetheight then return end
+			sel.dufsetheight = true
+			local inVehicle = false
+			if UnitInVehicle or pff.currentEvent == "UNIT_ENTERING_VEHICLE" then inVehicle = UnitInVehicle("PLAYER") end
+			if inVehicle then
+				PlayerFrameHealthBar:SetHeight(12)
+				if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then PlayerFrameTexture.spacer:Hide() end
+			else
+				PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
+				if PlayerFrameTexture and PlayerFrameTexture.spacer ~= nil then PlayerFrameTexture.spacer:Show() end
 			end
-		)
+
+			sel.dufsetheight = false
+		end)
 
 		PlayerFrameHealthBar:SetHeight(DUnitFrames:HPHeight())
 		if DUnitFrames:GetWoWBuild() == "CLASSIC" or DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
@@ -190,16 +139,12 @@ function DUnitFrames:UpdatePlayerFrame()
 	if PlayerFrameTexture and PlayerFrameTexture.spacer == nil then
 		PlayerFrameTexture.spacer = DUnitFrames:GetParent(PlayerFrameTexture):CreateTexture(nil, "ARTWORK")
 		PlayerFrameTexture.spacer:SetDrawLayer("ARTWORK", 7)
-		hooksecurefunc(
-			PlayerFrameTexture.spacer,
-			"SetVertexColor",
-			function(sel, r, g, b, a)
-				if sel.dufsetvertexcolor then return end
-				sel.dufsetvertexcolor = true
-				sel:SetVertexColor(r, g, b, a)
-				sel.dufsetvertexcolor = false
-			end
-		)
+		hooksecurefunc(PlayerFrameTexture.spacer, "SetVertexColor", function(sel, r, g, b, a)
+			if sel.dufsetvertexcolor then return end
+			sel.dufsetvertexcolor = true
+			sel:SetVertexColor(r, g, b, a)
+			sel.dufsetvertexcolor = false
+		end)
 
 		PlayerFrameTexture.spacer:SetVertexColor(1, 1, 1)
 	end
@@ -273,41 +218,33 @@ end
 
 function DUnitFrames:PlayerFrameSetup()
 	if PlayerFrameHealthBar then
-		hooksecurefunc(
-			PlayerFrameHealthBar,
-			"SetStatusBarTexture",
-			function(sel, texture)
-				if sel.settexture then return end
-				sel.settexture = true
-				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-				else
-					sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-				end
-
-				sel.settexture = false
+		hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarTexture", function(sel, texture)
+			if sel.settexture then return end
+			sel.settexture = true
+			if DUFTAB["LID_BARTEXTURE"] and DUFTAB["LID_BARTEXTURE"] > 0 then
+				sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["LID_BARTEXTURE"])
+			else
+				sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 			end
-		)
+
+			sel.settexture = false
+		end)
 
 		PlayerFrameHealthBar:SetStatusBarTexture("")
 	end
 
 	if PlayerFrameManaBar then
-		hooksecurefunc(
-			PlayerFrameManaBar,
-			"SetStatusBarTexture",
-			function(sel, texture)
-				if sel.settexture then return end
-				sel.settexture = true
-				if DUFTAB["bartexture"] and DUFTAB["bartexture"] > 0 then
-					sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["bartexture"])
-				else
-					sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
-				end
-
-				sel.settexture = false
+		hooksecurefunc(PlayerFrameManaBar, "SetStatusBarTexture", function(sel, texture)
+			if sel.settexture then return end
+			sel.settexture = true
+			if DUFTAB["LID_BARTEXTURE"] and DUFTAB["LID_BARTEXTURE"] > 0 then
+				sel:SetStatusBarTexture("Interface\\Addons\\DUnitFrames\\media\\bars\\bar_" .. DUFTAB["LID_BARTEXTURE"])
+			else
+				sel:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
 			end
-		)
+
+			sel.settexture = false
+		end)
 
 		PlayerFrameManaBar:SetStatusBarTexture("")
 	end
@@ -322,124 +259,96 @@ function DUnitFrames:PlayerFrameSetup()
 	end
 
 	if PlayerFrameHealthBar then
-		hooksecurefunc(
-			PlayerFrameHealthBar,
-			"SetStatusBarColor",
-			function(sel, oR, oG, oB)
-				if sel.dufsetvertexcolor then return end
-				sel.dufsetvertexcolor = true
-				local r, g, b = DUnitFrames:GetBarColor("PLAYER", sel)
-				if r and g and b then
-					sel:SetStatusBarColor(r, g, b)
-				else
-					sel:SetStatusBarColor(oR, oG, oB)
-				end
-
-				sel.dufsetvertexcolor = false
+		hooksecurefunc(PlayerFrameHealthBar, "SetStatusBarColor", function(sel, oR, oG, oB)
+			if sel.dufsetvertexcolor then return end
+			sel.dufsetvertexcolor = true
+			local r, g, b = DUnitFrames:GetBarColor("PLAYER", sel)
+			if r and g and b then
+				sel:SetStatusBarColor(r, g, b)
+			else
+				sel:SetStatusBarColor(oR, oG, oB)
 			end
-		)
+
+			sel.dufsetvertexcolor = false
+		end)
 
 		PlayerFrameHealthBar:SetStatusBarColor(PlayerFrameHealthBar:GetStatusBarColor())
 	end
 
 	if PlayerFrameHealthBarTextRight then
-		hooksecurefunc(
-			PlayerFrameHealthBarTextRight,
-			"SetText",
-			function(sel, text)
-				if sel.dufsettext then return end
-				sel.dufsettext = true
-				DUnitFrames:SetFont(sel)
-				local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight")
-				sel:SetText(newText)
-				sel.dufsettext = false
-			end
-		)
+		hooksecurefunc(PlayerFrameHealthBarTextRight, "SetText", function(sel, text)
+			if sel.dufsettext then return end
+			sel.dufsettext = true
+			DUnitFrames:SetFont(sel)
+			local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextRight")
+			sel:SetText(newText)
+			sel.dufsettext = false
+		end)
 
 		PlayerFrameHealthBarTextRight:SetText(PlayerFrameHealthBarTextRight:GetText())
 	end
 
 	if PlayerFrameHealthBarTextLeft then
-		hooksecurefunc(
-			PlayerFrameHealthBarTextLeft,
-			"SetText",
-			function(sel, text)
-				if sel.dufsettext then return end
-				sel.dufsettext = true
-				DUnitFrames:SetFont(sel)
-				local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft")
-				sel:SetText(newText)
-				sel.dufsettext = false
-			end
-		)
+		hooksecurefunc(PlayerFrameHealthBarTextLeft, "SetText", function(sel, text)
+			if sel.dufsettext then return end
+			sel.dufsettext = true
+			DUnitFrames:SetFont(sel)
+			local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarTextLeft")
+			sel:SetText(newText)
+			sel.dufsettext = false
+		end)
 
 		PlayerFrameHealthBarTextLeft:SetText(PlayerFrameHealthBarTextLeft:GetText())
 	end
 
 	if PlayerFrameHealthBarText then
-		hooksecurefunc(
-			PlayerFrameHealthBarText,
-			"SetText",
-			function(sel, text)
-				if sel.dufsettext then return end
-				sel.dufsettext = true
-				DUnitFrames:SetFont(sel)
-				local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText")
-				sel:SetText(newText)
-				sel.dufsettext = false
-			end
-		)
+		hooksecurefunc(PlayerFrameHealthBarText, "SetText", function(sel, text)
+			if sel.dufsettext then return end
+			sel.dufsettext = true
+			DUnitFrames:SetFont(sel)
+			local newText = DUnitFrames:ModifyText(text, UnitHealth("PLAYER"), UnitHealthMax("PLAYER"), "PlayerFrameHealthBarText")
+			sel:SetText(newText)
+			sel.dufsettext = false
+		end)
 
 		PlayerFrameHealthBarText:SetText(PlayerFrameHealthBarText:GetText())
 	end
 
 	if PlayerFrameManaBarTextLeft then
-		hooksecurefunc(
-			PlayerFrameManaBarTextLeft,
-			"SetText",
-			function(sel, text)
-				if sel.dufsettext then return end
-				sel.dufsettext = true
-				DUnitFrames:SetFont(sel)
-				local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft")
-				sel:SetText(newText)
-				sel.dufsettext = false
-			end
-		)
+		hooksecurefunc(PlayerFrameManaBarTextLeft, "SetText", function(sel, text)
+			if sel.dufsettext then return end
+			sel.dufsettext = true
+			DUnitFrames:SetFont(sel)
+			local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextLeft")
+			sel:SetText(newText)
+			sel.dufsettext = false
+		end)
 
 		PlayerFrameManaBarTextLeft:SetText(PlayerFrameManaBarTextLeft:GetText())
 	end
 
 	if PlayerFrameManaBarTextRight then
-		hooksecurefunc(
-			PlayerFrameManaBarTextRight,
-			"SetText",
-			function(sel, text)
-				if sel.dufsettext then return end
-				sel.dufsettext = true
-				DUnitFrames:SetFont(sel)
-				local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight")
-				sel:SetText(newText)
-				sel.dufsettext = false
-			end
-		)
+		hooksecurefunc(PlayerFrameManaBarTextRight, "SetText", function(sel, text)
+			if sel.dufsettext then return end
+			sel.dufsettext = true
+			DUnitFrames:SetFont(sel)
+			local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarTextRight")
+			sel:SetText(newText)
+			sel.dufsettext = false
+		end)
 
 		PlayerFrameManaBarTextRight:SetText(PlayerFrameManaBarTextRight:GetText())
 	end
 
 	if PlayerFrameManaBarText then
-		hooksecurefunc(
-			PlayerFrameManaBarText,
-			"SetText",
-			function(sel, text)
-				if sel.dufsettext then return end
-				sel.dufsettext = true
-				DUnitFrames:SetFont(sel)
-				local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText")
-				sel:SetText(newText)
-				sel.dufsettext = false
-			end
-		)
+		hooksecurefunc(PlayerFrameManaBarText, "SetText", function(sel, text)
+			if sel.dufsettext then return end
+			sel.dufsettext = true
+			DUnitFrames:SetFont(sel)
+			local newText = DUnitFrames:ModifyText(text, UnitPower("PLAYER"), UnitPowerMax("PLAYER"), "PlayerFrameManaBarText")
+			sel:SetText(newText)
+			sel.dufsettext = false
+		end)
 
 		PlayerFrameManaBarText:SetText(PlayerFrameManaBarText:GetText())
 	end
@@ -448,16 +357,12 @@ function DUnitFrames:PlayerFrameSetup()
 		if DUnitFrames:GetConfig("namemode", "Over Portrait") ~= "Inside Health" then
 			PlayerName:SetParent(DUFHIDDEN)
 		else
-			hooksecurefunc(
-				PlayerName,
-				"SetText",
-				function(sel, text, ...)
-					if sel.dufsettext then return end
-					sel.dufsettext = true
-					DUnitFrames:SetFont(sel, DUnitFrames:GetConfig("namesize", 10))
-					sel.dufsettext = false
-				end
-			)
+			hooksecurefunc(PlayerName, "SetText", function(sel, text, ...)
+				if sel.dufsettext then return end
+				sel.dufsettext = true
+				DUnitFrames:SetFont(sel, DUnitFrames:GetConfig("namesize", 10))
+				sel.dufsettext = false
+			end)
 
 			PlayerName:SetFont(STANDARD_TEXT_FONT, DUnitFrames:GetConfig("namesize", 10), DUnitFrames:GetFontFlags())
 			PlayerName:SetText(PlayerName:GetText())
@@ -465,118 +370,79 @@ function DUnitFrames:PlayerFrameSetup()
 	end
 
 	if PlayerFrameTexture then
-		hooksecurefunc(
-			PlayerFrameTexture,
-			"SetVertexColor",
-			function(sel, oR, oG, oB)
-				if sel.dufsetvertexcolor then return end
-				sel.dufsetvertexcolor = true
-				local r, g, b, isDefault = DUnitFrames:GetBorderColor("PLAYER", sel)
-				if r and g and b and not isDefault then
-					sel:SetVertexColor(r, g, b, 1)
-				else
-					sel:SetVertexColor(oR, oG, oB, 1)
-				end
-
-				if sel.spacer then
-					sel.spacer:SetVertexColor(sel:GetVertexColor())
-				end
-
-				sel.dufsetvertexcolor = false
+		hooksecurefunc(PlayerFrameTexture, "SetVertexColor", function(sel, oR, oG, oB)
+			if sel.dufsetvertexcolor then return end
+			sel.dufsetvertexcolor = true
+			local r, g, b, isDefault = DUnitFrames:GetBorderColor("PLAYER", sel)
+			if r and g and b and not isDefault then
+				sel:SetVertexColor(r, g, b, 1)
+			else
+				sel:SetVertexColor(oR, oG, oB, 1)
 			end
-		)
+
+			if sel.spacer then sel.spacer:SetVertexColor(sel:GetVertexColor()) end
+			sel.dufsetvertexcolor = false
+		end)
 
 		PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	end
 
 	if PlayerFrameManaBarTextLeft and not PlayerFrameManaBarTextLeft.hooked then
 		PlayerFrameManaBarTextLeft.hooked = true
-		hooksecurefunc(
-			PlayerFrameManaBarTextLeft,
-			"Show",
-			function(sel, ...)
-				if DUnitFrames:HPHeight() >= 32 then
-					sel:Hide()
-				end
-			end
-		)
+		hooksecurefunc(PlayerFrameManaBarTextLeft, "Show", function(sel, ...) if DUnitFrames:HPHeight() >= 32 then sel:Hide() end end)
 	end
 
 	if PlayerFrameManaBarTextRight and not PlayerFrameManaBarTextRight.hooked then
 		PlayerFrameManaBarTextRight.hooked = true
-		hooksecurefunc(
-			PlayerFrameManaBarTextRight,
-			"Show",
-			function(sel, ...)
-				if DUnitFrames:HPHeight() >= 32 then
-					sel:Hide()
-				end
-			end
-		)
+		hooksecurefunc(PlayerFrameManaBarTextRight, "Show", function(sel, ...) if DUnitFrames:HPHeight() >= 32 then sel:Hide() end end)
 	end
 
 	if PlayerFrameManaBarText and not PlayerFrameManaBarText.hooked then
 		PlayerFrameManaBarText.hooked = true
-		hooksecurefunc(
-			PlayerFrameManaBarText,
-			"Show",
-			function(sel, ...)
-				if DUnitFrames:HPHeight() >= 32 then
-					sel:Hide()
-				end
-			end
-		)
+		hooksecurefunc(PlayerFrameManaBarText, "Show", function(sel, ...) if DUnitFrames:HPHeight() >= 32 then sel:Hide() end end)
 	end
 
 	if PlayerFrameManaBar then
-		hooksecurefunc(
-			PlayerFrameManaBar,
-			"SetHeight",
-			function(sel)
-				if sel.dufsetheight then return end
-				sel.dufsetheight = true
-				if DUnitFrames:GetWoWBuild() == "CLASSIC" or DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
-					if 38 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(38 - DUnitFrames:HPHeight())
-					else
-						sel:SetHeight(1)
-					end
+		hooksecurefunc(PlayerFrameManaBar, "SetHeight", function(sel)
+			if sel.dufsetheight then return end
+			sel.dufsetheight = true
+			if DUnitFrames:GetWoWBuild() == "CLASSIC" or DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					sel:SetHeight(38 - DUnitFrames:HPHeight())
 				else
-					if 38 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(38 - DUnitFrames:HPHeight())
-					else
-						sel:SetHeight(1)
-					end
+					sel:SetHeight(1)
 				end
-
-				sel.dufsetheight = false
+			else
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					sel:SetHeight(38 - DUnitFrames:HPHeight())
+				else
+					sel:SetHeight(1)
+				end
 			end
-		)
+
+			sel.dufsetheight = false
+		end)
 
 		PlayerFrameManaBar:SetHeight(27)
-		hooksecurefunc(
-			PlayerFrameManaBar,
-			"SetSize",
-			function(sel)
-				if sel.dufsetsize then return end
-				sel.dufsetsize = true
-				if DUnitFrames:GetWoWBuild() == "CLASSIC" or DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
-					if 38 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(38 - DUnitFrames:HPHeight())
-					else
-						sel:SetHeight(1)
-					end
+		hooksecurefunc(PlayerFrameManaBar, "SetSize", function(sel)
+			if sel.dufsetsize then return end
+			sel.dufsetsize = true
+			if DUnitFrames:GetWoWBuild() == "CLASSIC" or DUnitFrames:GetWoWBuild() == "TBC" or DUnitFrames:GetWoWBuild() == "MISTS" then
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					sel:SetHeight(38 - DUnitFrames:HPHeight())
 				else
-					if 38 - DUnitFrames:HPHeight() > 1 then
-						sel:SetHeight(38 - DUnitFrames:HPHeight())
-					else
-						sel:SetHeight(1)
-					end
+					sel:SetHeight(1)
 				end
-
-				sel.dufsetsize = false
+			else
+				if 38 - DUnitFrames:HPHeight() > 1 then
+					sel:SetHeight(38 - DUnitFrames:HPHeight())
+				else
+					sel:SetHeight(1)
+				end
 			end
-		)
+
+			sel.dufsetsize = false
+		end)
 	end
 
 	if PlayerFrameAlternateManaBar == nil then
@@ -632,20 +498,16 @@ function DUnitFrames:PlayerFrameSetup()
 	UnitFrameHealthBar_Initialize("player", PlayerFrameHealthBar, PlayerFrameHealthBarText, true)
 	UnitFrameManaBar_Initialize("player", PlayerFrameManaBar, PlayerFrameManaBarText, true)
 	if ComboPointPlayerFrame ~= nil then
-		hooksecurefunc(
-			ComboPointPlayerFrame,
-			"SetPoint",
-			function(sel, ...)
-				local _, class = UnitClass("PLAYER")
-				if class == "DRUID" then
-					if sel.dufsetpoint then return end
-					sel.dufsetpoint = true
-					sel:SetScale(0.82)
-					sel:SetPoint("TOP", PlayerFrameAlternateManaBar, "BOTTOM", 0, 0)
-					sel.dufsetpoint = false
-				end
+		hooksecurefunc(ComboPointPlayerFrame, "SetPoint", function(sel, ...)
+			local _, class = UnitClass("PLAYER")
+			if class == "DRUID" then
+				if sel.dufsetpoint then return end
+				sel.dufsetpoint = true
+				sel:SetScale(0.82)
+				sel:SetPoint("TOP", PlayerFrameAlternateManaBar, "BOTTOM", 0, 0)
+				sel.dufsetpoint = false
 			end
-		)
+		end)
 	end
 
 	DUnitFrames:UpdatePlayerFrame()

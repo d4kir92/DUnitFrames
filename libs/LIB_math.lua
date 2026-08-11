@@ -4,15 +4,12 @@ function DUnitFrames:NN(value, short)
 	if DUnitFrames:GetConfig("numbermode", "X.X Dynamic") == "X Dynamic" then
 		if value > 999999999 then
 			if short then return format("%.0f B", value / 1000000000) end
-
 			return format("%.0f B", value / 1000000000)
 		elseif value > 999999 then
 			if short then return format("%.0f M", value / 1000000) end
-
 			return format("%.0f M", value / 1000000)
 		elseif value > 999 then
 			if short then return format("%.0f K", value / 1000) end
-
 			return format("%.0f K", value / 1000)
 		else
 			return value
@@ -20,15 +17,12 @@ function DUnitFrames:NN(value, short)
 	elseif DUnitFrames:GetConfig("numbermode", "X.X Dynamic") == "X.X Dynamic" then
 		if value > 999999999 then
 			if short then return format("%.1f B", value / 1000000000) end
-
 			return format("%.1f B", value / 1000000000)
 		elseif value > 999999 then
 			if short then return format("%.1f M", value / 1000000) end
-
 			return format("%.1f M", value / 1000000)
 		elseif value > 999 then
 			if short then return format("%.1f K", value / 1000) end
-
 			return format("%.1f K", value / 1000)
 		else
 			return value
@@ -36,15 +30,12 @@ function DUnitFrames:NN(value, short)
 	elseif DUnitFrames:GetConfig("numbermode", "X.X Dynamic") == "X.XX Dynamic" then
 		if value > 999999999 then
 			if short then return format("%.2f B", value / 1000000000) end
-
 			return format("%.2f B", value / 1000000000)
 		elseif value > 999999 then
 			if short then return format("%.2f M", value / 1000000) end
-
 			return format("%.2f M", value / 1000000)
 		elseif value > 999 then
 			if short then return format("%.2f K", value / 1000) end
-
 			return format("%.2f K", value / 1000)
 		else
 			return value
@@ -85,7 +76,6 @@ function DUnitFrames:PN(vcur, vmax)
 		elseif DUnitFrames:GetConfig("percentmode", "X.X%") == "X.XX%" then
 			value = string.format("%.2f", value)
 		end
-
 		return value .. "%"
 	else
 		return ""
@@ -112,6 +102,5 @@ function DUnitFrames:ModifyText(text, cur, max, from)
 	else
 		return text
 	end
-
 	return "ERROR! SEND TO DEVELOPER (DUnitFrames) " .. tostring(text) .. " from: " .. tostring(from)
 end
