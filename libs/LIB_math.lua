@@ -75,6 +75,8 @@ function DUnitFrames:PN(vcur, vmax)
 			value = string.format("%.1f", value)
 		elseif DUnitFrames:GetConfig("percentmode", "X.X%") == "X.XX%" then
 			value = string.format("%.2f", value)
+		else
+			value = string.format("%d", value)
 		end
 		return value .. "%"
 	else
