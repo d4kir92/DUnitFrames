@@ -35,9 +35,7 @@ libs\!LibUIDropDownMenu\LibUIDropDownMenu\LibUIDropDownMenu.xml
 
 locale\enUS.lua
 locale\deDE.lua
-locale\ruRU.lua
-locale\zhTW.lua
-libs\LIB_lang.lua
+
 libs\LIB_math.lua
 
 settings.lua

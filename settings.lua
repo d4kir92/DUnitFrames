@@ -281,6 +281,7 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
+		DUnitFrames:SetAddonOutput("DUnitFrames", 134167)
 		DUnitFrames:SetVersion(134167, "1.3.104")
 		if DUFTAB["LID_BARTEXTURE"] == nil then DUFTAB["LID_BARTEXTURE"] = 0 end
 		DUFLoaded = true
