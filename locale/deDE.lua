@@ -1,21 +1,18 @@
 local _, DUnitFrames = ...
 -- deDE German Deutsch
-function DUnitFrames:DUFLang_deDE()
-	local lang = DUnitFrames:GetLang()
-	lang.LID_BARMODE = "Leisten Modus"
-	lang.LID_BARTEXTURE = "Leisten Texture"
-	lang.LID_BORDERMODE = "Rand Modus"
-	lang.LID_HPHEIGHT = "Gesundheitshöhe"
-	lang.LID_HIDECOMBOPOINTS = "Kombopunkte verstecken"
-	lang.LID_HIDEWHENFULL = "Wenn voll: verstecken"
-	lang.LID_NAMEMODE = "Namen Modus"
-	lang.LID_NAMESIZE = "Namen Größe"
-	lang.LID_NUMBERMODE = "Nummer Modus"
-	lang.LID_PERCENTMODE = "Prozent Modus"
-	lang.LID_PORTRAITMODE = "Porträt Modus"
-	lang.LID_PORTRAITMODESELF = "Porträt Modus (selbst)"
-	lang.LID_SHOWSPECS = "Specs anzeigen"
-	lang.LID_SHOWTHREAT = "Bedrohung anzeigen"
-	lang.LID_OUTLINE = "Umrandung"
-	lang.LID_ALTERNATEMANABAR = "Alternative Mana Leiste (Druide)"
-end
+DUnitFrames:AddTrans("deDE", "LID_BARMODE", "Leisten Modus")
+DUnitFrames:AddTrans("deDE", "LID_BARTEXTURE", "Leisten Texture")
+DUnitFrames:AddTrans("deDE", "LID_BORDERMODE", "Rand Modus")
+DUnitFrames:AddTrans("deDE", "LID_HPHEIGHT", "Gesundheitshöhe")
+DUnitFrames:AddTrans("deDE", "LID_HIDECOMBOPOINTS", "Kombopunkte verstecken")
+DUnitFrames:AddTrans("deDE", "LID_HIDEWHENFULL", "Wenn voll: verstecken")
+DUnitFrames:AddTrans("deDE", "LID_NAMEMODE", "Namen Modus")
+DUnitFrames:AddTrans("deDE", "LID_NAMESIZE", "Namen Größe")
+DUnitFrames:AddTrans("deDE", "LID_NUMBERMODE", "Nummer Modus")
+DUnitFrames:AddTrans("deDE", "LID_PERCENTMODE", "Prozent Modus")
+DUnitFrames:AddTrans("deDE", "LID_PORTRAITMODE", "Porträt Modus")
+DUnitFrames:AddTrans("deDE", "LID_PORTRAITMODESELF", "Porträt Modus (selbst)")
+DUnitFrames:AddTrans("deDE", "LID_SHOWSPECS", "Specs anzeigen")
+DUnitFrames:AddTrans("deDE", "LID_SHOWTHREAT", "Bedrohung anzeigen")
+DUnitFrames:AddTrans("deDE", "LID_OUTLINE", "Umrandung")
+DUnitFrames:AddTrans("deDE", "LID_ALTERNATEMANABAR", "Alternative Mana Leiste (Druide)")

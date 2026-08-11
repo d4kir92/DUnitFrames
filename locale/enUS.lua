@@ -1,21 +1,18 @@
 local _, DUnitFrames = ...
 -- enUS English
-function DUnitFrames:DUFLang_enUS()
-	local lang = DUnitFrames:GetLang()
-	lang.LID_BARMODE = "Bar Mode"
-	lang.LID_BARTEXTURE = "Bar Texture"
-	lang.LID_BORDERMODE = "Border Mode"
-	lang.LID_HPHEIGHT = "Health Height"
-	lang.LID_HIDECOMBOPOINTS = "Hide ComboPoints"
-	lang.LID_HIDEWHENFULL = "Hide when full"
-	lang.LID_NAMEMODE = "Name Mode"
-	lang.LID_NAMESIZE = "Name Size"
-	lang.LID_NUMBERMODE = "Number Mode"
-	lang.LID_PERCENTMODE = "Percent Mode"
-	lang.LID_PORTRAITMODE = "Portrait Mode"
-	lang.LID_PORTRAITMODESELF = "Porträt Modus (self)"
-	lang.LID_SHOWSPECS = "Show Specs"
-	lang.LID_SHOWTHREAT = "Show Threat"
-	lang.LID_OUTLINE = "Outline"
-	lang.LID_ALTERNATEMANABAR = "Alternate Mana Bar (Druid)"
-end
+DUnitFrames:AddTrans("enUS", "LID_BARMODE", "Bar Mode")
+DUnitFrames:AddTrans("enUS", "LID_BARTEXTURE", "Bar Texture")
+DUnitFrames:AddTrans("enUS", "LID_BORDERMODE", "Border Mode")
+DUnitFrames:AddTrans("enUS", "LID_HPHEIGHT", "Health Height")
+DUnitFrames:AddTrans("enUS", "LID_HIDECOMBOPOINTS", "Hide ComboPoints")
+DUnitFrames:AddTrans("enUS", "LID_HIDEWHENFULL", "Hide when full")
+DUnitFrames:AddTrans("enUS", "LID_NAMEMODE", "Name Mode")
+DUnitFrames:AddTrans("enUS", "LID_NAMESIZE", "Name Size")
+DUnitFrames:AddTrans("enUS", "LID_NUMBERMODE", "Number Mode")
+DUnitFrames:AddTrans("enUS", "LID_PERCENTMODE", "Percent Mode")
+DUnitFrames:AddTrans("enUS", "LID_PORTRAITMODE", "Portrait Mode")
+DUnitFrames:AddTrans("enUS", "LID_PORTRAITMODESELF", "Porträt Modus (self)")
+DUnitFrames:AddTrans("enUS", "LID_SHOWSPECS", "Show Specs")
+DUnitFrames:AddTrans("enUS", "LID_SHOWTHREAT", "Show Threat")
+DUnitFrames:AddTrans("enUS", "LID_OUTLINE", "Outline")
+DUnitFrames:AddTrans("enUS", "LID_ALTERNATEMANABAR", "Alternate Mana Bar (Druid)")
