@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- ruRU Russian Русский
+DUnitFrames:AddTrans("ruRU", "LID_BARMODE", "Режим полосы")
+DUnitFrames:AddTrans("ruRU", "LID_BARTEXTURE", "Текстура полосы")
+DUnitFrames:AddTrans("ruRU", "LID_BORDERMODE", "Режим рамки")
+DUnitFrames:AddTrans("ruRU", "LID_HPHEIGHT", "Высота полосы здоровья")
+DUnitFrames:AddTrans("ruRU", "LID_HIDECOMBOPOINTS", "Скрыть очки комбо")
+DUnitFrames:AddTrans("ruRU", "LID_HIDEWHENFULL", "Скрывать при полном заполнении")
+DUnitFrames:AddTrans("ruRU", "LID_NAMEMODE", "Режим имени")
+DUnitFrames:AddTrans("ruRU", "LID_NAMESIZE", "Размер имени")
+DUnitFrames:AddTrans("ruRU", "LID_NUMBERMODE", "Режим чисел")
+DUnitFrames:AddTrans("ruRU", "LID_PERCENTMODE", "Режим процентов")
+DUnitFrames:AddTrans("ruRU", "LID_PORTRAITMODE", "Режим портрета")
+DUnitFrames:AddTrans("ruRU", "LID_PORTRAITMODESELF", "Режим портрета (себя)")
+DUnitFrames:AddTrans("ruRU", "LID_SHOWSPECS", "Показывать специализацию")
+DUnitFrames:AddTrans("ruRU", "LID_SHOWTHREAT", "Показывать угрозу")
+DUnitFrames:AddTrans("ruRU", "LID_OUTLINE", "Обводка")
+DUnitFrames:AddTrans("ruRU", "LID_ALTERNATEMANABAR", "Альтернативная полоса маны (Друид)")

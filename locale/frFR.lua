@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- frFR French Français
+DUnitFrames:AddTrans("frFR", "LID_BARMODE", "Mode Barre")
+DUnitFrames:AddTrans("frFR", "LID_BARTEXTURE", "Texture de Barre")
+DUnitFrames:AddTrans("frFR", "LID_BORDERMODE", "Mode Bordure")
+DUnitFrames:AddTrans("frFR", "LID_HPHEIGHT", "Hauteur de Santé")
+DUnitFrames:AddTrans("frFR", "LID_HIDECOMBOPOINTS", "Masquer les Points de Combo")
+DUnitFrames:AddTrans("frFR", "LID_HIDEWHENFULL", "Masquer si plein")
+DUnitFrames:AddTrans("frFR", "LID_NAMEMODE", "Mode Nom")
+DUnitFrames:AddTrans("frFR", "LID_NAMESIZE", "Taille du Nom")
+DUnitFrames:AddTrans("frFR", "LID_NUMBERMODE", "Mode Nombre")
+DUnitFrames:AddTrans("frFR", "LID_PERCENTMODE", "Mode Pourcentage")
+DUnitFrames:AddTrans("frFR", "LID_PORTRAITMODE", "Mode Portrait")
+DUnitFrames:AddTrans("frFR", "LID_PORTRAITMODESELF", "Mode Portrait (soi-même)")
+DUnitFrames:AddTrans("frFR", "LID_SHOWSPECS", "Afficher les Spécialisations")
+DUnitFrames:AddTrans("frFR", "LID_SHOWTHREAT", "Afficher la Menace")
+DUnitFrames:AddTrans("frFR", "LID_OUTLINE", "Contour")
+DUnitFrames:AddTrans("frFR", "LID_ALTERNATEMANABAR", "Barre de Mana Alternative (Druide)")

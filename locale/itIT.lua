@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- itIT Italian Italiano
+DUnitFrames:AddTrans("itIT", "LID_BARMODE", "Modalità Barra")
+DUnitFrames:AddTrans("itIT", "LID_BARTEXTURE", "Texture Barra")
+DUnitFrames:AddTrans("itIT", "LID_BORDERMODE", "Modalità Bordo")
+DUnitFrames:AddTrans("itIT", "LID_HPHEIGHT", "Altezza Salute")
+DUnitFrames:AddTrans("itIT", "LID_HIDECOMBOPOINTS", "Nascondi Punti Combo")
+DUnitFrames:AddTrans("itIT", "LID_HIDEWHENFULL", "Nascondi quando pieno")
+DUnitFrames:AddTrans("itIT", "LID_NAMEMODE", "Modalità Nome")
+DUnitFrames:AddTrans("itIT", "LID_NAMESIZE", "Dimensione Nome")
+DUnitFrames:AddTrans("itIT", "LID_NUMBERMODE", "Modalità Numero")
+DUnitFrames:AddTrans("itIT", "LID_PERCENTMODE", "Modalità Percentuale")
+DUnitFrames:AddTrans("itIT", "LID_PORTRAITMODE", "Modalità Ritratto")
+DUnitFrames:AddTrans("itIT", "LID_PORTRAITMODESELF", "Modalità Ritratto (se stesso)")
+DUnitFrames:AddTrans("itIT", "LID_SHOWSPECS", "Mostra Specializzazioni")
+DUnitFrames:AddTrans("itIT", "LID_SHOWTHREAT", "Mostra Minaccia")
+DUnitFrames:AddTrans("itIT", "LID_OUTLINE", "Contorno")
+DUnitFrames:AddTrans("itIT", "LID_ALTERNATEMANABAR", "Barra Mana Alternativa (Druido)")

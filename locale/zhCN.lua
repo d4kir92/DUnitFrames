@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- zhCN Chinese (Simplified) 简体中文
+DUnitFrames:AddTrans("zhCN", "LID_BARMODE", "条形模式")
+DUnitFrames:AddTrans("zhCN", "LID_BARTEXTURE", "条形纹理")
+DUnitFrames:AddTrans("zhCN", "LID_BORDERMODE", "边框模式")
+DUnitFrames:AddTrans("zhCN", "LID_HPHEIGHT", "生命值高度")
+DUnitFrames:AddTrans("zhCN", "LID_HIDECOMBOPOINTS", "隐藏连击点")
+DUnitFrames:AddTrans("zhCN", "LID_HIDEWHENFULL", "满值时隐藏")
+DUnitFrames:AddTrans("zhCN", "LID_NAMEMODE", "名称模式")
+DUnitFrames:AddTrans("zhCN", "LID_NAMESIZE", "名称大小")
+DUnitFrames:AddTrans("zhCN", "LID_NUMBERMODE", "数字模式")
+DUnitFrames:AddTrans("zhCN", "LID_PERCENTMODE", "百分比模式")
+DUnitFrames:AddTrans("zhCN", "LID_PORTRAITMODE", "头像模式")
+DUnitFrames:AddTrans("zhCN", "LID_PORTRAITMODESELF", "头像模式（自己）")
+DUnitFrames:AddTrans("zhCN", "LID_SHOWSPECS", "显示专精")
+DUnitFrames:AddTrans("zhCN", "LID_SHOWTHREAT", "显示威胁")
+DUnitFrames:AddTrans("zhCN", "LID_OUTLINE", "轮廓")
+DUnitFrames:AddTrans("zhCN", "LID_ALTERNATEMANABAR", "备用法力条（德鲁伊）")

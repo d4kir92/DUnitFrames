@@ -5,7 +5,7 @@
 ## Interface-Mists: 50504
 ## Interface: 40402
 
-## Version: 1.3.104
+## Version: 1.3.105
 ## Title: DUnitFrames by |cff55d2ffD4KiR |T132115:16:16:0:0|t 
 ## Notes: D4KiRs Unit Frames
 ## Notes-deDE: D4KiRs Einheitenfenster
@@ -33,8 +33,17 @@ libs\D4Lib\D4Lib.xml
 libs\!LibUIDropDownMenu\LibStub\LibStub.lua
 libs\!LibUIDropDownMenu\LibUIDropDownMenu\LibUIDropDownMenu.xml
 
-locale\enUS.lua
 locale\deDE.lua
+locale\enUS.lua
+locale\esES.lua
+locale\esMX.lua
+locale\frFR.lua
+locale\itIT.lua
+locale\koKR.lua
+locale\ptBR.lua
+locale\ruRU.lua
+locale\zhCN.lua
+locale\zhTW.lua
 
 libs\LIB_math.lua
 

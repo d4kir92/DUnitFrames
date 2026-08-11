@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- zhTW Chinese (Traditional) 繁體中文
+DUnitFrames:AddTrans("zhTW", "LID_BARMODE", "條形模式")
+DUnitFrames:AddTrans("zhTW", "LID_BARTEXTURE", "條形材質")
+DUnitFrames:AddTrans("zhTW", "LID_BORDERMODE", "邊框模式")
+DUnitFrames:AddTrans("zhTW", "LID_HPHEIGHT", "生命值高度")
+DUnitFrames:AddTrans("zhTW", "LID_HIDECOMBOPOINTS", "隱藏連擊點")
+DUnitFrames:AddTrans("zhTW", "LID_HIDEWHENFULL", "滿值時隱藏")
+DUnitFrames:AddTrans("zhTW", "LID_NAMEMODE", "名稱模式")
+DUnitFrames:AddTrans("zhTW", "LID_NAMESIZE", "名稱大小")
+DUnitFrames:AddTrans("zhTW", "LID_NUMBERMODE", "數字模式")
+DUnitFrames:AddTrans("zhTW", "LID_PERCENTMODE", "百分比模式")
+DUnitFrames:AddTrans("zhTW", "LID_PORTRAITMODE", "頭像模式")
+DUnitFrames:AddTrans("zhTW", "LID_PORTRAITMODESELF", "頭像模式（自己）")
+DUnitFrames:AddTrans("zhTW", "LID_SHOWSPECS", "顯示專精")
+DUnitFrames:AddTrans("zhTW", "LID_SHOWTHREAT", "顯示威脅")
+DUnitFrames:AddTrans("zhTW", "LID_OUTLINE", "輪廓")
+DUnitFrames:AddTrans("zhTW", "LID_ALTERNATEMANABAR", "備用法力條（德魯伊）")

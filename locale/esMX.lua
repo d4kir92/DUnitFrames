@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- esMX Spanish (Mexico) Español
+DUnitFrames:AddTrans("esMX", "LID_BARMODE", "Modo de Barra")
+DUnitFrames:AddTrans("esMX", "LID_BARTEXTURE", "Textura de Barra")
+DUnitFrames:AddTrans("esMX", "LID_BORDERMODE", "Modo de Borde")
+DUnitFrames:AddTrans("esMX", "LID_HPHEIGHT", "Altura de Salud")
+DUnitFrames:AddTrans("esMX", "LID_HIDECOMBOPOINTS", "Ocultar Puntos de Combo")
+DUnitFrames:AddTrans("esMX", "LID_HIDEWHENFULL", "Ocultar cuando esté lleno")
+DUnitFrames:AddTrans("esMX", "LID_NAMEMODE", "Modo de Nombre")
+DUnitFrames:AddTrans("esMX", "LID_NAMESIZE", "Tamaño de Nombre")
+DUnitFrames:AddTrans("esMX", "LID_NUMBERMODE", "Modo de Número")
+DUnitFrames:AddTrans("esMX", "LID_PERCENTMODE", "Modo de Porcentaje")
+DUnitFrames:AddTrans("esMX", "LID_PORTRAITMODE", "Modo de Retrato")
+DUnitFrames:AddTrans("esMX", "LID_PORTRAITMODESELF", "Modo de Retrato (propio)")
+DUnitFrames:AddTrans("esMX", "LID_SHOWSPECS", "Mostrar Especializaciones")
+DUnitFrames:AddTrans("esMX", "LID_SHOWTHREAT", "Mostrar Amenaza")
+DUnitFrames:AddTrans("esMX", "LID_OUTLINE", "Contorno")
+DUnitFrames:AddTrans("esMX", "LID_ALTERNATEMANABAR", "Barra de Maná Alternativa (Druida)")

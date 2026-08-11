@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- ptBR Portuguese (Brazil) Português
+DUnitFrames:AddTrans("ptBR", "LID_BARMODE", "Modo de Barra")
+DUnitFrames:AddTrans("ptBR", "LID_BARTEXTURE", "Textura da Barra")
+DUnitFrames:AddTrans("ptBR", "LID_BORDERMODE", "Modo de Borda")
+DUnitFrames:AddTrans("ptBR", "LID_HPHEIGHT", "Altura da Vida")
+DUnitFrames:AddTrans("ptBR", "LID_HIDECOMBOPOINTS", "Ocultar Pontos de Combo")
+DUnitFrames:AddTrans("ptBR", "LID_HIDEWHENFULL", "Ocultar quando cheio")
+DUnitFrames:AddTrans("ptBR", "LID_NAMEMODE", "Modo de Nome")
+DUnitFrames:AddTrans("ptBR", "LID_NAMESIZE", "Tamanho do Nome")
+DUnitFrames:AddTrans("ptBR", "LID_NUMBERMODE", "Modo de Número")
+DUnitFrames:AddTrans("ptBR", "LID_PERCENTMODE", "Modo de Porcentagem")
+DUnitFrames:AddTrans("ptBR", "LID_PORTRAITMODE", "Modo de Retrato")
+DUnitFrames:AddTrans("ptBR", "LID_PORTRAITMODESELF", "Modo de Retrato (próprio)")
+DUnitFrames:AddTrans("ptBR", "LID_SHOWSPECS", "Mostrar Especializações")
+DUnitFrames:AddTrans("ptBR", "LID_SHOWTHREAT", "Mostrar Ameaça")
+DUnitFrames:AddTrans("ptBR", "LID_OUTLINE", "Contorno")
+DUnitFrames:AddTrans("ptBR", "LID_ALTERNATEMANABAR", "Barra de Mana Alternativa (Druida)")

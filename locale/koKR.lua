@@ -1,0 +1,18 @@
+local _, DUnitFrames = ...
+-- koKR Korean 한국어
+DUnitFrames:AddTrans("koKR", "LID_BARMODE", "바 모드")
+DUnitFrames:AddTrans("koKR", "LID_BARTEXTURE", "바 텍스처")
+DUnitFrames:AddTrans("koKR", "LID_BORDERMODE", "테두리 모드")
+DUnitFrames:AddTrans("koKR", "LID_HPHEIGHT", "체력 높이")
+DUnitFrames:AddTrans("koKR", "LID_HIDECOMBOPOINTS", "연계 점수 숨기기")
+DUnitFrames:AddTrans("koKR", "LID_HIDEWHENFULL", "가득 찼을 때 숨기기")
+DUnitFrames:AddTrans("koKR", "LID_NAMEMODE", "이름 모드")
+DUnitFrames:AddTrans("koKR", "LID_NAMESIZE", "이름 크기")
+DUnitFrames:AddTrans("koKR", "LID_NUMBERMODE", "숫자 모드")
+DUnitFrames:AddTrans("koKR", "LID_PERCENTMODE", "퍼센트 모드")
+DUnitFrames:AddTrans("koKR", "LID_PORTRAITMODE", "초상화 모드")
+DUnitFrames:AddTrans("koKR", "LID_PORTRAITMODESELF", "초상화 모드 (자신)")
+DUnitFrames:AddTrans("koKR", "LID_SHOWSPECS", "특성 표시")
+DUnitFrames:AddTrans("koKR", "LID_SHOWTHREAT", "위협 수준 표시")
+DUnitFrames:AddTrans("koKR", "LID_OUTLINE", "윤곽선")
+DUnitFrames:AddTrans("koKR", "LID_ALTERNATEMANABAR", "대체 마나 바 (드루이드)")
