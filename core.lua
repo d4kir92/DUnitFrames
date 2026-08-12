@@ -104,7 +104,7 @@ function f.Think()
 		local energiecur = UnitPower("PLAYER", Enum.PowerType.Energy)
 		local energiemax = UnitPowerMax("PLAYER", Enum.PowerType.Energy)
 		if energiecur and energiecur < energiemax then powernotfull = true end
-		if not powernotfull and UnitHealth("PLAYER") >= UnitHealthMax("PLAYER") and not UnitExists("TARGET") and not MouseIsOver(PlayerFrame) then
+		if not powernotfull and UnitHealth("PLAYER") >= UnitHealthMax("PLAYER") and not UnitExists("TARGET") and not PlayerFrame:IsMouseOver() then
 			PlayerFrame.duf_alpha = PlayerFrame.duf_alpha - 0.05
 		else
 			PlayerFrame.duf_alpha = PlayerFrame.duf_alpha + 0.05

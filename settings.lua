@@ -282,7 +282,7 @@ function f:OnEvent(event, ...)
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
 		DUnitFrames:SetAddonOutput("DUnitFrames", 134167)
-		DUnitFrames:SetVersion(134167, "1.3.106")
+		DUnitFrames:SetVersion(134167, "1.3.107")
 		if DUFTAB["bartexture"] == nil then DUFTAB["bartexture"] = 0 end
 		DUFLoaded = true
 		if PlayerPortrait then UnitFramePortrait_Update(PlayerPortrait) end

@@ -17,7 +17,6 @@
     "Lua.diagnostics.globals": [
         "PlayerFrame",
         "CLASS_ICON_TCOORDS",
-        "MouseIsOver",
         "UIDROPDOWNMENU_MAXLEVELS",
         "ExecuteFrameScript",
         "DropDownMenuButtonMixin",
