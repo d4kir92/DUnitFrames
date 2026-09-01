@@ -27,6 +27,7 @@
 ## SavedVariablesPerCharacter: DUFTABPC
 ## X-Curse-Project-ID: 409653
 ## X-Wago-ID: kRNLAb6o
+## IconTexture: 134167
 
 # External Libs
 libs\D4Lib\D4Lib.xml
