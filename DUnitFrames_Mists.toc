@@ -1,6 +1,6 @@
 ## Interface: 50504
 
-## Version: 1.4.0
+## Version: 1.4.1
 ## Title: DUnitFrames |T134167:16:16:0:0|t by |cff55d2ffD4KiR |T132115:16:16:0:0|t 
 ## Notes: D4KiRs Unit Frames
 ## Notes-deDE: D4KiRs Einheitenfenster
@@ -15,8 +15,17 @@
 ## Notes-zhTW: D4KiR的單位框架
 
 ## Author: D4KiR |T132115:16:16:0:0|t
-## Category: D4KiR |T132115:16:16:0:0|t
-## X-Category: D4KiR |T132115:16:16:0:0|t
+## Category: Unit Frames
+## Category-deDE: Einheitenfenster
+## Category-esES: Marcos de unidades
+## Category-esMX: Marcos de unidades
+## Category-frFR: Portraits d'unités
+## Category-itIT: Riquadri delle unità
+## Category-koKR: 유닛프레임
+## Category-ptBR: Quadros de unidade
+## Category-ruRU: Рамки юнитов
+## Category-zhCN: 单位框体
+## Category-zhTW: 單位框架
 ## DefaultState: enabled
 ## SavedVariables: DUFTAB
 ## SavedVariablesPerCharacter: DUFTABPC
