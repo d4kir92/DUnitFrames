@@ -1,6 +1,6 @@
 -- By D4KiR
 local _, DUnitFrames = ...
-local ICON = 134167
+local ICON = DUnitFrames:GetAddonIcon()
 local DEFAULT_WIDTH = 520
 local DEFAULT_HEIGHT = 560
 local dufset = nil
@@ -302,8 +302,8 @@ function f:OnEvent(event, ...)
 		once = false
 		DUFTAB = DUFTAB or {}
 		DUFTABPC = DUFTABPC or {}
-		DUnitFrames:SetAddonOutput("DUnitFrames", ICON)
-		DUnitFrames:SetVersion(ICON, "1.4.2")
+		DUnitFrames:SetAddonOutput()
+		DUnitFrames:SetVersion()
 		if DUFTAB["bartexture"] == nil then DUFTAB["bartexture"] = 0 end
 		DUFLoaded = true
 		if PlayerPortrait then UnitFramePortrait_Update(PlayerPortrait) end
